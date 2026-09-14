@@ -115,12 +115,21 @@
   .find .hd{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:12px}
   .find h2{font-size:16px;font-weight:600;color:var(--ink)}
   .tiles{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
-  .tile{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:12px;padding:14px;border-radius:16px;background:var(--bg);border:1px solid var(--line);text-align:left;transition:border-color .15s,transform .15s,box-shadow .15s,background .15s}
-  .tile:hover{border-color:var(--line-2);transform:translateY(-2px);box-shadow:var(--shadow);background:var(--surface)}
-  .tile img{width:56px;height:56px;border-radius:14px}
-  .tile b{font-weight:600;font-size:14px;line-height:1.3;padding-right:20px}
-  .tile .arr{position:absolute;right:12px;bottom:14px;width:22px;height:22px;border-radius:50%;background:var(--surface-2);color:var(--ink-2);display:grid;place-items:center;opacity:0;transform:translateX(-4px);transition:opacity .15s,transform .15s}
-  .tile:hover .arr{opacity:1;transform:none;background:var(--accent-soft);color:var(--accent)}
+  .tile{position:relative;display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:16px;background:var(--surface);border:1px solid var(--line);text-align:left;transition:border-color .2s,transform .2s,box-shadow .2s}
+  .tile:hover{border-color:var(--t-line);transform:translateY(-2px);box-shadow:var(--shadow)}
+  .tile .ic{width:60px;height:60px;border-radius:14px;background:var(--t-bg);display:grid;place-items:center;flex:none;transition:transform .3s ease}
+  .tile:hover .ic{transform:scale(1.06)}
+  .tile img{width:40px;height:40px;object-fit:contain}
+  .tile .tx{min-width:0;flex:1}
+  .tile b{display:block;font-weight:700;font-size:14.5px;line-height:1.25;color:var(--ink)}
+  .tile span.sub{display:block;font-size:12.5px;color:var(--ink-3);margin-top:3px;line-height:1.3}
+  .tile .arr{width:28px;height:28px;border-radius:50%;background:var(--surface-2);color:var(--ink-2);display:grid;place-items:center;flex:none;transition:background .2s,color .2s,transform .2s}
+  .tile:hover .arr{background:var(--t-line);color:#fff;transform:translateX(2px)}
+  .t-green{--t-bg:#E6F5EC;--t-line:#2E9E5B}
+  .t-blue{--t-bg:#E8F2FC;--t-line:#3A86D6}
+  .t-sky{--t-bg:#E7F1FB;--t-line:#4A90E2}
+  .t-pink{--t-bg:#FCE9EF;--t-line:#D9487A}
+  .t-purple{--t-bg:#F1E9FA;--t-line:#8A4FC9}
 
   /* hero feature photo + floating cards */
   .feature{position:relative;height:520px}
@@ -269,6 +278,7 @@
   @media (max-width:1060px){
     .nav{display:none}
     .hero-panel{grid-template-columns:1fr;padding:40px 64px 72px}
+    .tiles{grid-template-columns:repeat(2,1fr)}
     .feature{height:420px}
     .feature .main{inset:0 0 0 0}
     .float.f3{right:8px}
@@ -289,7 +299,7 @@
     .ways{grid-template-columns:1fr}
     .stats{gap:6px 14px}
     .stats span + span::before{display:none}
-    .tiles{grid-template-columns:repeat(2,1fr)}
+    .tiles{grid-template-columns:1fr}
     .hero-panel{margin-inline:-20px;padding:28px 20px 60px}
     .feature{height:300px}
     .float{display:none}
@@ -398,11 +408,11 @@
        <div class="card">
         <div class="hd"><h2>Find tests &amp; packages for your needs</h2><a class="link" href="#">View all</a></div>
         <div class="tiles">
-          <button class="tile" data-q="Full body"><img src="{{img:c_full}}" alt=""><b>Full Body Packages</b><span class="arr" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
-          <button class="tile" data-q="Scan"><img src="{{img:c_rad}}" alt=""><b>X Rays, Scans &amp; More</b><span class="arr" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
-          <button class="tile" data-q="Fever"><img src="{{img:c_fever}}" alt=""><b>Fever Tests</b><span class="arr" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
-          <button class="tile" data-q="Diabetes"><img src="{{img:c_diab}}" alt=""><b>Diabetes Tests</b><span class="arr" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
-          <button class="tile" data-q="Vitamin"><img src="{{img:c_vit}}" alt=""><b>Vitamins Tests</b><span class="arr" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+          <button class="tile t-green" data-q="Full body"><span class="ic"><img src="{{img:c_full}}" alt=""></span><span class="tx"><b>Full Body Packages</b><span class="sub">60 to 90 tests, home collection</span></span><span class="arr" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+          <button class="tile t-blue" data-q="Scan"><span class="ic"><img src="{{img:c_rad}}" alt=""></span><span class="tx"><b>X Rays, Scans &amp; More</b><span class="sub">CT, MRI, X-ray, ultrasound</span></span><span class="arr" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+          <button class="tile t-sky" data-q="Fever"><span class="ic"><img src="{{img:c_fever}}" alt=""></span><span class="tx"><b>Fever Tests</b><span class="sub">Dengue, malaria, typhoid</span></span><span class="arr" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+          <button class="tile t-pink" data-q="Diabetes"><span class="ic"><img src="{{img:c_diab}}" alt=""></span><span class="tx"><b>Diabetes Tests</b><span class="sub">HbA1c, fasting sugar</span></span><span class="arr" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+          <button class="tile t-purple" data-q="Vitamin"><span class="ic"><img src="{{img:c_vit}}" alt=""></span><span class="tx"><b>Vitamins Tests</b><span class="sub">Vitamin D, B12, iron</span></span><span class="arr" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
         </div>
        </div>
       </div>

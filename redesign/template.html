@@ -75,19 +75,21 @@
   .chip{padding:6px 12px;border-radius:999px;border:1px solid var(--line-2);background:var(--surface);color:var(--ink-2);font-size:13px;font-weight:500;transition:border-color .15s,color .15s}
   .chip:hover{border-color:var(--accent);color:var(--accent)}
 
-  .search{background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);position:relative}
-  .search-row{display:grid;grid-template-columns:auto 1fr auto;align-items:center}
-  .loc{display:flex;align-items:center;gap:8px;padding:0 16px;height:56px;border-right:1px solid var(--line);font-weight:600;font-size:14px;color:var(--ink);white-space:nowrap;border-radius:16px 0 0 16px}
-  .loc:hover{background:var(--surface-2)}
-  .loc svg{color:var(--accent)}
-  .loc .chev{color:var(--ink-3)}
-  .search .field{display:flex;align-items:center;gap:10px;padding-left:16px;min-width:0}
-  .search .field svg{color:var(--ink-3);flex:none}
-  .search input{height:56px;border:0;background:transparent;padding:0 12px 0 0;font:inherit;font-size:15px;color:var(--ink);min-width:0;width:100%}
+  .search{background:var(--surface);border:1px solid var(--line);border-radius:999px;box-shadow:var(--shadow);position:relative}
+  .search-row{display:grid;grid-template-columns:auto 1fr auto;align-items:center;padding:6px 6px 6px 22px}
+  .loc{display:flex;align-items:center;gap:10px;padding:0 18px 0 0;height:52px;font-weight:600;font-size:15px;color:var(--ink);white-space:nowrap;border-right:1.5px solid var(--line-2);margin-right:18px;min-width:220px}
+  .loc img{width:22px;height:22px}
+  .loc .city{flex:1;text-align:left}
+  .loc .cur{width:22px;height:22px;opacity:.9}
+  .loc:hover .city{color:var(--accent)}
+  .search .field{display:flex;align-items:center;min-width:0}
+  .search .field>svg{display:none}
+  .search input{height:52px;border:0;background:transparent;padding:0 12px 0 0;font:inherit;font-size:16px;color:var(--ink);min-width:0;width:100%}
   .search input::placeholder{color:var(--ink-3)}
   .search input:focus{outline:none}
-  .search .go{margin:6px;height:44px;padding:0 20px;border-radius:11px}
-  .suggest{position:absolute;left:0;right:0;top:calc(100% + 6px);background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:8px;z-index:20;max-height:320px;overflow:auto}
+  .search .go{width:56px;height:56px;padding:0;border-radius:50%;display:grid;place-items:center;background:#F26B5B;color:#fff}
+  .search .go:hover{background:var(--accent)}
+  .suggest{position:absolute;left:12px;right:12px;top:calc(100% + 8px);background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:8px;z-index:20;max-height:320px;overflow:auto}
   .suggest[hidden]{display:none}
   .suggest .hd{font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);font-weight:600;padding:8px 10px 4px}
   .suggest button{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px;border-radius:9px;text-align:left}
@@ -294,8 +296,9 @@
     .wrap{padding-inline:20px}
     .hero{padding:28px 0 20px}
     .hero h1{max-width:none}
-    .search-row{grid-template-columns:1fr auto}
-    .loc{grid-column:1 / -1;border-right:0;border-bottom:1px solid var(--line);border-radius:16px 16px 0 0;height:46px}
+    .search{border-radius:22px}
+    .search-row{grid-template-columns:1fr auto;padding:6px 6px 6px 16px}
+    .loc{grid-column:1 / -1;border-right:0;border-bottom:1px solid var(--line);height:46px;margin:0 0 4px;min-width:0;padding-right:0}
     .ways{grid-template-columns:1fr}
     .stats{gap:6px 14px}
     .stats span + span::before{display:none}
@@ -359,16 +362,16 @@
       <form class="search" id="searchForm" role="search" autocomplete="off">
         <div class="search-row">
           <button type="button" class="loc" id="locBtn" aria-label="Change location">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
-            <span id="locName">Gurgaon</span>
-            <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            <img src="{{img:loc_pin}}" alt="">
+            <span class="city" id="locName">Gurgaon</span>
+            <img class="cur" src="{{img:loc_cur}}" alt="" title="Use current location">
           </button>
           <div class="field">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
             <label class="visually-hidden" for="q">Search tests or full body checkups</label>
             <input id="q" type="text" placeholder="Search tests or full body checkups" />
           </div>
-          <button type="submit" class="btn btn-primary go">Search</button>
+          <button type="submit" class="go" aria-label="Search"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
         </div>
         <div class="suggest" id="suggest" hidden></div>
       </form>

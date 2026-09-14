@@ -1,10 +1,12 @@
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tata 1mg Labs Redesign</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Figtree:wght@400;500;600;700&display=swap">
 <style>
   :root{
     color-scheme:light only;
+    --gutter:64px;
     --bg:#F6F7F9;
     --surface:#FFFFFF;
     --surface-2:#EEF1F5;
@@ -27,10 +29,10 @@
   body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
   a{color:inherit;text-decoration:none}
   button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;padding:0}
-  img,svg{display:block;max-width:100%}
+  img,svg{display:block;max-width:100%;height:auto}
   h1,h2,h3{margin:0;font-family:var(--display);text-wrap:balance;letter-spacing:-.02em}
   p{margin:0}
-  .wrap{width:100%;padding-inline:64px;margin-inline:auto}
+  .wrap{width:100%;padding-inline:var(--gutter);margin-inline:auto}
   .visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
   :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
 
@@ -43,6 +45,13 @@
   .nav a:hover{background:var(--surface-2);color:var(--ink)}
   .nav a[aria-current]{color:var(--accent);background:var(--accent-soft);font-weight:700}
   .topbar .right{margin-left:auto;display:flex;align-items:center;gap:6px}
+  .burger{display:none;width:40px;height:40px;border-radius:10px;place-items:center;color:var(--ink)}
+  .burger:hover{background:var(--surface-2)}
+  .mnav{display:none;position:absolute;left:0;right:0;top:100%;background:var(--surface);border-bottom:1px solid var(--line);box-shadow:var(--shadow);padding:8px 20px 16px}
+  .mnav.open{display:block}
+  .mnav a{display:block;padding:12px 8px;border-bottom:1px solid var(--line);font-weight:700;font-size:15px;color:var(--ink)}
+  .mnav a:last-child{border-bottom:0}
+  .mnav a[aria-current]{color:var(--accent)}
   .icon-btn{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;font-weight:700;font-size:14px;color:var(--ink);position:relative}
   .icon-btn:hover{background:var(--surface-2);color:var(--ink)}
   .icon-btn .count{position:absolute;top:2px;right:4px;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--accent);color:var(--accent-ink);font-size:11px;font-weight:700;display:grid;place-items:center;font-variant-numeric:tabular-nums}
@@ -57,7 +66,7 @@
 
   /* ===== hero ===== */
   .hero{padding:0}
-  .hero-panel{position:relative;overflow:hidden;margin-inline:-64px;padding:56px 64px 72px;background:linear-gradient(135deg,#FFF3F1 0%,#F7F8FB 45%,#E9F6F2 100%);border-bottom:1px solid var(--line);display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:48px;align-items:center}
+  .hero-panel{position:relative;overflow:hidden;margin-inline:calc(var(--gutter) * -1);padding:56px var(--gutter) 72px;background:linear-gradient(135deg,#FFF3F1 0%,#F7F8FB 45%,#E9F6F2 100%);border-bottom:1px solid var(--line);display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:48px;align-items:center}
   .hero-panel::before{content:"";position:absolute;width:640px;height:640px;border-radius:50%;background:radial-gradient(circle,rgba(229,71,62,.14),transparent 65%);top:-260px;right:24%;pointer-events:none}
   .hero-panel::after{content:"";position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(14,140,120,.14),transparent 65%);bottom:-220px;left:40%;pointer-events:none}
   .hero-panel>*{position:relative;z-index:1}
@@ -166,7 +175,7 @@
   .need b{display:block;padding:10px 12px 12px;font-weight:600;font-size:14px}
 
   /* trust banners: auto-scrolling marquee */
-  .banners{overflow:hidden;margin-inline:-64px;padding:6px 0}
+  .banners{overflow:hidden;margin-inline:calc(var(--gutter) * -1);padding:6px 0}
   .banners .track{display:flex;gap:20px;width:max-content;padding-left:20px;animation:bannerScroll 45s linear infinite;will-change:transform}
   .banners:hover .track,.banners:focus-within .track{animation-play-state:paused}
   .banner{flex:none;width:440px;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:var(--surface);box-shadow:var(--shadow);transition:transform .3s ease}
@@ -278,8 +287,10 @@
 
   /* ===== responsive ===== */
   @media (max-width:1060px){
+    :root{--gutter:32px}
     .nav{display:none}
-    .hero-panel{grid-template-columns:1fr;padding:40px 64px 72px}
+    .burger{display:grid}
+    .hero-panel{grid-template-columns:1fr;padding:40px var(--gutter) 72px}
     .tiles{grid-template-columns:repeat(2,1fr)}
     .feature{height:420px}
     .feature .main{inset:0 0 0 0}
@@ -293,7 +304,6 @@
     .help{position:static}
   }
   @media (max-width:640px){
-    .wrap{padding-inline:20px}
     .hero{padding:28px 0 20px}
     .hero h1{max-width:none}
     .search{border-radius:22px}
@@ -303,18 +313,32 @@
     .stats{gap:6px 14px}
     .stats span + span::before{display:none}
     .tiles{grid-template-columns:1fr}
-    .hero-panel{margin-inline:-20px;padding:28px 20px 60px}
+    .hero-panel{padding:28px var(--gutter) 60px}
     .feature{height:300px}
     .float{display:none}
     .find .card{padding:16px}
     .needs,.radio{grid-template-columns:repeat(2,1fr)}
-    .banners{margin-inline:-20px}
     .banner{width:280px}
     .steps{grid-template-columns:1fr}
     .app{aspect-ratio:auto;background-size:cover;background-position:right center;flex-direction:column;align-items:stretch}
     .app::before{content:"";display:block;aspect-ratio:1200/448;background:url("{{img:app_bg}}") right center / cover no-repeat}
     .app .content{padding:20px;max-width:none;background:#fff}
+    :root{--gutter:20px}
+    .topbar .wrap{height:60px;gap:12px}
+    .logo img{height:26px}
+    .topbar .right{gap:2px}
     .topbar .right .label{display:none}
+    .topbar .right .icon-btn:not(#cartBtn){display:none}
+    .topbar .right .btn{white-space:nowrap;padding:7px 10px;font-size:12.5px}
+    .mnav{padding:4px var(--gutter) 12px}
+    .hero h1{font-size:30px}
+    .hero-lede{font-size:15px}
+    .chip{padding:8px 14px}
+    .way{height:64px}
+    .sec-head h2{font-size:20px}
+    .step .txt{padding:12px 12px 14px}
+    .f-cert img{height:52px}
+    .f-bottom .f-inner{flex-direction:column}
     .seo{padding:20px 18px 6px}
     .f-links{grid-template-columns:1fr}
     .f-more .cols{grid-template-columns:1fr}
@@ -346,8 +370,22 @@
       </button>
       <button class="icon-btn"><span class="label">Need Help?</span></button>
       <button class="btn btn-ghost btn-sm">Login | Signup</button>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mnav">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
     </div>
   </div>
+  <nav class="mnav" id="mnav" aria-label="Mobile">
+    <a href="#">Medicines</a>
+    <a href="#" aria-current="page">Lab Tests</a>
+    <a href="#">Consult Doctors</a>
+    <a href="#">Cancer Care</a>
+    <a href="#">Ayurveda</a>
+    <a href="#">Partnerships</a>
+    <a href="#">Corporates</a>
+    <a href="#">Care Plan</a>
+    <a href="#">Need Help?</a>
+  </nav>
 </header>
 
 <main>
@@ -769,6 +807,10 @@
   document.querySelectorAll("[data-q]").forEach(el=>el.addEventListener("click", ()=>{
     q.value = el.dataset.q; window.scrollTo({top:0, behavior:"smooth"}); q.focus(); renderSuggest();
   }));
+
+  const burger = document.getElementById("burger"), mnav = document.getElementById("mnav");
+  burger.addEventListener("click", ()=>{ const open = mnav.classList.toggle("open"); burger.setAttribute("aria-expanded", open); burger.setAttribute("aria-label", open ? "Close menu" : "Open menu"); });
+  document.addEventListener("click", e=>{ if(!e.target.closest("#mnav,#burger")){ mnav.classList.remove("open"); burger.setAttribute("aria-expanded","false"); } });
 
   const cities = ["Gurgaon","Delhi","Noida","Mumbai","Pune","Hyderabad","Bangalore","Chennai"];
   document.getElementById("locBtn").addEventListener("click", ()=>{

@@ -56,10 +56,10 @@
   .btn-sm{padding:7px 12px;font-size:13px;border-radius:8px}
 
   /* ===== hero ===== */
-  .hero{padding:28px 0 0}
-  .hero-panel{position:relative;border-radius:28px;overflow:hidden;background:linear-gradient(135deg,#FFF3F1 0%,#F7F8FB 45%,#E9F6F2 100%);border:1px solid var(--line);padding:52px 56px 64px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:48px;align-items:center}
-  .hero-panel::before{content:"";position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(229,71,62,.14),transparent 65%);top:-200px;right:22%;pointer-events:none}
-  .hero-panel::after{content:"";position:absolute;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(14,140,120,.14),transparent 65%);bottom:-180px;left:38%;pointer-events:none}
+  .hero{padding:0}
+  .hero-panel{position:relative;overflow:hidden;margin-inline:-64px;padding:56px 64px 72px;background:linear-gradient(135deg,#FFF3F1 0%,#F7F8FB 45%,#E9F6F2 100%);border-bottom:1px solid var(--line);display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:48px;align-items:center}
+  .hero-panel::before{content:"";position:absolute;width:640px;height:640px;border-radius:50%;background:radial-gradient(circle,rgba(229,71,62,.14),transparent 65%);top:-260px;right:24%;pointer-events:none}
+  .hero-panel::after{content:"";position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(14,140,120,.14),transparent 65%);bottom:-220px;left:40%;pointer-events:none}
   .hero-panel>*{position:relative;z-index:1}
   .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--trust);background:var(--trust-soft);padding:6px 12px;border-radius:999px}
   .eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--trust)}
@@ -268,7 +268,7 @@
   /* ===== responsive ===== */
   @media (max-width:1060px){
     .nav{display:none}
-    .hero-panel{grid-template-columns:1fr;padding:36px 32px 64px}
+    .hero-panel{grid-template-columns:1fr;padding:40px 64px 72px}
     .feature{height:420px}
     .feature .main{inset:0 0 0 0}
     .float.f3{right:8px}
@@ -290,7 +290,7 @@
     .stats{gap:6px 14px}
     .stats span + span::before{display:none}
     .tiles{grid-template-columns:repeat(2,1fr)}
-    .hero-panel{padding:24px 18px 56px;border-radius:20px}
+    .hero-panel{margin-inline:-20px;padding:28px 20px 60px}
     .feature{height:300px}
     .float{display:none}
     .find .card{padding:16px}

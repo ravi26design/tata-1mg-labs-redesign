@@ -1,0 +1,771 @@
+<meta charset="utf-8">
+<title>Tata 1mg Labs Redesign</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+  :root{
+    color-scheme:light only;
+    --bg:#F6F7F9;
+    --surface:#FFFFFF;
+    --surface-2:#EEF1F5;
+    --ink:#14202C;
+    --ink-2:#4C5A69;
+    --ink-3:#7C8794;
+    --line:#E2E7ED;
+    --line-2:#CCD4DD;
+    --accent:#E5473E;
+    --accent-ink:#FFFFFF;
+    --accent-soft:#FDEDEB;
+    --trust:#0E8C78;
+    --trust-soft:#E3F4F0;
+    --shadow:0 1px 2px rgba(20,32,44,.05),0 10px 28px -14px rgba(20,32,44,.2);
+    --display:"Plus Jakarta Sans","Figtree","Segoe UI",system-ui,sans-serif;
+    --body:"Figtree","Segoe UI",system-ui,-apple-system,sans-serif;
+  }
+
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;padding:0}
+  img,svg{display:block;max-width:100%}
+  h1,h2,h3{margin:0;font-family:var(--display);text-wrap:balance;letter-spacing:-.02em}
+  p{margin:0}
+  .wrap{width:100%;padding-inline:64px;margin-inline:auto}
+  .visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+
+  /* ===== header ===== */
+  .topbar{position:sticky;top:0;z-index:30;background:var(--surface);border-bottom:1px solid var(--line)}
+  .topbar .wrap{display:flex;align-items:center;gap:20px;height:64px}
+  .logo img{height:30px;width:auto}
+  .nav{display:flex;gap:2px}
+  .nav a{padding:8px 11px;border-radius:8px;color:var(--ink);font-weight:700;font-size:13.5px;white-space:nowrap}
+  .nav a:hover{background:var(--surface-2);color:var(--ink)}
+  .nav a[aria-current]{color:var(--accent);background:var(--accent-soft);font-weight:700}
+  .topbar .right{margin-left:auto;display:flex;align-items:center;gap:6px}
+  .icon-btn{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;font-weight:700;font-size:14px;color:var(--ink);position:relative}
+  .icon-btn:hover{background:var(--surface-2);color:var(--ink)}
+  .icon-btn .count{position:absolute;top:2px;right:4px;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--accent);color:var(--accent-ink);font-size:11px;font-weight:700;display:grid;place-items:center;font-variant-numeric:tabular-nums}
+  .icon-btn .count[hidden]{display:none}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 16px;border-radius:10px;font-weight:700;font-size:14px;transition:transform .12s ease,filter .15s ease}
+  .btn:active{transform:translateY(1px)}
+  .btn-primary{background:var(--accent);color:var(--accent-ink)}
+  .btn-primary:hover{filter:brightness(.95)}
+  .btn-ghost{border:1px solid var(--line-2);background:var(--surface);color:var(--ink)}
+  .btn-ghost:hover{background:var(--surface-2)}
+  .btn-sm{padding:7px 12px;font-size:13px;border-radius:8px}
+
+  /* ===== hero ===== */
+  .hero{padding:28px 0 0}
+  .hero-panel{position:relative;border-radius:28px;overflow:hidden;background:linear-gradient(135deg,#FFF3F1 0%,#F7F8FB 45%,#E9F6F2 100%);border:1px solid var(--line);padding:52px 56px 64px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:48px;align-items:center}
+  .hero-panel::before{content:"";position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(229,71,62,.14),transparent 65%);top:-200px;right:22%;pointer-events:none}
+  .hero-panel::after{content:"";position:absolute;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(14,140,120,.14),transparent 65%);bottom:-180px;left:38%;pointer-events:none}
+  .hero-panel>*{position:relative;z-index:1}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--trust);background:var(--trust-soft);padding:6px 12px;border-radius:999px}
+  .eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--trust)}
+  .hero h1{font-size:clamp(34px,3.9vw,50px);font-weight:800;line-height:1.08;margin:18px 0 14px;max-width:18ch;letter-spacing:-.03em}
+  .hero h1 em{font-style:normal;color:var(--accent)}
+  .hero-left{display:flex;flex-direction:column}
+  .hero-lede{font-size:16px;color:var(--ink-2);max-width:46ch;margin-bottom:18px}
+  .stats{display:flex;flex-wrap:wrap;gap:6px 22px;margin-bottom:0;font-size:14px;color:var(--ink-2)}
+  .stats span{display:inline-flex;align-items:center;gap:8px}
+  .stats b{font-family:var(--display);font-weight:600;color:var(--ink);font-size:15px;font-variant-numeric:tabular-nums}
+  .stats span + span::before{content:"";width:4px;height:4px;border-radius:50%;background:var(--line-2);margin-right:14px}
+  .popular{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:12px;font-size:13px;color:var(--ink-3)}
+  .chip{padding:6px 12px;border-radius:999px;border:1px solid var(--line-2);background:var(--surface);color:var(--ink-2);font-size:13px;font-weight:500;transition:border-color .15s,color .15s}
+  .chip:hover{border-color:var(--accent);color:var(--accent)}
+
+  .search{background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);position:relative}
+  .search-row{display:grid;grid-template-columns:auto 1fr auto;align-items:center}
+  .loc{display:flex;align-items:center;gap:8px;padding:0 16px;height:56px;border-right:1px solid var(--line);font-weight:600;font-size:14px;color:var(--ink);white-space:nowrap;border-radius:16px 0 0 16px}
+  .loc:hover{background:var(--surface-2)}
+  .loc svg{color:var(--accent)}
+  .loc .chev{color:var(--ink-3)}
+  .search .field{display:flex;align-items:center;gap:10px;padding-left:16px;min-width:0}
+  .search .field svg{color:var(--ink-3);flex:none}
+  .search input{height:56px;border:0;background:transparent;padding:0 12px 0 0;font:inherit;font-size:15px;color:var(--ink);min-width:0;width:100%}
+  .search input::placeholder{color:var(--ink-3)}
+  .search input:focus{outline:none}
+  .search .go{margin:6px;height:44px;padding:0 20px;border-radius:11px}
+  .suggest{position:absolute;left:0;right:0;top:calc(100% + 6px);background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:8px;z-index:20;max-height:320px;overflow:auto}
+  .suggest[hidden]{display:none}
+  .suggest .hd{font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);font-weight:600;padding:8px 10px 4px}
+  .suggest button{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px;border-radius:9px;text-align:left}
+  .suggest button:hover,.suggest button.active{background:var(--surface-2)}
+  .suggest .nm{font-weight:500}
+  .suggest .meta{font-size:12.5px;color:var(--ink-3)}
+  .suggest .pr{font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .suggest .empty{padding:14px 10px;color:var(--ink-3)}
+
+  /* three booking ways */
+  .ways{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}
+  .way{display:flex;align-items:center;justify-content:center;gap:14px;padding:0 16px;height:76px;border-radius:18px;background:var(--way-bg);border:1px solid var(--way-line);text-align:left;color:var(--ink);transition:transform .15s,filter .15s,border-color .15s}
+  .way:hover{transform:translateY(-2px);border-color:var(--way-line-hover)}
+  .way img{width:40px;height:40px;object-fit:contain;flex:none}
+  .way .lbl{display:flex;flex-direction:column;line-height:1.2}
+  .way .lbl span{font-size:13px;color:var(--ink-2);font-weight:500}
+  .way .lbl b{font-size:16px;font-weight:700;white-space:nowrap}
+  .way-blue{--way-bg:#EAF4FD;--way-line:#C9E1F6;--way-line-hover:#7FB6E6}
+  .way-pink{--way-bg:#FBEAEE;--way-line:#F2CAD3;--way-line-hover:#E08CA0}
+  .way-green{--way-bg:#E7F5EE;--way-line:#C3E5D2;--way-line-hover:#6FC291}
+
+  /* find tests tiles */
+  .find{margin-top:-44px;position:relative;z-index:2}
+  .find .card{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:22px 24px;box-shadow:var(--shadow)}
+  .find .hd{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:12px}
+  .find h2{font-size:16px;font-weight:600;color:var(--ink)}
+  .tiles{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+  .tile{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:12px;padding:14px;border-radius:16px;background:var(--bg);border:1px solid var(--line);text-align:left;transition:border-color .15s,transform .15s,box-shadow .15s,background .15s}
+  .tile:hover{border-color:var(--line-2);transform:translateY(-2px);box-shadow:var(--shadow);background:var(--surface)}
+  .tile img{width:56px;height:56px;border-radius:14px}
+  .tile b{font-weight:600;font-size:14px;line-height:1.3;padding-right:20px}
+  .tile .arr{position:absolute;right:12px;bottom:14px;width:22px;height:22px;border-radius:50%;background:var(--surface-2);color:var(--ink-2);display:grid;place-items:center;opacity:0;transform:translateX(-4px);transition:opacity .15s,transform .15s}
+  .tile:hover .arr{opacity:1;transform:none;background:var(--accent-soft);color:var(--accent)}
+
+  /* hero feature photo + floating cards */
+  .feature{position:relative;height:520px}
+  .feature .main{position:absolute;inset:0 0 0 12%;border-radius:26px;overflow:hidden;box-shadow:var(--shadow);background:var(--surface-2)}
+  .feature .main img{width:100%;height:100%;object-fit:cover;object-position:center top}
+  .feature .main .cap{position:absolute;left:0;right:0;bottom:0;padding:48px 20px 18px;background:linear-gradient(to top,rgba(10,18,26,.85),rgba(10,18,26,0));color:#fff}
+  .feature .main .cap b{display:block;font-family:var(--display);font-weight:700;font-size:18px;line-height:1.2}
+  .feature .main .cap span{font-size:13px;opacity:.85}
+  .float{position:absolute;display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:10px 14px 10px 10px;box-shadow:var(--shadow);max-width:260px;animation:floaty 6s ease-in-out infinite}
+  .float img{width:46px;height:46px;border-radius:12px;object-fit:cover;flex:none}
+  .float b{display:block;font-family:var(--display);font-weight:700;font-size:13.5px;line-height:1.2;color:var(--ink)}
+  .float span{display:block;font-size:12px;color:var(--ink-3);margin-top:2px}
+  .float.f1{left:0;top:32px}
+  .float.f2{left:0;bottom:120px;animation-delay:-2s}
+  .float.f3{right:-12px;top:44%;animation-delay:-4s}
+  .float .ok{width:22px;height:22px;border-radius:50%;background:var(--trust-soft);color:var(--trust);display:grid;place-items:center;flex:none;margin-left:auto}
+  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+  /* ===== sections ===== */
+  section.block{padding:34px 0}
+  .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:18px}
+  .sec-head h2{font-size:23px;font-weight:600}
+  .sec-head p{color:var(--ink-2);margin-top:4px;font-size:14.5px}
+  .link{font-weight:600;font-size:14px;color:var(--accent);display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+  .link:hover{text-decoration:underline;text-underline-offset:3px}
+
+  /* health needs cards (Men / Women / ...) */
+  .needs{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+  .need{position:relative;border-radius:16px;overflow:hidden;background:var(--surface);border:1px solid var(--line);text-align:left;padding:0;transition:transform .15s,border-color .15s}
+  .need:hover{transform:translateY(-2px);border-color:var(--line-2)}
+  .need img{width:100%;aspect-ratio:1;object-fit:cover}
+  .need b{display:block;padding:10px 12px 12px;font-weight:600;font-size:14px}
+
+  /* trust banners: auto-scrolling marquee */
+  .banners{overflow:hidden;margin-inline:-64px;padding:6px 0}
+  .banners .track{display:flex;gap:20px;width:max-content;padding-left:20px;animation:bannerScroll 45s linear infinite;will-change:transform}
+  .banners:hover .track,.banners:focus-within .track{animation-play-state:paused}
+  .banner{flex:none;width:440px;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:var(--surface);box-shadow:var(--shadow);transition:transform .3s ease}
+  .banner:hover{transform:translateY(-3px)}
+  .banner img{width:100%;height:auto;display:block}
+  @keyframes bannerScroll{to{transform:translateX(-50%)}}
+
+  /* radiology */
+  .radio{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+  .rad{display:flex;flex-direction:column;border-radius:16px;overflow:hidden;background:var(--surface);border:1px solid var(--line);text-align:left;transition:transform .15s,border-color .15s}
+  .rad:hover{transform:translateY(-2px);border-color:var(--line-2)}
+  .rad img{width:100%;aspect-ratio:1;object-fit:cover}
+  .rad b{display:block;padding:10px 12px 12px;font-weight:600;font-size:14px}
+
+  /* how it works */
+  .steps{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+  .step{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+  .step img{width:100%;aspect-ratio:624/486;object-fit:cover}
+  .step .txt{padding:14px 14px 16px;display:flex;flex-direction:column;gap:6px}
+  .step .n{font-family:var(--display);font-weight:600;font-size:12px;letter-spacing:.06em;color:var(--accent)}
+  .step h3{font-size:15px;font-weight:600;line-height:1.3}
+  .step p{font-size:13px;color:var(--ink-2)}
+
+  /* app band */
+  .app{position:relative;border-radius:20px;overflow:hidden;border:1px solid var(--line);background:#fff url("{{img:app_bg}}") center / 100% auto no-repeat;aspect-ratio:1200/448;display:flex;align-items:center}
+  .app .content{position:relative;padding:32px 40px;max-width:52%}
+  .app h2{font-size:clamp(20px,1.9vw,28px);font-weight:600;margin-bottom:8px}
+  .app h3{font-family:var(--body);font-size:15px;font-weight:400;color:var(--ink-2);margin-bottom:20px}
+  .app .stores{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .app .stores img{height:44px;width:auto;border-radius:8px}
+  .app .or{font-size:13px;color:var(--ink-3);padding:0 4px}
+  .app .qr{display:flex;align-items:center;gap:14px;font-size:14px;font-weight:500;color:var(--ink-2)}
+  .app .qr img{width:104px;height:104px;border-radius:12px;border:1px solid var(--line);background:#fff}
+
+  /* seo / about (FAQ style) */
+  .seo{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:28px 36px 12px}
+  .seo h2{font-size:22px;font-weight:600;margin-bottom:12px}
+  .faqs{display:flex;flex-direction:column}
+  .faq{border-top:1px solid var(--line)}
+  .faq summary{cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 0;font-weight:600;font-size:16px;color:var(--ink)}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary:hover{color:var(--accent)}
+  .faq .pm{position:relative;width:28px;height:28px;border-radius:50%;border:1px solid var(--line-2);flex:none;transition:background .2s,border-color .2s,transform .3s ease}
+  .faq .pm::before,.faq .pm::after{content:"";position:absolute;left:50%;top:50%;background:currentColor;transform:translate(-50%,-50%)}
+  .faq .pm::before{width:12px;height:2px}
+  .faq .pm::after{width:2px;height:12px;transition:transform .3s ease}
+  .faq[open] .pm{background:var(--ink);border-color:var(--ink);color:#fff}
+  .faq[open] .pm::after{transform:translate(-50%,-50%) scaleY(0)}
+  .faq .ans{padding:0 0 20px;color:var(--ink-2);font-size:14.5px;line-height:1.7;max-width:80ch}
+  .faq .ans p + p{margin-top:10px}
+  .faq .ans a{color:var(--accent);font-weight:600}
+  .faq .ans a:hover{text-decoration:underline;text-underline-offset:3px}
+
+  /* ===== footer ===== */
+  footer{background:var(--surface);border-top:1px solid var(--line);color:var(--ink-2);font-size:14px}
+  .f-stats{padding:28px 0 8px}
+  .f-stats .f-inner{display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap;background:linear-gradient(90deg,var(--accent-soft),var(--surface-2));border:1px solid var(--line);border-radius:20px;padding:22px 28px}
+  .f-stats h2{font-size:20px;font-weight:600;color:var(--ink);max-width:14ch;line-height:1.2}
+  .f-stats ul{list-style:none;margin:0;padding:0;display:flex;gap:14px;flex-wrap:wrap}
+  .f-stats li{display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 22px 14px 14px;min-width:210px;box-shadow:var(--shadow)}
+  .f-stats .ic{width:52px;height:52px;border-radius:12px;background:var(--surface-2);display:grid;place-items:center;flex:none}
+  .f-stats img{width:36px;height:36px}
+  .f-stats b{display:block;font-family:var(--display);font-size:28px;font-weight:700;color:var(--ink);line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+  .f-stats span{font-size:13px;color:var(--ink-2);font-weight:500;margin-top:4px;display:block}
+
+  .f-links{padding:36px 0 28px;display:grid;grid-template-columns:repeat(3,1fr) 1.3fr;gap:32px}
+  .f-col h3{font-family:var(--body);font-size:14px;font-weight:700;color:var(--ink);margin-bottom:14px}
+  .f-col ul{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+  .f-col a{color:var(--ink-2);font-size:14px}
+  .f-col a:hover{color:var(--accent)}
+  .f-social{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+  .f-social a{width:32px;height:32px;border-radius:50%;overflow:hidden;display:block;transition:transform .15s}
+  .f-social a:hover{transform:translateY(-2px)}
+  .f-social img{width:100%;height:100%}
+  .f-apps{display:flex;gap:10px;flex-wrap:wrap}
+  .f-apps img{height:40px;width:auto;border-radius:6px}
+
+  .f-trust{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:28px 0}
+  .f-trust .f-inner{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+  .f-trust li{list-style:none;display:grid;grid-template-columns:48px 1fr;gap:14px;align-items:start}
+  .f-trust ul{margin:0;padding:0;display:contents}
+  .f-trust img{width:48px;height:48px}
+  .f-trust b{display:block;font-weight:700;color:var(--ink);margin-bottom:4px}
+  .f-trust p{font-size:13.5px;color:var(--ink-2)}
+
+  .f-cert{padding:24px 0;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+  .f-cert p{font-weight:600;color:var(--ink);max-width:48ch}
+  .f-cert img{height:64px;width:auto}
+
+  .f-more{border-top:1px solid var(--line)}
+  .f-more summary{cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;padding:18px 0;font-weight:700;color:var(--ink);font-size:15px}
+  .f-more summary::-webkit-details-marker{display:none}
+  .f-more summary svg{transition:transform .2s;color:var(--ink-3)}
+  .f-more details[open] summary svg{transform:rotate(180deg)}
+  .f-more .cols{display:grid;grid-template-columns:repeat(2,1fr);gap:20px 40px;padding:4px 0 26px}
+  .f-more h4{margin:0 0 6px;font-size:14px;font-weight:700;color:var(--ink)}
+  .f-more p{font-size:13.5px;color:var(--ink-2);max-width:70ch}
+
+  .f-bottom{border-top:1px solid var(--line);padding:22px 0 36px}
+  .f-bottom .f-inner{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;flex-wrap:wrap}
+  .f-bottom p{font-size:12.5px;color:var(--ink-3);max-width:78ch}
+  .f-pay b{display:block;font-size:12px;font-weight:600;color:var(--ink-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px}
+  .f-pay ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+  .f-pay li{width:44px;height:28px;border:1px solid var(--line);border-radius:6px;display:grid;place-items:center;background:#fff}
+  .f-pay img{width:34px;height:auto}
+
+  .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--bg);padding:11px 16px;border-radius:12px;font-weight:500;font-size:14px;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:50}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+  /* ===== responsive ===== */
+  @media (max-width:1060px){
+    .nav{display:none}
+    .hero-panel{grid-template-columns:1fr;padding:36px 32px 64px}
+    .feature{height:420px}
+    .feature .main{inset:0 0 0 0}
+    .float.f3{right:8px}
+    .needs,.radio{grid-template-columns:repeat(3,1fr)}
+    .banner{width:360px}
+    .steps{grid-template-columns:repeat(3,1fr)}
+    .about-grid{grid-template-columns:1fr}
+    .f-links{grid-template-columns:1fr 1fr}
+    .f-trust .f-inner{grid-template-columns:1fr}
+    .help{position:static}
+  }
+  @media (max-width:640px){
+    .wrap{padding-inline:20px}
+    .hero{padding:28px 0 20px}
+    .hero h1{max-width:none}
+    .search-row{grid-template-columns:1fr auto}
+    .loc{grid-column:1 / -1;border-right:0;border-bottom:1px solid var(--line);border-radius:16px 16px 0 0;height:46px}
+    .ways{grid-template-columns:1fr}
+    .stats{gap:6px 14px}
+    .stats span + span::before{display:none}
+    .tiles{grid-template-columns:repeat(2,1fr)}
+    .hero-panel{padding:24px 18px 56px;border-radius:20px}
+    .feature{height:300px}
+    .float{display:none}
+    .find .card{padding:16px}
+    .needs,.radio{grid-template-columns:repeat(2,1fr)}
+    .banners{margin-inline:-20px}
+    .banner{width:280px}
+    .steps{grid-template-columns:1fr}
+    .app{aspect-ratio:auto;background-size:cover;background-position:right center;flex-direction:column;align-items:stretch}
+    .app::before{content:"";display:block;aspect-ratio:1200/448;background:url("{{img:app_bg}}") right center / cover no-repeat}
+    .app .content{padding:20px;max-width:none;background:#fff}
+    .topbar .right .label{display:none}
+    .seo{padding:20px 18px 6px}
+    .f-links{grid-template-columns:1fr}
+    .f-more .cols{grid-template-columns:1fr}
+    .f-stats ul{gap:10px;width:100%}
+    .f-stats li{width:100%}
+    .f-stats h2{max-width:none}
+  }
+  @media (prefers-reduced-motion: reduce){ *{transition:none !important;animation:none !important} .banners{overflow-x:auto} }
+</style>
+
+<!-- ===================== HEADER ===================== -->
+<header class="topbar">
+  <div class="wrap">
+    <a class="logo" href="#" aria-label="Tata 1mg"><img src="{{img:logo}}" alt="Tata 1mg logo"></a>
+    <nav class="nav" aria-label="Primary">
+      <a href="#">Medicines</a>
+      <a href="#" aria-current="page">Lab Tests</a>
+      <a href="#">Consult Doctors</a>
+      <a href="#">Cancer Care</a>
+      <a href="#">Ayurveda</a>
+      <a href="#">Partnerships</a>
+      <a href="#">Corporates</a>
+      <a href="#">Care Plan</a>
+    </nav>
+    <div class="right">
+      <button class="icon-btn" id="cartBtn" aria-label="Cart">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.4 11.2a1 1 0 0 0 1 .8H18a1 1 0 0 0 1-.8L21 8H6.5"/><circle cx="9" cy="20" r="1.2"/><circle cx="17" cy="20" r="1.2"/></svg>
+        <span class="count" id="cartCount" hidden>0</span>
+      </button>
+      <button class="icon-btn"><span class="label">Need Help?</span></button>
+      <button class="btn btn-ghost btn-sm">Login | Signup</button>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+  <div class="wrap">
+   <div class="hero-panel">
+    <div class="hero-left">
+      <span class="eyebrow" style="align-self:flex-start">Trusted NABL certified labs</span>
+      <h1>Book lab tests online from <em>trusted and certified</em> labs</h1>
+      <p class="hero-lede">Home sample collection, doctor-verified reports and 2,000+ tests from 120+ certified labs in 55+ cities.</p>
+
+      <form class="search" id="searchForm" role="search" autocomplete="off">
+        <div class="search-row">
+          <button type="button" class="loc" id="locBtn" aria-label="Change location">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            <span id="locName">Gurgaon</span>
+            <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="field">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <label class="visually-hidden" for="q">Search tests or full body checkups</label>
+            <input id="q" type="text" placeholder="Search tests or full body checkups" />
+          </div>
+          <button type="submit" class="btn btn-primary go">Search</button>
+        </div>
+        <div class="suggest" id="suggest" hidden></div>
+      </form>
+      <div class="popular">
+        <span>Popular:</span>
+        <button type="button" class="chip" data-q="Full body">Full body checkup</button>
+        <button type="button" class="chip" data-q="Thyroid">Thyroid</button>
+        <button type="button" class="chip" data-q="Vitamin">Vitamin D</button>
+        <button type="button" class="chip" data-q="HbA1c">HbA1c</button>
+        <button type="button" class="chip" data-q="CBC">CBC</button>
+      </div>
+
+      <div class="stats" aria-label="Tata 1mg Labs at a glance" style="margin:18px 0 0">
+        <span><b>45,00,000+</b> tests booked</span>
+        <span><b>120+</b> verified labs</span>
+        <span><b>55+</b> cities</span>
+      </div>
+
+      <div class="ways" aria-label="Other ways to book">
+        <a class="way way-blue" href="tel:18002122323"><img src="{{img:q_phone}}" alt=""><span class="lbl"><span>Book via</span><b>Phone Call</b></span></a>
+        <a class="way way-pink" href="#"><img src="{{img:q_quick}}" alt=""><span class="lbl"><span>Quick</span><b>Order</b></span></a>
+        <a class="way way-green" href="#"><img src="{{img:q_wa}}" alt=""><span class="lbl"><span>Book via</span><b>Whatsapp</b></span></a>
+      </div>
+
+    </div>
+
+    <div class="feature" aria-label="Why book with Tata 1mg">
+      <figure class="main" style="margin:0"><img src="{{img:hero_home_lg}}" alt="Phlebotomist collecting a sample at home"><figcaption class="cap"><b>Home sample collection</b><span>Safe pickup at your doorstep</span></figcaption></figure>
+      <div class="float f1"><img src="{{img:hero_nabl}}" alt=""><div><b>Trusted NABL certified labs</b><span>Hygienic &amp; safety assured testing</span></div></div>
+      <div class="float f2"><img src="{{img:hero_cov}}" alt=""><div><b>Wide coverage across india</b><span>Most trusted service in 55+ cities</span></div></div>
+      <div class="float f3"><img src="{{img:hero_rep}}" alt=""><div><b>Fast, accurate reports</b><span>Doctor-verified, delivered on time</span></div><span class="ok"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span></div>
+    </div>
+   </div>
+
+      <div class="find">
+       <div class="card">
+        <div class="hd"><h2>Find tests &amp; packages for your needs</h2><a class="link" href="#">View all</a></div>
+        <div class="tiles">
+          <button class="tile" data-q="Full body"><img src="{{img:c_full}}" alt=""><b>Full Body Packages</b><span class="arr" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+          <button class="tile" data-q="Scan"><img src="{{img:c_rad}}" alt=""><b>X Rays, Scans &amp; More</b><span class="arr" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+          <button class="tile" data-q="Fever"><img src="{{img:c_fever}}" alt=""><b>Fever Tests</b><span class="arr" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+          <button class="tile" data-q="Diabetes"><img src="{{img:c_diab}}" alt=""><b>Diabetes Tests</b><span class="arr" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+          <button class="tile" data-q="Vitamin"><img src="{{img:c_vit}}" alt=""><b>Vitamins Tests</b><span class="arr" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+        </div>
+       </div>
+      </div>
+  </div>
+</section>
+
+<!-- ===================== HEALTH NEEDS ===================== -->
+<section class="block">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><h2>Tests and packages for your health needs</h2></div>
+      <a class="link" href="#">View all <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+    <div class="needs">
+      <button class="need" data-q="Men"><img src="{{img:n_men}}" alt=""><b>Men</b></button>
+      <button class="need" data-q="Women"><img src="{{img:n_women}}" alt=""><b>Women</b></button>
+      <button class="need" data-q="Liver"><img src="{{img:n_liver}}" alt=""><b>Liver &amp; Kidney</b></button>
+      <button class="need" data-q="Thyroid"><img src="{{img:n_thy}}" alt=""><b>Thyroid</b></button>
+      <button class="need" data-q="Hormone"><img src="{{img:n_horm}}" alt=""><b>Hormones</b></button>
+      <button class="need" data-q="Allergy"><img src="{{img:n_all}}" alt=""><b>Allergy</b></button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TRUST BANNERS ===================== -->
+<section class="block" style="padding-top:6px">
+  <div class="wrap">
+    <div class="banners" aria-label="Why trust Tata 1mg Labs">
+      <div class="track">
+      <a class="banner" href="#"><img src="{{img:b_nabl}}" alt="NABL Labs"></a>
+      <a class="banner" href="#"><img src="{{img:b_cap}}" alt="CAP Accredited"></a>
+      <a class="banner" href="#"><img src="{{img:b_bharosa}}" alt="Bharose ka Badge"></a>
+      <a class="banner" href="#"><img src="{{img:b_trust}}" alt="Trust what you see"></a>
+      <a class="banner" href="#"><img src="{{img:b_nrl}}" alt="National Reference Lab"></a>
+      <a class="banner" href="#" aria-hidden="true" tabindex="-1"><img src="{{img:b_nabl}}" alt="NABL Labs"></a>
+      <a class="banner" href="#" aria-hidden="true" tabindex="-1"><img src="{{img:b_cap}}" alt="CAP Accredited"></a>
+      <a class="banner" href="#" aria-hidden="true" tabindex="-1"><img src="{{img:b_bharosa}}" alt="Bharose ka Badge"></a>
+      <a class="banner" href="#" aria-hidden="true" tabindex="-1"><img src="{{img:b_trust}}" alt="Trust what you see"></a>
+      <a class="banner" href="#" aria-hidden="true" tabindex="-1"><img src="{{img:b_nrl}}" alt="National Reference Lab"></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== RADIOLOGY ===================== -->
+<section class="block">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><h2>Radiology tests, x-rays &amp; scans</h2></div>
+      <a class="link" href="#">View all <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+    <div class="radio">
+      <button class="rad" data-q="CT Scan"><img src="{{img:r_ct}}" alt=""><b>CT Scan</b></button>
+      <button class="rad" data-q="ECG"><img src="{{img:r_ecg}}" alt=""><b>ECG</b></button>
+      <button class="rad" data-q="X-Ray"><img src="{{img:r_xray}}" alt=""><b>X-Ray</b></button>
+      <button class="rad" data-q="Ultrasound"><img src="{{img:r_us}}" alt=""><b>Ultrasound</b></button>
+      <button class="rad" data-q="MRI"><img src="{{img:r_mri}}" alt=""><b>MRI</b></button>
+      <button class="rad" data-q="Echo"><img src="{{img:r_echo}}" alt=""><b>Echo Test</b></button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== HOW IT WORKS ===================== -->
+<section class="block">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><h2>How does home sample collection work?</h2></div>
+    </div>
+    <div class="steps">
+      <div class="step"><img src="{{img:s1}}" alt=""><div class="txt"><span class="n">STEP 1</span><h3>Easy online booking</h3><p>Search for tests and packages, book your preferred time slot and enter your address for seamless at-home lab tests.</p></div></div>
+      <div class="step"><img src="{{img:s2}}" alt=""><div class="txt"><span class="n">STEP 2</span><h3>Live tracking of phlebotomist</h3><p>Track our trained phlebotomist's real time location for seamless sample collection.</p></div></div>
+      <div class="step"><img src="{{img:s3}}" alt=""><div class="txt"><span class="n">STEP 3</span><h3>Safe Sample Collection</h3><p>Our phlebotomists follow strict safety protocols to collect samples safely at home and on time.</p></div></div>
+      <div class="step"><img src="{{img:s4}}" alt=""><div class="txt"><span class="n">STEP 4</span><h3>Sample received at lab</h3><p>Samples are transported securely to our accredited labs with world-class machines for testing by qualified experts.</p></div></div>
+      <div class="step"><img src="{{img:s5}}" alt=""><div class="txt"><span class="n">STEP 5</span><h3>Quick, Doctor-Verified Reports</h3><p>Get doctor-approved reports via email and WhatsApp, with options for doctor follow-ups and AI insights.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== APP ===================== -->
+<section class="block">
+  <div class="wrap">
+    <div class="app">
+      <div class="content">
+        <h2>Download the Tata 1mg app. Trusted healthcare, at your fingertips.</h2>
+        <h3>Book tests, track reports, and get AI-powered health insights.</h3>
+        <div class="stores">
+          <a href="#"><img src="{{img:appstore}}" alt="Download on the App Store"></a>
+          <a href="#"><img src="{{img:gplay}}" alt="Get it on Google Play"></a>
+          <span class="or">or</span>
+          <span class="qr"><img src="{{img:qr}}" alt="Scan QR to download the app"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ABOUT ===================== -->
+<section class="block">
+  <div class="wrap">
+    <div class="seo">
+      <h2>Keep your health in check with Tata 1mg: Lab tests just a click away</h2>
+      <div class="faqs">
+      <details class="faq" open>
+        <summary><span>Tata 1mg brings care to health</span><span class="pm" aria-hidden="true"></span></summary>
+        <div class="ans">
+          <p>Tata 1mg is India's leading digital healthcare platform. From ordering medicines online to consulting doctors online, Tata 1mg is that one place that aims to fulfill all your health needs within the comfort of your home. In fact, you don't even need to visit the diagnostic labs to get tests done. Tata 1mg has got that covered too.</p>
+        </div>
+      </details>
+      <details class="faq">
+        <summary><span>Tata 1mg: Lab tests now at your doorstep</span><span class="pm" aria-hidden="true"></span></summary>
+        <div class="ans">
+          <p>Spending hours in a queue at a diagnostic lab or a hospital is now a thing of the past. With more than 45,00,000 lab tests booked, Tata 1mg labs is on a mission to give you a flawless healthcare experience by bringing 'care' to 'health'.</p>
+          <p>With Tata 1mg labs, you can choose the diagnostic lab of your preference and get the hassle-free experience of a diagnostic center at the comfort of your home.</p>
+          <p>You can choose the diagnostic lab of your choice and get your lab tests done at discounted prices with the quality of service kept intact.</p>
+          <p>Wondering how to book a lab test? It's simple. You just need to search and add your tests, select the lab of your choice and schedule your test as per your suitable time slot. Once your test gets confirmed, a phlebotomist will be assigned to collect a sample from your home.</p>
+        </div>
+      </details>
+      <details class="faq">
+        <summary><span>Need more help?</span><span class="pm" aria-hidden="true"></span></summary>
+        <div class="ans">
+          <p>Just give us a call (<a href="tel:18002122323">18002122323</a>) and we will help you complete your order.</p>
+        </div>
+      </details>
+      <details class="faq">
+        <summary><span>Certified labs: For accessible and affordable experience</span><span class="pm" aria-hidden="true"></span></summary>
+        <div class="ans">
+          <p>We partner with various recognized diagnostic labs to make sure that you have a safe and smooth experience. To ensure quality and hygiene in sample collection and high accuracy in results, we partner with labs that are certified by international bodies like ISO (International Organization for Standardization), NABL (National Accreditation Board for testing and calibration laboratories) and CAP (College of American Pathologists).</p>
+        </div>
+      </details>
+      <details class="faq">
+        <summary><span>The services we offer</span><span class="pm" aria-hidden="true"></span></summary>
+        <div class="ans">
+          <p>As India's leading digital healthcare platforms, your health is our utmost priority. Apart from facilitating pathological tests, Tata 1mg is your one-stop place for booking radiology tests such as MRIs and CT scans. Not just this, we also offer a free package of diabetes tests for members of the Diabetes Care Plan.</p>
+          <p>With a presence in cities like Delhi, Gurgaon, Noida, Mumbai, Pune, Hyderabad, Bangalore, Chennai, etc., through Tata 1mg, you can avail over 2,000 tests and get tested by 120+ top, verified labs at the best prices. You even have the option to compare tests and packages based on prices and lab ratings and choose accordingly.</p>
+          <p>Need help with lab test results? Talk to more than 20 kinds of specialists on Tata 1mg and get your results verified by them.</p>
+          <p>We have been making healthcare affordable and accessible since the day we started. We aim to bring care to health and continue doing so until everyone is well.</p>
+          <p>Customer centricity is the core of our values. Our team of highly trained and experienced doctors, phlebotomists and pharmacists look into each order to give you a fulfilling experience.</p>
+          <p>Explore our labs now and book your tests today. Stay Healthy!</p>
+        </div>
+      </details>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+<div class="wrap">
+  <div class="f-stats">
+    <div class="f-inner">
+      <h2>India's largest healthcare platform</h2>
+      <ul>
+        <li><span class="ic"><img src="{{img:f_stat1}}" alt=""></span><div><b>260m+</b><span>Visitors</span></div></li>
+        <li><span class="ic"><img src="{{img:f_stat2}}" alt=""></span><div><b>31m+</b><span>Orders Delivered</span></div></li>
+        <li><span class="ic"><img src="{{img:f_stat3}}" alt=""></span><div><b>1800+</b><span>Cities</span></div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="f-links">
+    <div class="f-col">
+      <h3>Know Us</h3>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">Press Coverage</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Business Partnership</a></li>
+        <li><a href="#">Become a Health Partner</a></li>
+        <li><a href="#">Corporate Governance</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h3>Our Policies</h3>
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms and Conditions</a></li>
+        <li><a href="#">Editorial Policy</a></li>
+        <li><a href="#">Return Policy</a></li>
+        <li><a href="#">IP Policy</a></li>
+        <li><a href="#">Grievance Redressal Policy</a></li>
+        <li><a href="#">Fake Jobs and Fraud Disclaimer</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h3>Our Services</h3>
+      <ul>
+        <li><a href="#">Order Medicines</a></li>
+        <li><a href="#">Book Lab Tests</a></li>
+        <li><a href="#">Consult a Doctor</a></li>
+        <li><a href="#">Ayurveda Articles</a></li>
+        <li><a href="#">Hindi Articles</a></li>
+        <li><a href="#">Care Plan</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h3>Connect</h3>
+      <p style="font-size:13px;color:var(--ink-3);margin-bottom:10px">Social Links</p>
+      <div class="f-social">
+        <a href="#" aria-label="Facebook"><img src="{{img:so_fb}}" alt=""></a>
+        <a href="#" aria-label="Instagram"><img src="{{img:so_ig}}" alt=""></a>
+        <a href="#" aria-label="Twitter"><img src="{{img:so_tw}}" alt=""></a>
+        <a href="#" aria-label="YouTube"><img src="{{img:so_yt}}" alt=""></a>
+        <a href="#" aria-label="LinkedIn"><img src="{{img:so_li}}" alt=""></a>
+        <a href="#" aria-label="Medium"><img src="{{img:so_md}}" alt=""></a>
+      </div>
+      <p style="font-size:13px;color:var(--ink-3);margin-bottom:10px">Download the Tata 1mg app</p>
+      <div class="f-apps">
+        <a href="#"><img src="{{img:f_gplay}}" alt="Get it on Google Play"></a>
+        <a href="#"><img src="{{img:f_appstore}}" alt="Download on the App Store"></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="f-trust">
+    <div class="f-inner">
+      <ul>
+        <li><img src="{{img:t_reliable}}" alt=""><div><b>Reliable</b><p>All products displayed on Tata 1mg are procured from verified and licensed pharmacies. All labs listed on the platform are accredited</p></div></li>
+        <li><img src="{{img:t_secure}}" alt=""><div><b>Secure</b><p>Tata 1mg uses Secure Sockets Layer (SSL) 128-bit encryption and is Payment Card Industry Data Security Standard (PCI DSS) compliant</p></div></li>
+        <li><img src="{{img:t_afford}}" alt=""><div><b>Affordable</b><p>Find affordable medicine substitutes, save up to 50% on health products, up to 80% off on lab tests and free doctor consultations.</p></div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="f-cert">
+    <p>India's only LegitScript and ISO/ IEC 27001:2022 certified online healthcare platform</p>
+    <img src="{{img:urs}}" alt="URS ISO 27001 and UKAS Management Systems certification">
+  </div>
+
+  <div class="f-more">
+    <div class="f-inner">
+      <details>
+        <summary>Know more about Tata 1mg <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary>
+        <div class="cols">
+          <div><h4>Access medical and health information</h4><p>Tata 1mg provides you with medical information which is curated, written and verified by experts, accurate and trustworthy. Our experts create high-quality content about medicines, diseases, lab investigations, Over-The-Counter (OTC) health products, Ayurvedic herbs/ingredients, and alternative remedies.</p></div>
+          <div><h4>Order medicines online</h4><p>Get free medicine home delivery in over 1800 cities across India. You can also order Ayurvedic, Homeopathic and other Over-The-Counter (OTC) health products. Your safety is our top priority. All products displayed on Tata 1mg are procured from verified and licensed pharmacies.</p></div>
+          <div><h4>Book lab tests</h4><p>Book any lab tests and preventive health packages from certified labs and get tested from the comfort of your home. Enjoy free home sample collection, view reports online and consult a doctor online for free.</p></div>
+          <div><h4>Consult a doctor online</h4><p>Got a health query? Consult doctors online from the comfort of your home for free. Chat privately with our registered medical specialists to connect directly with verified doctors. Your privacy is guaranteed.</p></div>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div class="f-bottom">
+    <div class="f-inner">
+      <p>© 2026 Tata 1mg. All rights reserved. All medicines are dispensed in compliance with the Drugs and Cosmetics Act, 1940 and Drugs and Cosmetics Rules, 1945. We do not process requests for Schedule X and habit forming drugs.</p>
+      <div class="f-pay">
+        <b>Our payment partners</b>
+        <ul>
+          <li><img src="{{img:p_visa}}" alt="Visa"></li>
+          <li><img src="{{img:p_mc}}" alt="Mastercard"></li>
+          <li><img src="{{img:p_amex}}" alt="American Express"></li>
+          <li><img src="{{img:p_rupay}}" alt="RuPay"></li>
+          <li><img src="{{img:p_paytm}}" alt="Paytm"></li>
+          <li><img src="{{img:p_amazon}}" alt="Amazon Pay"></li>
+          <li><img src="{{img:p_gpay}}" alt="Google Pay"></li>
+          <li><img src="{{img:p_mobikwik}}" alt="MobiKwik"></li>
+          <li><img src="{{img:p_freecharge}}" alt="Freecharge"></li>
+          <li><img src="{{img:p_phonepe}}" alt="PhonePe"></li>
+          <li><img src="{{img:p_simpl}}" alt="Simpl"></li>
+          <li><img src="{{img:p_airtel}}" alt="Airtel Money"></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  const TESTS = [
+    {id:1,name:"Tata 1mg Full Body Checkup",tests:64,price:999},
+    {id:2,name:"Comprehensive Full Body with Vitamins",tests:86,price:1499},
+    {id:3,name:"Thyroid Profile (T3, T4, TSH)",tests:3,price:349},
+    {id:4,name:"HbA1c (Glycated Haemoglobin)",tests:1,price:299},
+    {id:5,name:"Diabetes Screening (HbA1c + Fasting Sugar)",tests:4,price:449},
+    {id:6,name:"Vitamin D (25-OH)",tests:1,price:599},
+    {id:7,name:"Vitamin B12",tests:1,price:449},
+    {id:8,name:"Complete Blood Count (CBC)",tests:1,price:199},
+    {id:9,name:"Fever Panel (Dengue, Malaria, Typhoid, CBC)",tests:5,price:899},
+    {id:10,name:"Dengue NS1 Antigen",tests:1,price:499},
+    {id:11,name:"Liver Function Test (LFT)",tests:11,price:399},
+    {id:12,name:"Kidney Function Test (KFT)",tests:10,price:449},
+    {id:13,name:"Lipid Profile",tests:8,price:399},
+    {id:14,name:"Allergy Panel, Food (Basic)",tests:20,price:2499},
+    {id:15,name:"Men's Health Package",tests:70,price:1249},
+    {id:16,name:"Women's Wellness Package",tests:72,price:1299},
+    {id:17,name:"PCOD / PCOS Hormone Profile",tests:12,price:1199},
+    {id:18,name:"Testosterone (Total)",tests:1,price:499},
+    {id:19,name:"CT Scan Brain (Plain)",tests:1,price:2200},
+    {id:20,name:"MRI Brain (Plain)",tests:1,price:4500},
+    {id:21,name:"X-Ray Chest PA View",tests:1,price:350},
+    {id:22,name:"Ultrasound Whole Abdomen",tests:1,price:1200},
+    {id:23,name:"ECG (Resting)",tests:1,price:300},
+    {id:24,name:"2D Echo Test",tests:1,price:1800},
+  ];
+  const KEYWORDS = {
+    "full body":[1,2],"thyroid":[3],"vitamin":[6,7],"hba1c":[4,5],"cbc":[8],"fever":[9,10],"diabetes":[5,4],
+    "liver":[11,12],"kidney":[12,11],"hormone":[17,18,3],"allergy":[14],"men":[15,18],"women":[16,17],
+    "scan":[19,20,21,22],"ct scan":[19],"mri":[20],"x-ray":[21],"ultrasound":[22],"ecg":[23],"echo":[24],"heart":[13,23,24]
+  };
+  const rupee = n => "₹" + n.toLocaleString("en-IN");
+  const cart = new Set();
+  const cartCount = document.getElementById("cartCount");
+  const toast = document.getElementById("toast");
+  let toastTimer;
+  const showToast = msg => { toast.textContent = msg; toast.classList.add("show"); clearTimeout(toastTimer); toastTimer = setTimeout(()=>toast.classList.remove("show"), 2200); };
+  const updateCart = () => { cartCount.textContent = cart.size; cartCount.hidden = cart.size === 0; };
+
+  const q = document.getElementById("q"), suggest = document.getElementById("suggest");
+  let activeIdx = -1;
+  function matches(term){
+    term = term.trim().toLowerCase(); if(!term) return [];
+    const ids = new Set();
+    Object.keys(KEYWORDS).forEach(k=>{ if(k.includes(term) || term.includes(k)) KEYWORDS[k].forEach(i=>ids.add(i)); });
+    TESTS.forEach(p=>{ if(p.name.toLowerCase().includes(term)) ids.add(p.id); });
+    return [...ids].map(i=>TESTS.find(p=>p.id===i)).slice(0,7);
+  }
+  function renderSuggest(){
+    if(!q.value.trim()){ suggest.hidden = true; return; }
+    const res = matches(q.value); activeIdx = -1;
+    suggest.innerHTML = res.length
+      ? `<div class="hd">Tests and packages</div>` + res.map(p=>`<button type="button" data-pick="${p.id}"><span><span class="nm">${p.name}</span><br><span class="meta">${p.tests} ${p.tests===1?"test":"tests"} included</span></span><span class="pr">${rupee(p.price)}</span></button>`).join("")
+      : `<div class="empty">No results for "${q.value}". Try a test name like CBC or a concern like fever.</div>`;
+    suggest.hidden = false;
+  }
+  q.addEventListener("input", renderSuggest);
+  q.addEventListener("focus", renderSuggest);
+  q.addEventListener("keydown", e=>{
+    const items = [...suggest.querySelectorAll("[data-pick]")]; if(!items.length) return;
+    if(e.key==="ArrowDown"){ e.preventDefault(); activeIdx = (activeIdx+1)%items.length; }
+    else if(e.key==="ArrowUp"){ e.preventDefault(); activeIdx = (activeIdx-1+items.length)%items.length; }
+    else if(e.key==="Enter" && activeIdx>=0){ e.preventDefault(); items[activeIdx].click(); return; }
+    else if(e.key==="Escape"){ suggest.hidden = true; return; }
+    else return;
+    items.forEach((b,i)=>b.classList.toggle("active", i===activeIdx));
+  });
+  suggest.addEventListener("click", e=>{
+    const b = e.target.closest("[data-pick]"); if(!b) return;
+    const id = Number(b.dataset.pick); cart.add(id); updateCart();
+    showToast("Added " + TESTS.find(p=>p.id===id).name + " to cart");
+    q.value = ""; suggest.hidden = true;
+  });
+  document.addEventListener("click", e=>{ if(!e.target.closest("#searchForm")) suggest.hidden = true; });
+  document.getElementById("searchForm").addEventListener("submit", e=>{
+    e.preventDefault();
+    if(matches(q.value).length){ renderSuggest(); q.focus(); }
+    else showToast(q.value.trim() ? "No tests found. Try another name." : "Type a test name to search");
+  });
+  document.querySelectorAll("[data-q]").forEach(el=>el.addEventListener("click", ()=>{
+    q.value = el.dataset.q; window.scrollTo({top:0, behavior:"smooth"}); q.focus(); renderSuggest();
+  }));
+
+  const cities = ["Gurgaon","Delhi","Noida","Mumbai","Pune","Hyderabad","Bangalore","Chennai"];
+  document.getElementById("locBtn").addEventListener("click", ()=>{
+    const el = document.getElementById("locName");
+    el.textContent = cities[(cities.indexOf(el.textContent)+1)%cities.length];
+    showToast("Showing labs in " + el.textContent);
+  });
+  document.getElementById("cartBtn").addEventListener("click", ()=>{
+    showToast(cart.size ? cart.size + (cart.size===1?" item":" items") + " in your cart" : "Your cart is empty");
+  });
+})();
+</script>

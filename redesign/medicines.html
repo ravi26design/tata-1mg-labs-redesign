@@ -396,6 +396,8 @@
   .catnav a{display:inline-flex;align-items:center;gap:6px;padding:12px 12px;font-size:13.5px;font-weight:600;color:var(--ink-2);white-space:nowrap;border-bottom:2px solid transparent;transition:color .2s,border-color .2s}
   .catnav a svg{color:var(--ink-3)}
   .catnav a:hover{color:var(--accent);border-color:var(--accent)}
+  .catnav a.offers{color:var(--accent);font-weight:700}
+  .catnav a.offers svg{color:var(--accent)}
   .hero-media{display:grid;grid-template-columns:2fr 1fr;gap:14px;margin-top:26px;align-items:stretch}
   .hero-media .bslider{margin-top:0;aspect-ratio:auto;height:100%;min-height:200px}
   .notice{display:block;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:var(--surface);box-shadow:var(--shadow)}
@@ -550,7 +552,6 @@
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.4 11.2a1 1 0 0 0 1 .8H18a1 1 0 0 0 1-.8L21 8H6.5"/><circle cx="9" cy="20" r="1.2"/><circle cx="17" cy="20" r="1.2"/></svg>
         <span class="count" id="cartCount" hidden>0</span>
       </button>
-      <a class="icon-btn" href="#"><span class="label">Offers</span></a>
       <button class="icon-btn"><span class="label">Need Help?</span></button>
       <button class="btn btn-ghost btn-sm">Login | Signup</button>
       <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mnav">
@@ -567,7 +568,6 @@
     <a href="#">Partnerships</a>
     <a href="#">Corporates</a>
     <a href="#">Care Plan</a>
-    <a href="#">Offers</a>
     <a href="#">Need Help?</a>
   </nav>
 </header>
@@ -576,6 +576,7 @@
 <nav class="catnav" aria-label="Categories">
   <div class="wrap">
     <div class="catnav-track">
+      <a class="offers" href="#"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.2"/></svg>Offers</a>
       <a href="#">Health Resource Center<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></a>
       <a href="#">Hair Care<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></a>
       <a href="#">Fitness &amp; Health<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></a>

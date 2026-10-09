@@ -209,8 +209,8 @@
   .step .mark b{position:relative;margin:0 auto;width:44px;height:44px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:17px;box-shadow:0 0 0 6px var(--surface)}
   .step:last-child .mark b{background:var(--trust)}
   .step .pic{border-radius:16px;overflow:hidden;background:var(--surface-2);border:1px solid var(--line)}
-  .step .pic img{width:100%;aspect-ratio:1/1;object-fit:cover;object-position:right center;transition:transform .5s ease}
-  .step:hover .pic img{transform:scale(1.04)}
+  .step .pic img{width:100%;aspect-ratio:1/1;object-fit:cover;object-position:right center;transform:scale(1.32);transform-origin:right center;transition:transform .5s ease}
+  .step:hover .pic img{transform:scale(1.38)}
   .step .txt{display:flex;flex-direction:column;gap:6px;text-align:center}
   .step h3{font-size:15.5px;font-weight:700;line-height:1.3}
   .step p{font-size:13.5px;color:var(--ink-2);line-height:1.55}
@@ -357,7 +357,8 @@
     .step .mark b{width:40px;height:40px;font-size:15px}
     .step .pic{grid-column:2}
     .step .txt{grid-column:2}
-    .step .pic img{aspect-ratio:16/9}
+    .step .pic img{aspect-ratio:4/3;transform:scale(1.55)}
+    .step:hover .pic img{transform:scale(1.55)}
     .app{aspect-ratio:auto;background-size:cover;background-position:right center;flex-direction:column;align-items:stretch}
     .app::before{content:"";display:block;aspect-ratio:1200/448;background:url("{{img:app_bg}}") right center / cover no-repeat}
     .app .content{padding:20px;max-width:none;background:#fff}

@@ -389,6 +389,19 @@
 </style>
 <style>
   /* ===== medicines page ===== */
+  .topbar .icon-btn .label{white-space:nowrap}
+  .nav .save{background:var(--accent-soft);color:var(--accent);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;padding:6px 10px;border-radius:6px;align-self:center}
+  .nav .save:hover{background:var(--accent);color:#fff}
+  .catnav{background:var(--surface);border-bottom:1px solid var(--line)}
+  .catnav-track{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
+  .catnav-track::-webkit-scrollbar{display:none}
+  .catnav a{display:inline-flex;align-items:center;gap:6px;padding:12px 12px;font-size:13.5px;font-weight:600;color:var(--ink-2);white-space:nowrap;border-bottom:2px solid transparent;transition:color .2s,border-color .2s}
+  .catnav a svg{color:var(--ink-3)}
+  .catnav a:hover{color:var(--accent);border-color:var(--accent)}
+  .hero-media{display:grid;grid-template-columns:2fr 1fr;gap:14px;margin-top:26px;align-items:stretch}
+  .hero-media .bslider{margin-top:0;aspect-ratio:auto;height:100%;min-height:200px}
+  .notice{display:block;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:var(--surface);box-shadow:var(--shadow)}
+  .notice img{width:100%;height:100%;object-fit:contain;display:block}
   .mhero{padding:0}
   .mhero-panel{position:relative;overflow:hidden;margin-inline:calc(var(--gutter) * -1);padding:40px var(--gutter) 44px;background:linear-gradient(135deg,#FFF3F1 0%,#F7F8FB 45%,#E9F6F2 100%);border-bottom:1px solid var(--line)}
   .mhero-panel::before{content:"";position:absolute;width:640px;height:640px;border-radius:50%;background:radial-gradient(circle,rgba(229,71,62,.14),transparent 65%);top:-300px;right:18%;pointer-events:none}
@@ -406,7 +419,7 @@
   .qk-blue{--q-bg:#EAF4FD;--q-fg:#2B7BD1}.qk-pink{--q-bg:#FBEAEE;--q-fg:#D04A74}.qk-green{--q-bg:#E7F5EE;--q-fg:#1F9A5A}.qk-amber{--q-bg:#FFF4DF;--q-fg:#B86E00}
 
   /* banner slider */
-  .bslider{position:relative;border-radius:18px;overflow:hidden;box-shadow:var(--shadow);background:var(--surface);margin-top:26px;aspect-ratio:960/200}
+  .bslider{position:relative;border-radius:18px;overflow:hidden;box-shadow:var(--shadow);background:var(--surface);margin-top:26px;aspect-ratio:960/200;min-height:200px}
   .bslider .track{display:flex;height:100%;transition:transform .7s cubic-bezier(.22,1,.36,1)}
   .bslider .slide{flex:0 0 100%;height:100%}
   .bslider .slide img{width:100%;height:100%;object-fit:cover}
@@ -498,6 +511,8 @@
     .cards.c4{grid-template-columns:repeat(2,1fr)}
     .prods{grid-template-columns:repeat(3,1fr)}
     .quick{grid-template-columns:repeat(2,1fr)}
+    .hero-media{grid-template-columns:1fr}
+    .hero-media .bslider{aspect-ratio:960/260;height:auto}
     .call{grid-template-columns:1fr}
   }
   @media (max-width:640px){
@@ -508,7 +523,9 @@
     .prods{grid-template-columns:1fr 1fr;gap:10px}
     .quick{grid-template-columns:1fr 1fr;gap:8px}
     .qk{padding:10px}
-    .bslider{border-radius:14px;aspect-ratio:960/260}
+    .bslider,.hero-media .bslider{border-radius:14px;aspect-ratio:960/300}
+    .catnav-track{margin-inline:calc(var(--gutter) * -1);padding-inline:var(--gutter)}
+    .catnav a{padding:11px 10px;font-size:13px}
     .bslider .nav{opacity:1;width:30px;height:30px}
     .brands .br{width:96px;height:96px}
     .call{padding:22px 18px}
@@ -529,12 +546,14 @@
       <a href="#">Partnerships</a>
       <a href="#">Corporates</a>
       <a href="#">Care Plan</a>
+      <a class="save" href="#">Save more</a>
     </nav>
     <div class="right">
       <button class="icon-btn" id="cartBtn" aria-label="Cart">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.4 11.2a1 1 0 0 0 1 .8H18a1 1 0 0 0 1-.8L21 8H6.5"/><circle cx="9" cy="20" r="1.2"/><circle cx="17" cy="20" r="1.2"/></svg>
         <span class="count" id="cartCount" hidden>0</span>
       </button>
+      <a class="icon-btn" href="#"><span class="label">Offers</span></a>
       <button class="icon-btn"><span class="label">Need Help?</span></button>
       <button class="btn btn-ghost btn-sm">Login | Signup</button>
       <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mnav">
@@ -551,16 +570,32 @@
     <a href="#">Partnerships</a>
     <a href="#">Corporates</a>
     <a href="#">Care Plan</a>
+    <a href="#">Offers</a>
     <a href="#">Need Help?</a>
   </nav>
 </header>
 
 <main>
+<nav class="catnav" aria-label="Categories">
+  <div class="wrap">
+    <div class="catnav-track">
+      <a href="#">Health Resource Center<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></a>
+      <a href="#">Hair Care<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></a>
+      <a href="#">Fitness &amp; Health<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></a>
+      <a href="#">Sexual Wellness<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></a>
+      <a href="#">Vitamins &amp; Nutrition<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></a>
+      <a href="#">Supports &amp; Braces<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></a>
+      <a href="#">Immunity Boosters<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></a>
+      <a href="#">Homeopathy<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></a>
+      <a href="#">Pet Care<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></a>
+    </div>
+  </div>
+</nav>
 <!-- ===================== HERO ===================== -->
 <section class="mhero">
   <div class="wrap">
    <div class="mhero-panel">
-    <h1>India's leading online pharmacy, <em>delivered to your door</em></h1>
+    <h1>Tata 1mg: India's Leading <em>Online Pharmacy</em> &amp; Healthcare Platform</h1>
     <p class="lede">Order medicines, book lab tests and consult doctors from one place. Genuine products, 1800+ cities, same-day delivery in metros.</p>
 
     <form class="search" id="searchForm" role="search" autocomplete="off">
@@ -586,6 +621,7 @@
       <a class="qk qk-amber" href="#"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg></span><div><b>Consult a doctor</b><span>Online, from home</span></div></a>
     </div>
 
+    <div class="hero-media">
     <div class="bslider" id="bslider" aria-roledescription="carousel" aria-label="Offers">
       <div class="track" id="bsliderTrack">
         <figure class="slide" style="margin:0"><img src="{{img:m_ban1}}" alt="Neat Everyday: vegan softgels, ghee capsules and cold-pressed oils"></figure>
@@ -596,6 +632,8 @@
       <button type="button" class="nav prev" id="bsPrev" aria-label="Previous"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
       <button type="button" class="nav next" id="bsNext" aria-label="Next"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
       <div class="dots" id="bsDots" role="tablist" aria-label="Choose banner"></div>
+    </div>
+    <a class="notice" href="tel:18001803024"><img src="{{img:m_cdsco}}" alt="Pharmacovigilance notice: report any adverse event after taking a medicine via the QR code or PvPI toll-free number 1800 180 3024. Issued in public interest by the National Coordination Centre, Pharmacovigilance Programme of India."></a>
     </div>
    </div>
 
@@ -715,12 +753,6 @@
         <button type="submit" class="btn btn-primary">Get a Call to Order Medicines</button>
       </form>
     </div>
-  </div>
-</section>
-<!-- ===================== PUBLIC NOTICE ===================== -->
-<section class="block" style="padding-top:0">
-  <div class="wrap">
-    <div class="cdsco"><img src="{{img:m_cdsco}}" alt="Pharmacovigilance notice: report any adverse event after taking a medicine via the QR code or PvPI toll-free number 1800 180 3024. Issued in public interest by the National Coordination Centre, Pharmacovigilance Programme of India."></div>
   </div>
 </section>
 </main>

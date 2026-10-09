@@ -466,12 +466,12 @@
   .card .add.added{background:var(--trust-soft);color:var(--trust)}
 
   /* brand marquee */
-  .brands{overflow:hidden;margin-inline:calc(var(--gutter) * -1);padding:6px 0}
-  .brands .track{display:flex;gap:22px;width:max-content;padding-left:20px;animation:brandScroll 36s linear infinite}
+  .brands{overflow:hidden;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:22px 0}
+  .brands .track{display:flex;align-items:center;gap:36px;width:max-content;padding-left:36px;animation:brandScroll 40s linear infinite}
   .brands:hover .track{animation-play-state:paused}
-  .brands .br{width:132px;height:132px;border-radius:50%;overflow:hidden;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow);flex:none;display:grid;place-items:center;transition:transform .2s}
-  .brands .br:hover{transform:translateY(-3px)}
-  .brands .br img{width:100%;height:100%;object-fit:cover}
+  .brands .br{width:120px;height:120px;flex:none;display:grid;place-items:center;border-radius:50%;transition:transform .25s ease}
+  .brands .br:hover{transform:translateY(-4px) scale(1.04)}
+  .brands .br img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 6px 14px rgba(20,32,44,.10))}
   @keyframes brandScroll{to{transform:translateX(-50%)}}
 
   /* products */
@@ -529,7 +529,9 @@
     .catnav-track{margin-inline:calc(var(--gutter) * -1);padding-inline:var(--gutter)}
     .catnav a{padding:11px 10px;font-size:13px}
     .bslider .nav{opacity:1;width:30px;height:30px}
-    .brands .br{width:96px;height:96px}
+    .brands{border-radius:16px;padding:16px 0}
+    .brands .track{gap:22px;padding-left:22px}
+    .brands .br{width:88px;height:88px}
     .call{padding:22px 18px}
     .call form{flex-wrap:wrap}
     .call .btn-primary{width:100%}

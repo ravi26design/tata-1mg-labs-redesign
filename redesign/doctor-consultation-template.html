@@ -398,36 +398,51 @@
   .cp-strip a:hover{text-decoration:underline;text-underline-offset:3px}
 
   .dhero{padding:0}
-  .dhero-panel{position:relative;overflow:hidden;margin-inline:calc(var(--gutter) * -1);padding:48px var(--gutter) 56px;background:linear-gradient(135deg,#FFF3F1 0%,#F7F8FB 45%,#E9F6F2 100%);border-bottom:1px solid var(--line);display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:48px;align-items:center}
+  .dhero-panel{position:relative;overflow:hidden;margin-inline:calc(var(--gutter) * -1);padding:52px var(--gutter) 96px;background:linear-gradient(135deg,#FFF3F1 0%,#F7F8FB 45%,#E9F6F2 100%);border-bottom:1px solid var(--line);display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:48px;align-items:center}
   .dhero-panel::before{content:"";position:absolute;width:640px;height:640px;border-radius:50%;background:radial-gradient(circle,rgba(229,71,62,.14),transparent 65%);top:-300px;right:10%;pointer-events:none}
+  .dhero-panel::after{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(20,32,44,.06) 1px,transparent 1px);background-size:22px 22px;pointer-events:none;mask-image:linear-gradient(to bottom,transparent,#000 30%,#000 70%,transparent);-webkit-mask-image:linear-gradient(to bottom,transparent,#000 30%,#000 70%,transparent)}
   .dhero-panel>*{position:relative;z-index:1}
-  .dhero h1{font-size:clamp(30px,3.6vw,46px);font-weight:800;line-height:1.08;letter-spacing:-.03em;max-width:16ch;margin:0 0 12px}
+  .dhero .kicker{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;background:var(--surface);border:1px solid var(--line);font-size:13px;font-weight:700;color:var(--ink-2);margin-bottom:18px}
+  .dhero .kicker i{width:8px;height:8px;border-radius:50%;background:var(--trust);box-shadow:0 0 0 4px var(--trust-soft)}
+  .dhero h1{font-size:clamp(32px,3.8vw,50px);font-weight:800;line-height:1.06;letter-spacing:-.03em;max-width:16ch;margin:0 0 16px}
   .dhero h1 em{font-style:normal;color:var(--accent)}
-  .dhero .price{display:inline-flex;align-items:baseline;gap:8px;font-size:15px;color:var(--ink-2);margin-bottom:22px}
-  .dhero .price b{font-family:var(--display);font-size:30px;font-weight:800;color:var(--ink);letter-spacing:-.02em}
-  .benefits{list-style:none;margin:0 0 26px;padding:0;display:grid;gap:10px}
-  .benefits li{display:flex;align-items:center;gap:12px;font-size:15px;font-weight:600;color:var(--ink)}
-  .benefits .ic{width:40px;height:40px;border-radius:11px;background:var(--surface);border:1px solid var(--line);display:grid;place-items:center;flex:none}
-  .benefits img{width:22px;height:22px}
-  .dhero .cta{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-  .dhero .cta .btn{padding:14px 26px;font-size:15px}
+  .dhero .price{display:inline-flex;align-items:center;gap:10px;padding:8px 16px 8px 10px;border-radius:999px;background:var(--accent-soft);border:1px solid #F5C9C4;font-size:14px;font-weight:600;color:var(--ink-2);margin-bottom:22px}
+  .dhero .price b{font-family:var(--display);font-size:24px;font-weight:800;color:var(--accent);letter-spacing:-.02em;line-height:1}
+  .benefits{list-style:none;margin:0 0 28px;padding:0;display:flex;flex-wrap:wrap;gap:10px}
+  .benefits li{display:inline-flex;align-items:center;gap:10px;padding:8px 14px 8px 8px;border-radius:999px;background:var(--b-bg);border:1px solid var(--b-line);font-size:14px;font-weight:700;color:var(--ink)}
+  .benefits .ic{width:34px;height:34px;border-radius:50%;background:#fff;display:grid;place-items:center;flex:none}
+  .benefits img{width:20px;height:20px}
+  .b-blue{--b-bg:#EAF4FD;--b-line:#C9E1F6}.b-green{--b-bg:#E7F5EE;--b-line:#C3E5D2}.b-amber{--b-bg:#FFF4DF;--b-line:#F3DFB4}
+  .dhero .cta{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+  .dhero .cta .btn{padding:15px 28px;font-size:15px;border-radius:12px;box-shadow:0 10px 24px -10px rgba(229,71,62,.6)}
   .trust{display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--ink-2)}
-  .trust .avs{display:flex}
-  .trust .avs img{width:34px;height:34px;border-radius:50%;border:2px solid #fff;margin-left:-10px;object-fit:cover;background:#fff}
-  .trust .avs img:first-child{margin-left:0}
-  .dhero .art{display:grid;place-items:center}
-  .dhero .art .bubble{width:min(100%,420px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 50% 45%,#fff 0%,#FFF3F1 55%,transparent 72%);display:grid;place-items:center}
-  .dhero .art img{width:300px;max-width:80%;height:auto;image-rendering:auto}
+  .dhero .art{position:relative;height:460px}
+  .dhero .art .card-main{position:absolute;left:10%;right:10%;top:40px;bottom:40px;border-radius:28px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow);display:grid;place-items:center;overflow:hidden}
+  .dhero .art .card-main::before{content:"";position:absolute;inset:auto -20% -40% -20%;height:70%;border-radius:50%;background:radial-gradient(circle,#FFF3F1,transparent 70%)}
+  .dhero .art .card-main img{position:relative;width:min(300px,78%);height:auto}
+  .fcard{position:absolute;display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:10px 14px 10px 10px;box-shadow:var(--shadow);animation:floaty 6s ease-in-out infinite}
+  .fcard .ic{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;flex:none;background:var(--f-bg);color:var(--f-fg)}
+  .fcard b{display:block;font-size:13.5px;font-weight:700;line-height:1.2;color:var(--ink)}
+  .fcard span{display:block;font-size:12px;color:var(--ink-3);margin-top:2px}
+  .fcard.f1{left:-6px;top:6px;--f-bg:#EAF4FD;--f-fg:#2B7BD1}
+  .fcard.f2{right:-10px;top:120px;--f-bg:#E7F5EE;--f-fg:#1F9A5A;animation-delay:-2s}
+  .fcard.f3{left:4px;bottom:0;--f-bg:#FBEAEE;--f-fg:#C23A62;animation-delay:-4s}
+  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 
-  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-  .stat{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px 24px;display:flex;align-items:center;gap:16px}
-  .stat b{font-family:var(--display);font-size:32px;font-weight:800;letter-spacing:-.02em;color:var(--accent);line-height:1}
-  .stat span{font-size:14px;font-weight:600;color:var(--ink-2)}
+  .stats-wrap{margin-top:-52px;position:relative;z-index:2}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);background:var(--surface);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);overflow:hidden}
+  .stat{padding:24px 28px;display:flex;align-items:center;gap:16px;border-left:1px solid var(--line)}
+  .stat:first-child{border-left:0}
+  .stat .ic{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;flex:none;background:var(--s-bg);color:var(--s-fg)}
+  .stat b{display:block;font-family:var(--display);font-size:30px;font-weight:800;letter-spacing:-.02em;color:var(--ink);line-height:1}
+  .stat span{display:block;font-size:13.5px;font-weight:600;color:var(--ink-3);margin-top:4px}
+  .s-coral{--s-bg:#FDEDEB;--s-fg:#E5473E}.s-blue{--s-bg:#EAF4FD;--s-fg:#2B7BD1}.s-green{--s-bg:#E7F5EE;--s-fg:#1F9A5A}
 
-  .specs{display:flex;flex-wrap:wrap;gap:10px}
-  .spec{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;background:var(--surface);border:1px solid var(--line);font-size:14px;font-weight:600;color:var(--ink);transition:border-color .2s,color .2s,transform .2s}
-  .spec:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
-  .spec i{width:8px;height:8px;border-radius:50%;background:var(--trust);flex:none}
+  .specs{display:grid;grid-template-columns:repeat(8,1fr);gap:12px}
+  .spec{display:flex;flex-direction:column;align-items:center;gap:10px;padding:18px 10px 14px;border-radius:16px;background:var(--surface);border:1px solid var(--line);font-size:13.5px;font-weight:600;color:var(--ink);text-align:center;transition:border-color .2s,transform .2s,box-shadow .2s}
+  .spec:hover{border-color:var(--line-2);transform:translateY(-3px);box-shadow:var(--shadow)}
+  .spec i{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-family:var(--display);font-weight:800;font-size:17px;background:var(--m-bg);color:var(--m-fg)}
+  .spec:nth-child(8n+1) i{--m-bg:#FDEDEB;--m-fg:#E5473E}.spec:nth-child(8n+2) i{--m-bg:#EAF4FD;--m-fg:#2B7BD1}.spec:nth-child(8n+3) i{--m-bg:#E7F5EE;--m-fg:#1F9A5A}.spec:nth-child(8n+4) i{--m-bg:#FFF4DF;--m-fg:#B86E00}.spec:nth-child(8n+5) i{--m-bg:#F1E9FA;--m-fg:#8A4FC9}.spec:nth-child(8n+6) i{--m-bg:#FCE9EF;--m-fg:#D9487A}.spec:nth-child(8n+7) i{--m-bg:#E3F4F0;--m-fg:#0E8C78}.spec:nth-child(8n+8) i{--m-bg:#EEF1F5;--m-fg:#4C5A69}
 
   .reviews{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;margin-inline:calc(var(--gutter) * -1);padding-inline:var(--gutter);scroll-padding-inline:var(--gutter);padding-bottom:4px}
   .reviews::-webkit-scrollbar{display:none}
@@ -441,7 +456,8 @@
   .feats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
   .feat{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:24px 22px;display:flex;flex-direction:column;gap:12px;transition:transform .2s,box-shadow .2s}
   .feat:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
-  .feat img{width:56px;height:68px;object-fit:contain}
+  .feat .ic{width:72px;height:72px;border-radius:50%;background:var(--surface-2);display:grid;place-items:center}
+  .feat img{width:40px;height:48px;object-fit:contain}
   .feat h3{font-size:17px;font-weight:700}
   .feat p{font-size:14px;color:var(--ink-2);line-height:1.55}
 
@@ -455,8 +471,9 @@
   .join img{width:180px;height:180px}
 
   @media (max-width:1060px){
-    .dhero-panel{grid-template-columns:1fr;padding:36px var(--gutter) 44px}
-    .dhero .art img{width:240px}
+    .dhero-panel{grid-template-columns:1fr;padding:36px var(--gutter) 84px}
+    .dhero .art{height:400px}
+    .specs{grid-template-columns:repeat(4,1fr)}
     .feats{grid-template-columns:repeat(2,1fr)}
     .join{grid-template-columns:1fr}
     .join img{width:140px;height:140px}
@@ -465,8 +482,12 @@
     .dhero-panel{padding:28px var(--gutter) 36px}
     .dhero h1{max-width:none}
     .stats{grid-template-columns:1fr}
-    .stat{padding:16px 18px}
-    .stat b{font-size:26px}
+    .stat{padding:16px 18px;border-left:0;border-top:1px solid var(--line)}
+    .stat:first-child{border-top:0}
+    .stat b{font-size:24px}
+    .dhero .art{height:300px}
+    .fcard{display:none}
+    .specs{grid-template-columns:repeat(2,1fr);gap:8px}
     .review{flex-basis:290px}
     .feats{grid-template-columns:1fr}
     .dfaq{padding:4px 16px}
@@ -527,30 +548,36 @@
   <div class="wrap">
    <div class="dhero-panel">
     <div>
+      <span class="kicker"><i></i>Doctors online now</span>
       <h1>Online doctor consultation with <em>qualified doctors</em></h1>
       <div class="price"><span>Starting at</span><b>₹199</b></div>
       <ul class="benefits">
-        <li><span class="ic"><img src="{{img:dc_b_talk}}" alt=""></span>Talk within 30 min</li>
-        <li><span class="ic"><img src="{{img:dc_b_follow}}" alt=""></span>Free follow up for 3 days</li>
-        <li><span class="ic"><img src="{{img:dc_b_rx}}" alt=""></span>Get a valid prescription</li>
+        <li class="b-blue"><span class="ic"><img src="{{img:dc_b_talk}}" alt=""></span>Talk within 30 min</li>
+        <li class="b-green"><span class="ic"><img src="{{img:dc_b_follow}}" alt=""></span>Free follow up for 3 days</li>
+        <li class="b-amber"><span class="ic"><img src="{{img:dc_b_rx}}" alt=""></span>Get a valid prescription</li>
       </ul>
       <div class="cta">
         <a class="btn btn-primary" href="#consult" id="consultBtn">Consult now</a>
         <div class="trust"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="color:var(--trust)"><path d="M9 12l2 2 4-4"/><path d="M12 2l7 3v6c0 5-3.5 9-7 11-3.5-2-7-6-7-11V5z"/></svg><span><b>30L+</b> consultations done by certified doctors</span></div>
       </div>
     </div>
-    <div class="art"><div class="bubble"><img src="{{img:dc_hero}}" alt="Doctor consulting a patient online"></div></div>
+    <div class="art" aria-label="What you get">
+      <div class="card-main"><img src="{{img:dc_hero}}" alt="Doctor consulting a patient online"></div>
+      <div class="fcard f1"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><b>Reply within 30 min</b><span>Average first response</span></div></div>
+      <div class="fcard f2"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M12 2l7 3v6c0 5-3.5 9-7 11-3.5-2-7-6-7-11V5z"/></svg></span><div><b>100% confidential</b><span>Delete chats anytime</span></div></div>
+      <div class="fcard f3"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M9 14h6M9 18h4"/></svg></span><div><b>Valid prescription</b><span>Sent after consultation</span></div></div>
+    </div>
    </div>
   </div>
 </section>
 
 <!-- ===================== STATS ===================== -->
-<section class="block">
-  <div class="wrap">
+<section class="block" style="padding-top:0">
+  <div class="wrap stats-wrap">
     <div class="stats">
-      <div class="stat"><b>30L+</b><span>Total Consultations</span></div>
-      <div class="stat"><b>3k+</b><span>Daily Consultations</span></div>
-      <div class="stat"><b>22+</b><span>Specialities</span></div>
+      <div class="stat s-coral"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9"/><path d="M21 3v6h-6"/></svg></span><div><b>30L+</b><span>Total Consultations</span></div></div>
+      <div class="stat s-blue"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M8 2v4M16 2v4M3 10h18"/></svg></span><div><b>3k+</b><span>Daily Consultations</span></div></div>
+      <div class="stat s-green"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg></span><div><b>22+</b><span>Specialities</span></div></div>
     </div>
   </div>
 </section>
@@ -560,22 +587,22 @@
   <div class="wrap">
     <div class="sec-head"><div><h2>Consult by speciality</h2><p>Pick a speciality and a doctor will reply within 30 minutes.</p></div></div>
     <div class="specs">
-      <a class="spec" href="#"><i></i>General Physician</a>
-      <a class="spec" href="#"><i></i>Dermatology</a>
-      <a class="spec" href="#"><i></i>Gynaecology</a>
-      <a class="spec" href="#"><i></i>Paediatrics</a>
-      <a class="spec" href="#"><i></i>Diet &amp; Nutrition</a>
-      <a class="spec" href="#"><i></i>Psychiatry</a>
-      <a class="spec" href="#"><i></i>Orthopaedics</a>
-      <a class="spec" href="#"><i></i>Sexology</a>
-      <a class="spec" href="#"><i></i>Cardiology</a>
-      <a class="spec" href="#"><i></i>ENT</a>
-      <a class="spec" href="#"><i></i>Gastroenterology</a>
-      <a class="spec" href="#"><i></i>Dentistry</a>
-      <a class="spec" href="#"><i></i>Urology</a>
-      <a class="spec" href="#"><i></i>Neurology</a>
-      <a class="spec" href="#"><i></i>Ophthalmology</a>
-      <a class="spec" href="#"><i></i>Endocrinology</a>
+      <a class="spec" href="#"><i>G</i>General Physician</a>
+      <a class="spec" href="#"><i>D</i>Dermatology</a>
+      <a class="spec" href="#"><i>G</i>Gynaecology</a>
+      <a class="spec" href="#"><i>P</i>Paediatrics</a>
+      <a class="spec" href="#"><i>D</i>Diet &amp; Nutrition</a>
+      <a class="spec" href="#"><i>P</i>Psychiatry</a>
+      <a class="spec" href="#"><i>O</i>Orthopaedics</a>
+      <a class="spec" href="#"><i>S</i>Sexology</a>
+      <a class="spec" href="#"><i>C</i>Cardiology</a>
+      <a class="spec" href="#"><i>E</i>ENT</a>
+      <a class="spec" href="#"><i>G</i>Gastroenterology</a>
+      <a class="spec" href="#"><i>D</i>Dentistry</a>
+      <a class="spec" href="#"><i>U</i>Urology</a>
+      <a class="spec" href="#"><i>N</i>Neurology</a>
+      <a class="spec" href="#"><i>O</i>Ophthalmology</a>
+      <a class="spec" href="#"><i>E</i>Endocrinology</a>
     </div>
   </div>
 </section>
@@ -607,10 +634,10 @@
   <div class="wrap">
     <div class="sec-head"><div><h2>Why consult online with Tata 1mg</h2></div></div>
     <div class="feats">
-      <div class="feat"><img src="{{img:dc_f_conf}}" alt=""><h3>100% Confidential</h3><p>All advice &amp; consultations are completely confidential. You can also delete chats whenever you want.</p></div>
-      <div class="feat"><img src="{{img:dc_f_cert}}" alt=""><h3>Certified Doctors</h3><p>We offer quality healthcare through our network of certified and experienced doctors.</p></div>
-      <div class="feat"><img src="{{img:dc_f_conv}}" alt=""><h3>Convenience</h3><p>Forget the hassle of long queues and rush hour. Seek expert opinion anytime, anywhere.</p></div>
-      <div class="feat"><img src="{{img:dc_f_cost}}" alt=""><h3>Cost Effective</h3><p>We provide medical assistance on non urgent queries for free. Fee starting at ₹50 for faster response to queries.</p></div>
+      <div class="feat"><span class="ic"><img src="{{img:dc_f_conf}}" alt=""></span><h3>100% Confidential</h3><p>All advice &amp; consultations are completely confidential. You can also delete chats whenever you want.</p></div>
+      <div class="feat"><span class="ic"><img src="{{img:dc_f_cert}}" alt=""></span><h3>Certified Doctors</h3><p>We offer quality healthcare through our network of certified and experienced doctors.</p></div>
+      <div class="feat"><span class="ic"><img src="{{img:dc_f_conv}}" alt=""></span><h3>Convenience</h3><p>Forget the hassle of long queues and rush hour. Seek expert opinion anytime, anywhere.</p></div>
+      <div class="feat"><span class="ic"><img src="{{img:dc_f_cost}}" alt=""></span><h3>Cost Effective</h3><p>We provide medical assistance on non urgent queries for free. Fee starting at ₹50 for faster response to queries.</p></div>
     </div>
   </div>
 </section>

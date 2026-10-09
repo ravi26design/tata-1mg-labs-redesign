@@ -848,27 +848,32 @@
     q.value = el.dataset.q; window.scrollTo({top:0, behavior:"smooth"}); q.focus(); renderSuggest();
   }));
 
-  // ---- hero slider ----
+  // ---- hero slider (seamless loop) ----
   (function(){
-    const track = document.getElementById("sliderTrack"), slides = [...track.children], dots = document.getElementById("sliderDots"), count = document.getElementById("sliderCount"), root = document.getElementById("slider");
-    let i = 0, timer;
-    slides.forEach((_, n)=>{ const b = document.createElement("button"); b.type = "button"; b.setAttribute("role","tab"); b.setAttribute("aria-label", "Slide " + (n+1)); b.addEventListener("click", ()=>go(n, true)); dots.appendChild(b); });
-    function go(n, manual){
-      i = (n + slides.length) % slides.length;
-      track.style.transform = `translateX(-${i*100}%)`;
-      [...dots.children].forEach((d, k)=>d.setAttribute("aria-current", k===i ? "true" : "false"));
-      count.textContent = (i+1) + " / " + slides.length;
-      if(manual) restart();
-    }
-    function restart(){ clearInterval(timer); if(!matchMedia("(prefers-reduced-motion: reduce)").matches) timer = setInterval(()=>go(i+1), 4500); }
-    document.getElementById("sliderPrev").addEventListener("click", ()=>go(i-1, true));
-    document.getElementById("sliderNext").addEventListener("click", ()=>go(i+1, true));
+    const track = document.getElementById("sliderTrack"), dots = document.getElementById("sliderDots"), count = document.getElementById("sliderCount"), root = document.getElementById("slider");
+    const real = [...track.children], n = real.length;
+    const firstClone = real[0].cloneNode(true), lastClone = real[n-1].cloneNode(true);
+    firstClone.setAttribute("aria-hidden","true"); lastClone.setAttribute("aria-hidden","true");
+    track.appendChild(firstClone); track.insertBefore(lastClone, real[0]);
+    let pos = 1, timer, animating = false, doneTimer;
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const setX = (p, animate)=>{ track.style.transition = animate ? "" : "none"; track.style.transform = `translateX(-${p*100}%)`; if(!animate){ void track.offsetWidth; track.style.transition = ""; } };
+    const idx = ()=> (pos - 1 + n) % n;
+    function paint(){ const i = idx(); [...dots.children].forEach((d, k)=>d.setAttribute("aria-current", k===i ? "true" : "false")); count.textContent = (i+1) + " / " + n; }
+    real.forEach((_, k)=>{ const b = document.createElement("button"); b.type = "button"; b.setAttribute("role","tab"); b.setAttribute("aria-label", "Slide " + (k+1)); b.addEventListener("click", ()=>{ if(animating) return; begin(); pos = k + 1; setX(pos, true); paint(); restart(); }); dots.appendChild(b); });
+    function finish(){ if(!animating) return; animating = false; clearTimeout(doneTimer); if(pos === n + 1){ pos = 1; setX(pos, false); } else if(pos === 0){ pos = n; setX(pos, false); } }
+    function begin(){ animating = true; clearTimeout(doneTimer); doneTimer = setTimeout(finish, 800); }
+    function step(dir){ if(animating) return; begin(); pos += dir; setX(pos, true); paint(); }
+    track.addEventListener("transitionend", e=>{ if(e.target === track) finish(); });
+    function restart(){ clearInterval(timer); if(!reduce) timer = setInterval(()=>step(1), 4500); }
+    document.getElementById("sliderPrev").addEventListener("click", ()=>{ step(-1); restart(); });
+    document.getElementById("sliderNext").addEventListener("click", ()=>{ step(1); restart(); });
     root.addEventListener("mouseenter", ()=>clearInterval(timer));
     root.addEventListener("mouseleave", restart);
     let sx = null;
     root.addEventListener("touchstart", e=>{ sx = e.touches[0].clientX; }, {passive:true});
-    root.addEventListener("touchend", e=>{ if(sx===null) return; const dx = e.changedTouches[0].clientX - sx; if(Math.abs(dx) > 40) go(dx < 0 ? i+1 : i-1, true); sx = null; });
-    go(0); restart();
+    root.addEventListener("touchend", e=>{ if(sx===null) return; const dx = e.changedTouches[0].clientX - sx; if(Math.abs(dx) > 40){ step(dx < 0 ? 1 : -1); restart(); } sx = null; });
+    setX(pos, false); paint(); restart();
   })();
 
   const burger = document.getElementById("burger"), mnav = document.getElementById("mnav");

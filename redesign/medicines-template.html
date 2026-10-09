@@ -441,7 +441,7 @@
   .ctile{display:flex;flex-direction:column;border-radius:16px;overflow:hidden;background:var(--surface);border:1px solid var(--line);text-align:center;transition:transform .2s,border-color .2s,box-shadow .2s}
   .ctile:hover{transform:translateY(-3px);border-color:var(--line-2);box-shadow:var(--shadow)}
   .ctile img{width:100%;aspect-ratio:1;object-fit:cover}
-  .ctile b{display:block;padding:10px 8px 12px;font-size:13px;font-weight:600;line-height:1.25}
+  .ctile b{flex:1;display:flex;align-items:center;justify-content:center;min-height:54px;padding:8px 8px;font-size:13px;font-weight:600;line-height:1.25}
   .ctile.text{justify-content:center;min-height:100%;background:var(--trust-soft);border-color:transparent}
   .ctile.text .ph{aspect-ratio:1;display:grid;place-items:center;color:var(--trust)}
 
@@ -525,7 +525,7 @@
     .mhero-panel{padding:0 var(--gutter) 30px}
     .hero-media{margin-bottom:24px}
     .grid9{grid-template-columns:repeat(3,1fr);gap:8px}
-    .ctile b{font-size:12px;padding:8px 6px 10px}
+    .ctile b{font-size:12px;padding:6px;min-height:48px}
     .cards,.cards.c4{grid-template-columns:1fr 1fr;gap:10px}
     .prods{grid-template-columns:1fr 1fr;gap:10px}
     .quick{grid-template-columns:1fr 1fr;gap:8px}

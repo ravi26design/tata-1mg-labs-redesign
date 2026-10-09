@@ -471,9 +471,9 @@
   .brands{overflow:hidden;margin-inline:calc(var(--gutter) * -1);padding:10px 0 14px}
   .brands .track{display:flex;align-items:center;gap:32px;width:max-content;padding-left:32px;animation:brandScroll 40s linear infinite;will-change:transform}
   .brands:hover .track{animation-play-state:paused}
-  .brands .br{width:112px;height:112px;flex:none;display:grid;place-items:center;border-radius:50%;overflow:hidden;background:#fff;box-shadow:0 6px 16px rgba(20,32,44,.10);transition:transform .25s ease,box-shadow .25s ease}
-  .brands .br:hover{transform:translateY(-4px) scale(1.04);box-shadow:0 12px 24px rgba(20,32,44,.14)}
-  .brands .br img{width:104%;height:104%;object-fit:cover;border-radius:50%}
+  .brands .br{width:116px;height:116px;flex:none;display:grid;place-items:center;border-radius:50%;overflow:hidden;transition:transform .25s ease}
+  .brands .br:hover{transform:translateY(-3px) scale(1.05)}
+  .brands .br img{width:100%;height:100%;object-fit:cover;transform:scale(1.28);mix-blend-mode:multiply}
   @keyframes brandScroll{to{transform:translateX(-50%)}}
 
   /* products */

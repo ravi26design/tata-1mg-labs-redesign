@@ -1,6 +1,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Tata 1mg Labs Redesign</title>
+<title>Tata 1mg Doctor Consultation Redesign</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Figtree:wght@400;500;600;700&display=swap">
 <style>
@@ -388,15 +388,100 @@
   }
   @media (prefers-reduced-motion: reduce){ *{transition:none !important;animation:none !important} .banners{overflow-x:auto} }
 </style>
+<style>
+  /* ===== doctor consultation page ===== */
+  .cp-strip{background:#FFF1E8;border-bottom:1px solid #F6D9C6}
+  .cp-strip .wrap{display:flex;align-items:center;justify-content:center;gap:14px;padding:10px 0;flex-wrap:wrap}
+  .cp-strip img.ic{width:34px;height:34px}
+  .cp-strip p{font-size:14px;font-weight:600;color:var(--ink)}
+  .cp-strip a{display:inline-flex;align-items:center;gap:6px;font-weight:700;color:var(--accent);font-size:14px}
+  .cp-strip a:hover{text-decoration:underline;text-underline-offset:3px}
 
-<!-- ===================== HEADER ===================== -->
+  .dhero{padding:0}
+  .dhero-panel{position:relative;overflow:hidden;margin-inline:calc(var(--gutter) * -1);padding:48px var(--gutter) 56px;background:linear-gradient(135deg,#FFF3F1 0%,#F7F8FB 45%,#E9F6F2 100%);border-bottom:1px solid var(--line);display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:48px;align-items:center}
+  .dhero-panel::before{content:"";position:absolute;width:640px;height:640px;border-radius:50%;background:radial-gradient(circle,rgba(229,71,62,.14),transparent 65%);top:-300px;right:10%;pointer-events:none}
+  .dhero-panel>*{position:relative;z-index:1}
+  .dhero h1{font-size:clamp(30px,3.6vw,46px);font-weight:800;line-height:1.08;letter-spacing:-.03em;max-width:16ch;margin:0 0 12px}
+  .dhero h1 em{font-style:normal;color:var(--accent)}
+  .dhero .price{display:inline-flex;align-items:baseline;gap:8px;font-size:15px;color:var(--ink-2);margin-bottom:22px}
+  .dhero .price b{font-family:var(--display);font-size:30px;font-weight:800;color:var(--ink);letter-spacing:-.02em}
+  .benefits{list-style:none;margin:0 0 26px;padding:0;display:grid;gap:10px}
+  .benefits li{display:flex;align-items:center;gap:12px;font-size:15px;font-weight:600;color:var(--ink)}
+  .benefits .ic{width:40px;height:40px;border-radius:11px;background:var(--surface);border:1px solid var(--line);display:grid;place-items:center;flex:none}
+  .benefits img{width:22px;height:22px}
+  .dhero .cta{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .dhero .cta .btn{padding:14px 26px;font-size:15px}
+  .trust{display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--ink-2)}
+  .trust .avs{display:flex}
+  .trust .avs img{width:34px;height:34px;border-radius:50%;border:2px solid #fff;margin-left:-10px;object-fit:cover;background:#fff}
+  .trust .avs img:first-child{margin-left:0}
+  .dhero .art{display:grid;place-items:center}
+  .dhero .art .bubble{width:min(100%,420px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 50% 45%,#fff 0%,#FFF3F1 55%,transparent 72%);display:grid;place-items:center}
+  .dhero .art img{width:300px;max-width:80%;height:auto;image-rendering:auto}
+
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .stat{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px 24px;display:flex;align-items:center;gap:16px}
+  .stat b{font-family:var(--display);font-size:32px;font-weight:800;letter-spacing:-.02em;color:var(--accent);line-height:1}
+  .stat span{font-size:14px;font-weight:600;color:var(--ink-2)}
+
+  .specs{display:flex;flex-wrap:wrap;gap:10px}
+  .spec{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;background:var(--surface);border:1px solid var(--line);font-size:14px;font-weight:600;color:var(--ink);transition:border-color .2s,color .2s,transform .2s}
+  .spec:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+  .spec i{width:8px;height:8px;border-radius:50%;background:var(--trust);flex:none}
+
+  .reviews{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;margin-inline:calc(var(--gutter) * -1);padding-inline:var(--gutter);scroll-padding-inline:var(--gutter);padding-bottom:4px}
+  .reviews::-webkit-scrollbar{display:none}
+  .review{flex:0 0 360px;scroll-snap-align:start;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:14px}
+  .review .q{color:var(--accent);font-family:var(--display);font-size:40px;line-height:.6;font-weight:800}
+  .review p{font-size:14.5px;color:var(--ink-2);line-height:1.6;flex:1}
+  .review .who{display:flex;align-items:center;gap:10px;font-weight:700;font-size:14px}
+  .review .who span{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--trust-soft);color:var(--trust);font-size:13px}
+  .review .stars{color:#F4B400;font-size:13px;letter-spacing:1px}
+
+  .feats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .feat{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:24px 22px;display:flex;flex-direction:column;gap:12px;transition:transform .2s,box-shadow .2s}
+  .feat:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+  .feat img{width:56px;height:68px;object-fit:contain}
+  .feat h3{font-size:17px;font-weight:700}
+  .feat p{font-size:14px;color:var(--ink-2);line-height:1.55}
+
+  .dfaq{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:8px 28px}
+  .dfaq .faq{border-top:1px solid var(--line)}
+  .dfaq .faq:first-child{border-top:0}
+
+  .join{background:var(--ink);color:#fff;border-radius:22px;padding:32px 36px;display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center;overflow:hidden;position:relative}
+  .join h2{font-size:26px;font-weight:800;letter-spacing:-.02em;margin-bottom:8px}
+  .join p{color:rgba(255,255,255,.78);font-size:15px;max-width:48ch;margin-bottom:18px}
+  .join img{width:180px;height:180px}
+
+  @media (max-width:1060px){
+    .dhero-panel{grid-template-columns:1fr;padding:36px var(--gutter) 44px}
+    .dhero .art img{width:240px}
+    .feats{grid-template-columns:repeat(2,1fr)}
+    .join{grid-template-columns:1fr}
+    .join img{width:140px;height:140px}
+  }
+  @media (max-width:640px){
+    .dhero-panel{padding:28px var(--gutter) 36px}
+    .dhero h1{max-width:none}
+    .stats{grid-template-columns:1fr}
+    .stat{padding:16px 18px}
+    .stat b{font-size:26px}
+    .review{flex-basis:290px}
+    .feats{grid-template-columns:1fr}
+    .dfaq{padding:4px 16px}
+    .join{padding:24px 20px}
+    .cp-strip .wrap{justify-content:flex-start;gap:10px}
+  }
+</style>
+
 <header class="topbar">
   <div class="wrap">
     <a class="logo" href="medicines.html" aria-label="Tata 1mg"><img src="{{img:logo}}" alt="Tata 1mg logo"></a>
     <nav class="nav" aria-label="Primary">
       <a href="medicines.html">Medicines</a>
-      <a href="index.html" aria-current="page">Lab Tests</a>
-      <a href="doctor-consultation.html">Consult Doctors</a>
+      <a href="index.html">Lab Tests</a>
+      <a href="doctor-consultation.html" aria-current="page">Consult Doctors</a>
       <a href="#">Cancer Care</a>
       <a href="#">Ayurveda</a>
       <a href="#">Partnerships</a>
@@ -417,8 +502,8 @@
   </div>
   <nav class="mnav" id="mnav" aria-label="Mobile">
     <a href="medicines.html">Medicines</a>
-    <a href="index.html" aria-current="page">Lab Tests</a>
-    <a href="doctor-consultation.html">Consult Doctors</a>
+    <a href="index.html">Lab Tests</a>
+    <a href="doctor-consultation.html" aria-current="page">Consult Doctors</a>
     <a href="#">Cancer Care</a>
     <a href="#">Ayurveda</a>
     <a href="#">Partnerships</a>
@@ -429,228 +514,151 @@
 </header>
 
 <main>
+<div class="cp-strip">
+  <div class="wrap">
+    <img class="ic" src="{{img:dc_careicon}}" alt="">
+    <p>Free consultation and more benefits with Care Plan membership.</p>
+    <a href="#">Join now! <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>
+</div>
+
 <!-- ===================== HERO ===================== -->
-<section class="hero">
+<section class="dhero">
   <div class="wrap">
-   <div class="hero-panel">
-    <div class="hero-left">
-      <h1>Book lab tests online from <em>trusted and certified</em> labs</h1>
-      <p class="hero-lede">Home sample collection, doctor-verified reports and 2,000+ tests from 120+ certified labs in 55+ cities.</p>
-
-      <form class="search" id="searchForm" role="search" autocomplete="off">
-        <div class="search-row">
-          <button type="button" class="loc" id="locBtn" aria-label="Change location">
-            <img src="{{img:loc_pin}}" alt="">
-            <span class="city" id="locName">Gurgaon</span>
-            <img class="cur" src="{{img:loc_cur}}" alt="" title="Use current location">
-          </button>
-          <div class="field">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-            <label class="visually-hidden" for="q">Search tests or full body checkups</label>
-            <input id="q" type="text" placeholder="Search tests or full body checkups" />
-          </div>
-          <button type="submit" class="go" aria-label="Search"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
-        </div>
-        <div class="suggest" id="suggest" hidden></div>
-      </form>
-      <div class="popular">
-        <span>Popular:</span>
-        <button type="button" class="chip" data-q="Full body">Full body checkup</button>
-        <button type="button" class="chip" data-q="Thyroid">Thyroid</button>
-        <button type="button" class="chip" data-q="Vitamin">Vitamin D</button>
-        <button type="button" class="chip" data-q="HbA1c">HbA1c</button>
-        <button type="button" class="chip" data-q="CBC">CBC</button>
+   <div class="dhero-panel">
+    <div>
+      <h1>Online doctor consultation with <em>qualified doctors</em></h1>
+      <div class="price"><span>Starting at</span><b>₹199</b></div>
+      <ul class="benefits">
+        <li><span class="ic"><img src="{{img:dc_b_talk}}" alt=""></span>Talk within 30 min</li>
+        <li><span class="ic"><img src="{{img:dc_b_follow}}" alt=""></span>Free follow up for 3 days</li>
+        <li><span class="ic"><img src="{{img:dc_b_rx}}" alt=""></span>Get a valid prescription</li>
+      </ul>
+      <div class="cta">
+        <a class="btn btn-primary" href="#consult" id="consultBtn">Consult now</a>
+        <div class="trust"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="color:var(--trust)"><path d="M9 12l2 2 4-4"/><path d="M12 2l7 3v6c0 5-3.5 9-7 11-3.5-2-7-6-7-11V5z"/></svg><span><b>30L+</b> consultations done by certified doctors</span></div>
       </div>
-
-      <div class="stats" aria-label="Tata 1mg Labs at a glance" style="margin:18px 0 0">
-        <span><b>45,00,000+</b> tests booked</span>
-        <span><b>120+</b> verified labs</span>
-        <span><b>55+</b> cities</span>
-      </div>
-
-      <div class="ways" aria-label="Other ways to book">
-        <a class="way way-blue" href="tel:18002122323"><img src="{{img:q_phone}}" alt=""><span class="lbl"><span>Book via</span><b>Phone Call</b></span></a>
-        <a class="way way-pink" href="#"><img src="{{img:q_quick}}" alt=""><span class="lbl"><span>Quick</span><b>Order</b></span></a>
-        <a class="way way-green" href="#"><img src="{{img:q_wa}}" alt=""><span class="lbl"><span>Book via</span><b>Whatsapp</b></span></a>
-      </div>
-
     </div>
-
-    <div class="feature" id="slider" aria-roledescription="carousel" aria-label="Why book with Tata 1mg">
-      <div class="track" id="sliderTrack">
-        <figure class="slide"><img src="{{img:hero_home_lg}}" alt="Phlebotomist collecting a sample at home"><figcaption class="cap"><b>Home sample collection</b><span>Safe pickup at your doorstep</span></figcaption></figure>
-        <figure class="slide"><img src="{{img:hero_nabl_lg}}" alt="Technician working inside a Tata 1mg lab"><figcaption class="cap"><b>Trusted NABL certified labs</b><span>Hygienic &amp; safety assured testing</span></figcaption></figure>
-        <figure class="slide"><img src="{{img:hero_cov_lg}}" alt="Tata 1mg Labs signage"><figcaption class="cap"><b>Wide coverage across india</b><span>Most trusted service in 55+ cities</span></figcaption></figure>
-        <figure class="slide"><img src="{{img:hero_rep_lg}}" alt="Lab professional holding a report"><figcaption class="cap"><b>Fast, accurate reports</b><span>Doctor-verified, delivered on time</span></figcaption></figure>
-      </div>
-      <span class="count visually-hidden" id="sliderCount" aria-live="polite">1 / 4</span>
-      <button type="button" class="nav prev" id="sliderPrev" aria-label="Previous"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
-      <button type="button" class="nav next" id="sliderNext" aria-label="Next"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
-      <div class="dots" id="sliderDots" role="tablist" aria-label="Choose slide"></div>
-    </div>
+    <div class="art"><div class="bubble"><img src="{{img:dc_hero}}" alt="Doctor consulting a patient online"></div></div>
    </div>
-
-      <div class="find">
-       <div class="card">
-        <div class="hd"><h2>Find tests &amp; packages for your needs</h2><a class="link" href="#">View all</a></div>
-        <div class="tiles">
-          <button class="tile t-green" data-q="Full body"><span class="ic"><img src="{{img:c_full}}" alt=""></span><span class="tx"><b>Full Body Packages</b><span class="sub">60 to 90 tests, home collection</span></span><span class="arr" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
-          <button class="tile t-blue" data-q="Scan"><span class="ic"><img src="{{img:c_rad}}" alt=""></span><span class="tx"><b>X Rays, Scans &amp; More</b><span class="sub">CT, MRI, X-ray, ultrasound</span></span><span class="arr" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
-          <button class="tile t-sky" data-q="Fever"><span class="ic"><img src="{{img:c_fever}}" alt=""></span><span class="tx"><b>Fever Tests</b><span class="sub">Dengue, malaria, typhoid</span></span><span class="arr" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
-          <button class="tile t-pink" data-q="Diabetes"><span class="ic"><img src="{{img:c_diab}}" alt=""></span><span class="tx"><b>Diabetes Tests</b><span class="sub">HbA1c, fasting sugar</span></span><span class="arr" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
-          <button class="tile t-purple" data-q="Vitamin"><span class="ic"><img src="{{img:c_vit}}" alt=""></span><span class="tx"><b>Vitamins Tests</b><span class="sub">Vitamin D, B12, iron</span></span><span class="arr" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
-        </div>
-       </div>
-      </div>
   </div>
 </section>
 
-<!-- ===================== HEALTH NEEDS ===================== -->
+<!-- ===================== STATS ===================== -->
 <section class="block">
   <div class="wrap">
-    <div class="sec-head">
-      <div><h2>Tests and packages for your health needs</h2></div>
-      <a class="link" href="#">View all <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-    </div>
-    <div class="needs">
-      <button class="need" data-q="Men"><img src="{{img:n_men}}" alt=""><b>Men</b></button>
-      <button class="need" data-q="Women"><img src="{{img:n_women}}" alt=""><b>Women</b></button>
-      <button class="need" data-q="Liver"><img src="{{img:n_liver}}" alt=""><b>Liver &amp; Kidney</b></button>
-      <button class="need" data-q="Thyroid"><img src="{{img:n_thy}}" alt=""><b>Thyroid</b></button>
-      <button class="need" data-q="Hormone"><img src="{{img:n_horm}}" alt=""><b>Hormones</b></button>
-      <button class="need" data-q="Allergy"><img src="{{img:n_all}}" alt=""><b>Allergy</b></button>
+    <div class="stats">
+      <div class="stat"><b>30L+</b><span>Total Consultations</span></div>
+      <div class="stat"><b>3k+</b><span>Daily Consultations</span></div>
+      <div class="stat"><b>22+</b><span>Specialities</span></div>
     </div>
   </div>
 </section>
 
-<!-- ===================== TRUST BANNERS ===================== -->
-<section class="block" style="padding-top:6px">
+<!-- ===================== SPECIALITIES ===================== -->
+<section class="block" style="padding-top:0" id="consult">
   <div class="wrap">
-    <div class="banners" aria-label="Why trust Tata 1mg Labs">
-      <div class="track">
-      <a class="banner" href="#"><img src="{{img:b_nabl}}" alt="NABL Labs"></a>
-      <a class="banner" href="#"><img src="{{img:b_cap}}" alt="CAP Accredited"></a>
-      <a class="banner" href="#"><img src="{{img:b_bharosa}}" alt="Bharose ka Badge"></a>
-      <a class="banner" href="#"><img src="{{img:b_trust}}" alt="Trust what you see"></a>
-      <a class="banner" href="#"><img src="{{img:b_nrl}}" alt="National Reference Lab"></a>
-      <a class="banner" href="#" aria-hidden="true" tabindex="-1"><img src="{{img:b_nabl}}" alt="NABL Labs"></a>
-      <a class="banner" href="#" aria-hidden="true" tabindex="-1"><img src="{{img:b_cap}}" alt="CAP Accredited"></a>
-      <a class="banner" href="#" aria-hidden="true" tabindex="-1"><img src="{{img:b_bharosa}}" alt="Bharose ka Badge"></a>
-      <a class="banner" href="#" aria-hidden="true" tabindex="-1"><img src="{{img:b_trust}}" alt="Trust what you see"></a>
-      <a class="banner" href="#" aria-hidden="true" tabindex="-1"><img src="{{img:b_nrl}}" alt="National Reference Lab"></a>
+    <div class="sec-head"><div><h2>Consult by speciality</h2><p>Pick a speciality and a doctor will reply within 30 minutes.</p></div></div>
+    <div class="specs">
+      <a class="spec" href="#"><i></i>General Physician</a>
+      <a class="spec" href="#"><i></i>Dermatology</a>
+      <a class="spec" href="#"><i></i>Gynaecology</a>
+      <a class="spec" href="#"><i></i>Paediatrics</a>
+      <a class="spec" href="#"><i></i>Diet &amp; Nutrition</a>
+      <a class="spec" href="#"><i></i>Psychiatry</a>
+      <a class="spec" href="#"><i></i>Orthopaedics</a>
+      <a class="spec" href="#"><i></i>Sexology</a>
+      <a class="spec" href="#"><i></i>Cardiology</a>
+      <a class="spec" href="#"><i></i>ENT</a>
+      <a class="spec" href="#"><i></i>Gastroenterology</a>
+      <a class="spec" href="#"><i></i>Dentistry</a>
+      <a class="spec" href="#"><i></i>Urology</a>
+      <a class="spec" href="#"><i></i>Neurology</a>
+      <a class="spec" href="#"><i></i>Ophthalmology</a>
+      <a class="spec" href="#"><i></i>Endocrinology</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== REVIEWS ===================== -->
+<section class="block" style="padding-top:0">
+  <div class="wrap">
+    <section class="hs">
+    <div class="sec-head"><div><h2>Our Happy Customers</h2></div></div>
+    <div class="hs-wrap">
+    <div class="reviews hs-track">
+      <article class="review"><span class="q">&ldquo;</span><div class="stars">★★★★★</div><p>I installed the app and went for a free consultation with a dietician. The advice given by Dr. Mirza was simply great. He shared a detailed diet chart and exercises with me which was easy to incorporate into my hectic schedule.</p><div class="who"><span>A</span>Aarohi</div></article>
+      <article class="review"><span class="q">&ldquo;</span><div class="stars">★★★★★</div><p>Best app for consultation and the most effective way to connect with the doctor from anywhere. The doctor replies with great detail and is extremely polite. One can also come back to consult the same doctor anytime.</p><div class="who"><span>R</span>Ronak</div></article>
+      <article class="review"><span class="q">&ldquo;</span><div class="stars">★★★★★</div><p>Initially, I was a little skeptical of consulting a doctor online. But the consultation turned out to be honest and cool, the doctor's behavior was friendly. The best part is that I saved so much time and money!</p><div class="who"><span>A</span>Aarzoo</div></article>
+      <article class="review"><span class="q">&ldquo;</span><div class="stars">★★★★★</div><p>Dr. Chakraborty is so concerned about his patient. I sincerely wish him the best. He always takes the time to understand the problem and on the basis of that he takes the decision and explains it very well. And if you miss out on anything, you can come back with more questions.</p><div class="who"><span>Y</span>Yash</div></article>
+      <article class="review"><span class="q">&ldquo;</span><div class="stars">★★★★★</div><p>Amazingly easy and convenient. Great service for the same price as a clinic visit, without the hassle of having to drive to the doctor's clinic. Couldn't be any happier.</p><div class="who"><span>R</span>Rahul</div></article>
+    </div>
+    <div class="hs-ctl" aria-label="Scroll">
+        <button type="button" class="hs-prev" aria-label="Previous"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg></button>
+        <button type="button" class="hs-next" aria-label="Next"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
       </div>
     </div>
+    </section>
   </div>
 </section>
 
-<!-- ===================== RADIOLOGY ===================== -->
-<section class="block">
+<!-- ===================== WHY ===================== -->
+<section class="block" style="padding-top:0">
   <div class="wrap">
-    <div class="sec-head">
-      <div><h2>Radiology tests, x-rays &amp; scans</h2></div>
-      <a class="link" href="#">View all <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-    </div>
-    <div class="radio">
-      <button class="rad" data-q="CT Scan"><img src="{{img:r_ct}}" alt=""><b>CT Scan</b></button>
-      <button class="rad" data-q="ECG"><img src="{{img:r_ecg}}" alt=""><b>ECG</b></button>
-      <button class="rad" data-q="X-Ray"><img src="{{img:r_xray}}" alt=""><b>X-Ray</b></button>
-      <button class="rad" data-q="Ultrasound"><img src="{{img:r_us}}" alt=""><b>Ultrasound</b></button>
-      <button class="rad" data-q="MRI"><img src="{{img:r_mri}}" alt=""><b>MRI</b></button>
-      <button class="rad" data-q="Echo"><img src="{{img:r_echo}}" alt=""><b>Echo Test</b></button>
+    <div class="sec-head"><div><h2>Why consult online with Tata 1mg</h2></div></div>
+    <div class="feats">
+      <div class="feat"><img src="{{img:dc_f_conf}}" alt=""><h3>100% Confidential</h3><p>All advice &amp; consultations are completely confidential. You can also delete chats whenever you want.</p></div>
+      <div class="feat"><img src="{{img:dc_f_cert}}" alt=""><h3>Certified Doctors</h3><p>We offer quality healthcare through our network of certified and experienced doctors.</p></div>
+      <div class="feat"><img src="{{img:dc_f_conv}}" alt=""><h3>Convenience</h3><p>Forget the hassle of long queues and rush hour. Seek expert opinion anytime, anywhere.</p></div>
+      <div class="feat"><img src="{{img:dc_f_cost}}" alt=""><h3>Cost Effective</h3><p>We provide medical assistance on non urgent queries for free. Fee starting at ₹50 for faster response to queries.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ===================== HOW IT WORKS ===================== -->
-<section class="block">
+<!-- ===================== FAQ ===================== -->
+<section class="block" style="padding-top:0">
   <div class="wrap">
-    <div class="how">
-      <div class="how-head">
-        <div><h2>How does home sample collection work?</h2><p>Five simple steps from booking to your report.</p></div>
-        <div class="how-meta">
-          <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>Home collection</span>
-          <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>NABL labs</span>
-          <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>Doctor-verified reports</span>
-        </div>
-      </div>
-      <div class="steps">
-      <div class="step"><div class="mark"><b>1</b></div><div class="pic"><img src="{{img:s1}}" alt=""></div><div class="txt"><h3>Easy online booking</h3><p>Search for tests and packages, book your preferred time slot and enter your address for seamless at-home lab tests.</p></div></div>
-      <div class="step"><div class="mark"><b>2</b></div><div class="pic"><img src="{{img:s2}}" alt=""></div><div class="txt"><h3>Live tracking of phlebotomist</h3><p>Track our trained phlebotomist's real time location for seamless sample collection.</p></div></div>
-      <div class="step"><div class="mark"><b>3</b></div><div class="pic"><img src="{{img:s3}}" alt=""></div><div class="txt"><h3>Safe Sample Collection</h3><p>Our phlebotomists follow strict safety protocols to collect samples safely at home and on time.</p></div></div>
-      <div class="step"><div class="mark"><b>4</b></div><div class="pic"><img src="{{img:s4}}" alt=""></div><div class="txt"><h3>Sample received at lab</h3><p>Samples are transported securely to our accredited labs with world-class machines for testing by qualified experts.</p></div></div>
-      <div class="step"><div class="mark"><b>5</b></div><div class="pic"><img src="{{img:s5}}" alt=""></div><div class="txt"><h3>Quick, Doctor-Verified Reports</h3><p>Get doctor-approved reports via email and WhatsApp, with options for doctor follow-ups and AI insights.</p></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== APP ===================== -->
-<section class="block">
-  <div class="wrap">
-    <div class="app">
-      <div class="content">
-        <h2>Download the Tata 1mg app. Trusted healthcare, at your fingertips.</h2>
-        <h3>Book tests, track reports, and get AI-powered health insights.</h3>
-        <div class="stores">
-          <a href="#"><img src="{{img:appstore}}" alt="Download on the App Store"></a>
-          <a href="#"><img src="{{img:gplay}}" alt="Get it on Google Play"></a>
-          <span class="or">or</span>
-          <span class="qr"><img src="{{img:qr}}" alt="Scan QR to download the app"></span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== ABOUT ===================== -->
-<section class="block">
-  <div class="wrap">
-    <details class="seo" id="aboutSection">
-      <summary class="seo-toggle">
-        <h2>Keep your health in check with Tata 1mg: Lab tests just a click away</h2>
-        <span class="seo-cta"><span class="more">Read more</span><span class="less">Read less</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
-      </summary>
-      <div class="faqs">
+    <div class="sec-head"><div><h2>Frequently Asked Questions</h2></div></div>
+    <div class="dfaq faqs">
       <details class="faq" open>
-        <summary><span>Tata 1mg brings care to health</span><span class="pm" aria-hidden="true"></span></summary>
-        <div class="ans">
-          <p>Tata 1mg is India's leading digital healthcare platform. From ordering medicines online to consulting doctors online, Tata 1mg is that one place that aims to fulfill all your health needs within the comfort of your home. In fact, you don't even need to visit the diagnostic labs to get tests done. Tata 1mg has got that covered too.</p>
-        </div>
+        <summary><span>When will I get an answer to my query? What happens if I don’t get a response?</span><span class="pm" aria-hidden="true"></span></summary>
+        <div class="ans"><p>If you opt for a free consult, then we make sure the doctor replies within 24 to 48 hours. In case of a paid consult, you will receive a reply within 2-4 business hours. However, if you do not get any response within the stipulated time, we will refund your money back into your account.</p></div>
       </details>
       <details class="faq">
-        <summary><span>Tata 1mg: Lab tests now at your doorstep</span><span class="pm" aria-hidden="true"></span></summary>
-        <div class="ans">
-          <p>Spending hours in a queue at a diagnostic lab or a hospital is now a thing of the past. With more than 45,00,000 lab tests booked, Tata 1mg labs is on a mission to give you a flawless healthcare experience by bringing 'care' to 'health'.</p>
-          <p>With Tata 1mg labs, you can choose the diagnostic lab of your preference and get the hassle-free experience of a diagnostic center at the comfort of your home.</p>
-          <p>You can choose the diagnostic lab of your choice and get your lab tests done at discounted prices with the quality of service kept intact.</p>
-          <p>Wondering how to book a lab test? It's simple. You just need to search and add your tests, select the lab of your choice and schedule your test as per your suitable time slot. Once your test gets confirmed, a phlebotomist will be assigned to collect a sample from your home.</p>
-        </div>
+        <summary><span>Who are the consulting doctors?</span><span class="pm" aria-hidden="true"></span></summary>
+        <div class="ans"><p>All the doctors are registered medical practitioners. Along with qualifying degrees - experience, research and track-record of practice are taken into account before a doctor is credentialed with Tata 1mg and is given access to answer patient queries.</p></div>
       </details>
       <details class="faq">
-        <summary><span>Need more help?</span><span class="pm" aria-hidden="true"></span></summary>
-        <div class="ans">
-          <p>Just give us a call (<a href="tel:18002122323">18002122323</a>) and we will help you complete your order.</p>
-        </div>
+        <summary><span>Will the doctor be able to resolve my issue?</span><span class="pm" aria-hidden="true"></span></summary>
+        <div class="ans"><p>Our doctors will give you expert advice on your problem and help you identify next steps which may include further tests, medicine recommendation or lifestyle tips. Few cases require face-to-face examination and we do ask patients to share pictures or reports if they can, for a conclusive diagnosis.</p></div>
       </details>
       <details class="faq">
-        <summary><span>Certified labs: For accessible and affordable experience</span><span class="pm" aria-hidden="true"></span></summary>
-        <div class="ans">
-          <p>We partner with various recognized diagnostic labs to make sure that you have a safe and smooth experience. To ensure quality and hygiene in sample collection and high accuracy in results, we partner with labs that are certified by international bodies like ISO (International Organization for Standardization), NABL (National Accreditation Board for testing and calibration laboratories) and CAP (College of American Pathologists).</p>
-        </div>
+        <summary><span>Is my consultation private with my doctor?</span><span class="pm" aria-hidden="true"></span></summary>
+        <div class="ans"><p>Privacy of data is one of the fundamental human rights and we at Tata 1mg understand that. All your medical history and online consultation with us are completely private and confidential. We are compliant with industry standards to ensure your consultations are securely stored.</p></div>
       </details>
       <details class="faq">
-        <summary><span>The services we offer</span><span class="pm" aria-hidden="true"></span></summary>
-        <div class="ans">
-          <p>As India's leading digital healthcare platforms, your health is our utmost priority. Apart from facilitating pathological tests, Tata 1mg is your one-stop place for booking radiology tests such as MRIs and CT scans. Not just this, we also offer a free package of diabetes tests for members of the Diabetes Care Plan.</p>
-          <p>With a presence in cities like Delhi, Gurgaon, Noida, Mumbai, Pune, Hyderabad, Bangalore, Chennai, etc., through Tata 1mg, you can avail over 2,000 tests and get tested by 120+ top, verified labs at the best prices. You even have the option to compare tests and packages based on prices and lab ratings and choose accordingly.</p>
-          <p>Need help with lab test results? Talk to more than 20 kinds of specialists on Tata 1mg and get your results verified by them.</p>
-          <p>We have been making healthcare affordable and accessible since the day we started. We aim to bring care to health and continue doing so until everyone is well.</p>
-          <p>Customer centricity is the core of our values. Our team of highly trained and experienced doctors, phlebotomists and pharmacists look into each order to give you a fulfilling experience.</p>
-          <p>Explore our labs now and book your tests today. Stay Healthy!</p>
-        </div>
+        <summary><span>For how long is the consultation valid?</span><span class="pm" aria-hidden="true"></span></summary>
+        <div class="ans"><p>In the case of a paid consult, you can follow-up with your doctor for up to 3 days. In case you opt for a free consult, follow-up questions are valid for one day only.</p></div>
       </details>
+      <details class="faq">
+        <summary><span>Do you have a refund policy?</span><span class="pm" aria-hidden="true"></span></summary>
+        <div class="ans"><p>We have a “take-it-easy” policy. If for any reason you’re not convinced with your online consultation, you can write to us at <a href="mailto:contact@1mgdoctors.com">contact@1mgdoctors.com</a> and we will review the consult with the doctor - seeking clarifications on your queries that were answered. 100% refund will be given in genuine cases.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== JOIN ===================== -->
+<section class="block" style="padding-top:0">
+  <div class="wrap">
+    <div class="join">
+      <div>
+        <h2>Are you a doctor?</h2>
+        <p>Be a part of our panel of specialists and connect with your patients from anywhere.</p>
+        <a class="btn btn-primary" href="https://www.1mgdoctors.com/doctors/register/new" target="_blank" rel="noopener">Join Now</a>
       </div>
-    </details>
+      <img src="{{img:dc_doctor}}" alt="">
+    </div>
   </div>
 </section>
 </main>
@@ -781,129 +789,25 @@
 
 <script>
 (function(){
-  const TESTS = [
-    {id:1,name:"Tata 1mg Full Body Checkup",tests:64,price:999},
-    {id:2,name:"Comprehensive Full Body with Vitamins",tests:86,price:1499},
-    {id:3,name:"Thyroid Profile (T3, T4, TSH)",tests:3,price:349},
-    {id:4,name:"HbA1c (Glycated Haemoglobin)",tests:1,price:299},
-    {id:5,name:"Diabetes Screening (HbA1c + Fasting Sugar)",tests:4,price:449},
-    {id:6,name:"Vitamin D (25-OH)",tests:1,price:599},
-    {id:7,name:"Vitamin B12",tests:1,price:449},
-    {id:8,name:"Complete Blood Count (CBC)",tests:1,price:199},
-    {id:9,name:"Fever Panel (Dengue, Malaria, Typhoid, CBC)",tests:5,price:899},
-    {id:10,name:"Dengue NS1 Antigen",tests:1,price:499},
-    {id:11,name:"Liver Function Test (LFT)",tests:11,price:399},
-    {id:12,name:"Kidney Function Test (KFT)",tests:10,price:449},
-    {id:13,name:"Lipid Profile",tests:8,price:399},
-    {id:14,name:"Allergy Panel, Food (Basic)",tests:20,price:2499},
-    {id:15,name:"Men's Health Package",tests:70,price:1249},
-    {id:16,name:"Women's Wellness Package",tests:72,price:1299},
-    {id:17,name:"PCOD / PCOS Hormone Profile",tests:12,price:1199},
-    {id:18,name:"Testosterone (Total)",tests:1,price:499},
-    {id:19,name:"CT Scan Brain (Plain)",tests:1,price:2200},
-    {id:20,name:"MRI Brain (Plain)",tests:1,price:4500},
-    {id:21,name:"X-Ray Chest PA View",tests:1,price:350},
-    {id:22,name:"Ultrasound Whole Abdomen",tests:1,price:1200},
-    {id:23,name:"ECG (Resting)",tests:1,price:300},
-    {id:24,name:"2D Echo Test",tests:1,price:1800},
-  ];
-  const KEYWORDS = {
-    "full body":[1,2],"thyroid":[3],"vitamin":[6,7],"hba1c":[4,5],"cbc":[8],"fever":[9,10],"diabetes":[5,4],
-    "liver":[11,12],"kidney":[12,11],"hormone":[17,18,3],"allergy":[14],"men":[15,18],"women":[16,17],
-    "scan":[19,20,21,22],"ct scan":[19],"mri":[20],"x-ray":[21],"ultrasound":[22],"ecg":[23],"echo":[24],"heart":[13,23,24]
-  };
-  const rupee = n => "₹" + n.toLocaleString("en-IN");
-  const cart = new Set();
-  const cartCount = document.getElementById("cartCount");
-  const toast = document.getElementById("toast");
-  let toastTimer;
+  const toast = document.getElementById("toast"); let toastTimer;
   const showToast = msg => { toast.textContent = msg; toast.classList.add("show"); clearTimeout(toastTimer); toastTimer = setTimeout(()=>toast.classList.remove("show"), 2200); };
-  const updateCart = () => { cartCount.textContent = cart.size; cartCount.hidden = cart.size === 0; };
+  document.getElementById("cartBtn").addEventListener("click", ()=>showToast("Your cart is empty"));
+  document.querySelectorAll(".spec").forEach(a=>a.addEventListener("click", e=>{ e.preventDefault(); showToast("Starting a " + a.textContent.trim() + " consultation"); }));
+  document.getElementById("consultBtn").addEventListener("click", e=>{ e.preventDefault(); document.getElementById("consult").scrollIntoView({behavior:"smooth", block:"start"}); });
 
-  const q = document.getElementById("q"), suggest = document.getElementById("suggest");
-  let activeIdx = -1;
-  function matches(term){
-    term = term.trim().toLowerCase(); if(!term) return [];
-    const ids = new Set();
-    Object.keys(KEYWORDS).forEach(k=>{ if(k.includes(term) || term.includes(k)) KEYWORDS[k].forEach(i=>ids.add(i)); });
-    TESTS.forEach(p=>{ if(p.name.toLowerCase().includes(term)) ids.add(p.id); });
-    return [...ids].map(i=>TESTS.find(p=>p.id===i)).slice(0,7);
-  }
-  function renderSuggest(){
-    if(!q.value.trim()){ suggest.hidden = true; return; }
-    const res = matches(q.value); activeIdx = -1;
-    suggest.innerHTML = res.length
-      ? `<div class="hd">Tests and packages</div>` + res.map(p=>`<button type="button" data-pick="${p.id}"><span><span class="nm">${p.name}</span><br><span class="meta">${p.tests} ${p.tests===1?"test":"tests"} included</span></span><span class="pr">${rupee(p.price)}</span></button>`).join("")
-      : `<div class="empty">No results for "${q.value}". Try a test name like CBC or a concern like fever.</div>`;
-    suggest.hidden = false;
-  }
-  q.addEventListener("input", renderSuggest);
-  q.addEventListener("focus", renderSuggest);
-  q.addEventListener("keydown", e=>{
-    const items = [...suggest.querySelectorAll("[data-pick]")]; if(!items.length) return;
-    if(e.key==="ArrowDown"){ e.preventDefault(); activeIdx = (activeIdx+1)%items.length; }
-    else if(e.key==="ArrowUp"){ e.preventDefault(); activeIdx = (activeIdx-1+items.length)%items.length; }
-    else if(e.key==="Enter" && activeIdx>=0){ e.preventDefault(); items[activeIdx].click(); return; }
-    else if(e.key==="Escape"){ suggest.hidden = true; return; }
-    else return;
-    items.forEach((b,i)=>b.classList.toggle("active", i===activeIdx));
+  // ---- horizontal scrollers ----
+  document.querySelectorAll(".hs").forEach(sec=>{
+    const track = sec.querySelector(".hs-track"), prev = sec.querySelector(".hs-prev"), next = sec.querySelector(".hs-next");
+    const step = ()=> (track.firstElementChild?.getBoundingClientRect().width || 300) * 2 + 28;
+    const update = ()=>{ prev.disabled = track.scrollLeft <= 2; next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 2; };
+    prev.addEventListener("click", ()=>track.scrollBy({left:-step(), behavior:"smooth"}));
+    next.addEventListener("click", ()=>track.scrollBy({left:step(), behavior:"smooth"}));
+    track.addEventListener("scroll", update, {passive:true}); addEventListener("resize", update); update();
   });
-  suggest.addEventListener("click", e=>{
-    const b = e.target.closest("[data-pick]"); if(!b) return;
-    const id = Number(b.dataset.pick); cart.add(id); updateCart();
-    showToast("Added " + TESTS.find(p=>p.id===id).name + " to cart");
-    q.value = ""; suggest.hidden = true;
-  });
-  document.addEventListener("click", e=>{ if(!e.target.closest("#searchForm")) suggest.hidden = true; });
-  document.getElementById("searchForm").addEventListener("submit", e=>{
-    e.preventDefault();
-    if(matches(q.value).length){ renderSuggest(); q.focus(); }
-    else showToast(q.value.trim() ? "No tests found. Try another name." : "Type a test name to search");
-  });
-  document.querySelectorAll("[data-q]").forEach(el=>el.addEventListener("click", ()=>{
-    q.value = el.dataset.q; window.scrollTo({top:0, behavior:"smooth"}); q.focus(); renderSuggest();
-  }));
 
-  // ---- hero slider (seamless loop) ----
-  (function(){
-    const track = document.getElementById("sliderTrack"), dots = document.getElementById("sliderDots"), count = document.getElementById("sliderCount"), root = document.getElementById("slider");
-    const real = [...track.children], n = real.length;
-    const firstClone = real[0].cloneNode(true), lastClone = real[n-1].cloneNode(true);
-    firstClone.setAttribute("aria-hidden","true"); lastClone.setAttribute("aria-hidden","true");
-    track.appendChild(firstClone); track.insertBefore(lastClone, real[0]);
-    let pos = 1, timer, animating = false, doneTimer;
-    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const setX = (p, animate)=>{ track.style.transition = animate ? "" : "none"; track.style.transform = `translateX(-${p*100}%)`; if(!animate){ void track.offsetWidth; track.style.transition = ""; } };
-    const idx = ()=> (pos - 1 + n) % n;
-    function paint(){ const i = idx(); [...dots.children].forEach((d, k)=>d.setAttribute("aria-current", k===i ? "true" : "false")); count.textContent = (i+1) + " / " + n; }
-    real.forEach((_, k)=>{ const b = document.createElement("button"); b.type = "button"; b.setAttribute("role","tab"); b.setAttribute("aria-label", "Slide " + (k+1)); b.addEventListener("click", ()=>{ if(animating) return; begin(); pos = k + 1; setX(pos, true); paint(); restart(); }); dots.appendChild(b); });
-    function finish(){ if(!animating) return; animating = false; clearTimeout(doneTimer); if(pos === n + 1){ pos = 1; setX(pos, false); } else if(pos === 0){ pos = n; setX(pos, false); } }
-    function begin(){ animating = true; clearTimeout(doneTimer); doneTimer = setTimeout(finish, 800); }
-    function step(dir){ if(animating) return; begin(); pos += dir; setX(pos, true); paint(); }
-    track.addEventListener("transitionend", e=>{ if(e.target === track) finish(); });
-    function restart(){ clearInterval(timer); if(!reduce) timer = setInterval(()=>step(1), 4500); }
-    document.getElementById("sliderPrev").addEventListener("click", ()=>{ step(-1); restart(); });
-    document.getElementById("sliderNext").addEventListener("click", ()=>{ step(1); restart(); });
-    root.addEventListener("mouseenter", ()=>clearInterval(timer));
-    root.addEventListener("mouseleave", restart);
-    let sx = null;
-    root.addEventListener("touchstart", e=>{ sx = e.touches[0].clientX; }, {passive:true});
-    root.addEventListener("touchend", e=>{ if(sx===null) return; const dx = e.changedTouches[0].clientX - sx; if(Math.abs(dx) > 40){ step(dx < 0 ? 1 : -1); restart(); } sx = null; });
-    setX(pos, false); paint(); restart();
-  })();
-
+  // ---- mobile menu ----
   const burger = document.getElementById("burger"), mnav = document.getElementById("mnav");
-  burger.addEventListener("click", ()=>{ const open = mnav.classList.toggle("open"); burger.setAttribute("aria-expanded", open); burger.setAttribute("aria-label", open ? "Close menu" : "Open menu"); });
+  burger.addEventListener("click", ()=>{ const open = mnav.classList.toggle("open"); burger.setAttribute("aria-expanded", open); });
   document.addEventListener("click", e=>{ if(!e.target.closest("#mnav,#burger")){ mnav.classList.remove("open"); burger.setAttribute("aria-expanded","false"); } });
-
-  const cities = ["Gurgaon","Delhi","Noida","Mumbai","Pune","Hyderabad","Bangalore","Chennai"];
-  document.getElementById("locBtn").addEventListener("click", ()=>{
-    const el = document.getElementById("locName");
-    el.textContent = cities[(cities.indexOf(el.textContent)+1)%cities.length];
-    showToast("Showing labs in " + el.textContent);
-  });
-  document.getElementById("cartBtn").addEventListener("click", ()=>{
-    showToast(cart.size ? cart.size + (cart.size===1?" item":" items") + " in your cart" : "Your cart is empty");
-  });
 })();
 </script>

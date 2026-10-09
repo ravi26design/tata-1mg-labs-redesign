@@ -6,6 +6,7 @@ A cleaner, search-first redesign of [1mg.com/labs](https://www.1mg.com/labs), bu
 
 | Page | Description |
 | --- | --- |
+| `redesign/doctor-consultation.html` | Online doctor consultation page in the same design language |
 | `redesign/medicines.html` | Medicines home page (1mg.com) in the same design language |
 | `redesign/index.html` | Clean redesign (light theme, 64px gutters, FAQ-style about section, full 1mg footer) |
 | `redesign/showcase.html` | Award-style showcase variant with choreographed motion |
@@ -13,6 +14,6 @@ A cleaner, search-first redesign of [1mg.com/labs](https://www.1mg.com/labs), bu
 
 ## Editing
 
-`redesign/template.html`, `redesign/medicines-template.html` and `redesign/showcase-template.html` are the editable sources. They use `{{img:name}}` placeholders that map to files in `redesign/images/`. The built pages embed those images as data URIs, so each page is a single self-contained file.
+`redesign/template.html`, `redesign/medicines-template.html`, `redesign/doctor-consultation-template.html` and `redesign/showcase-template.html` are the editable sources. They use `{{img:name}}` placeholders that map to files in `redesign/images/`. The built pages embed those images as data URIs, so each page is a single self-contained file.
 
 Prices and search results in the pages are illustrative sample data, not live 1mg prices.

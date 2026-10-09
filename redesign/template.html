@@ -191,13 +191,29 @@
   .rad b{display:block;padding:10px 12px 12px;font-weight:600;font-size:14px}
 
   /* how it works */
-  .steps{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
-  .step{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
-  .step img{width:100%;aspect-ratio:624/486;object-fit:cover}
-  .step .txt{padding:14px 14px 16px;display:flex;flex-direction:column;gap:6px}
-  .step .n{font-family:var(--display);font-weight:600;font-size:12px;letter-spacing:.06em;color:var(--accent)}
-  .step h3{font-size:15px;font-weight:600;line-height:1.3}
-  .step p{font-size:13px;color:var(--ink-2)}
+  /* how it works: timeline */
+  .how{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:28px 28px 30px}
+  .how-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:26px;flex-wrap:wrap}
+  .how-head h2{font-size:23px;font-weight:600}
+  .how-head p{color:var(--ink-2);margin-top:4px;font-size:14.5px}
+  .how-meta{display:flex;gap:8px;flex-wrap:wrap}
+  .how-meta span{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;background:var(--surface-2);font-size:13px;font-weight:600;color:var(--ink-2)}
+  .how-meta svg{color:var(--trust)}
+  .steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative;counter-reset:step}
+  .step{position:relative;padding:0 14px;display:flex;flex-direction:column;gap:14px}
+  .step .mark{position:relative;height:44px;display:flex;align-items:center}
+  .step .mark::before{content:"";position:absolute;left:0;right:0;top:50%;height:2px;background:var(--line-2);transform:translateY(-50%)}
+  .step:first-child .mark::before{left:50%}
+  .step:last-child .mark::before{right:50%}
+  .step .mark b{position:relative;margin:0 auto;width:44px;height:44px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:17px;box-shadow:0 0 0 6px var(--surface)}
+  .step:last-child .mark b{background:var(--trust)}
+  .step .pic{border-radius:16px;overflow:hidden;background:var(--surface-2);border:1px solid var(--line)}
+  .step .pic img{width:100%;aspect-ratio:1/1;object-fit:cover;object-position:right center;transition:transform .5s ease}
+  .step:hover .pic img{transform:scale(1.04)}
+  .step .txt{display:flex;flex-direction:column;gap:6px;text-align:center}
+  .step h3{font-size:15.5px;font-weight:700;line-height:1.3}
+  .step p{font-size:13.5px;color:var(--ink-2);line-height:1.55}
+  .step .n{display:none}
 
   /* app band */
   .app{position:relative;border-radius:20px;overflow:hidden;border:1px solid var(--line);background:#fff url("{{img:app_bg}}") center / 100% auto no-repeat;aspect-ratio:1200/448;display:flex;align-items:center}
@@ -297,7 +313,15 @@
     .float.f3{right:8px}
     .needs,.radio{grid-template-columns:repeat(3,1fr)}
     .banner{width:360px}
-    .steps{grid-template-columns:repeat(3,1fr)}
+    .how{padding:22px 20px 24px}
+    .steps{grid-template-columns:1fr;gap:0}
+    .step{display:grid;grid-template-columns:44px 150px 1fr;gap:16px;align-items:start;padding:0 0 22px}
+    .step .mark{height:auto;align-items:flex-start;justify-content:center}
+    .step .mark::before{left:50%;right:auto;top:0;bottom:-22px;width:2px;height:auto;transform:translateX(-50%)}
+    .step:first-child .mark::before{top:22px}
+    .step:last-child .mark::before{display:none}
+    .step .mark b{margin:0}
+    .step .txt{text-align:left;padding-top:4px}
     .about-grid{grid-template-columns:1fr}
     .f-links{grid-template-columns:1fr 1fr}
     .f-trust .f-inner{grid-template-columns:1fr}
@@ -319,7 +343,11 @@
     .find .card{padding:16px}
     .needs,.radio{grid-template-columns:repeat(2,1fr)}
     .banner{width:280px}
-    .steps{grid-template-columns:1fr}
+    .step{grid-template-columns:40px 1fr;padding-bottom:20px}
+    .step .mark b{width:40px;height:40px;font-size:15px}
+    .step .pic{grid-column:2}
+    .step .txt{grid-column:2}
+    .step .pic img{aspect-ratio:16/9}
     .app{aspect-ratio:auto;background-size:cover;background-position:right center;flex-direction:column;align-items:stretch}
     .app::before{content:"";display:block;aspect-ratio:1200/448;background:url("{{img:app_bg}}") right center / cover no-repeat}
     .app .content{padding:20px;max-width:none;background:#fff}
@@ -336,7 +364,6 @@
     .chip{padding:8px 14px}
     .way{height:64px}
     .sec-head h2{font-size:20px}
-    .step .txt{padding:12px 12px 14px}
     .f-cert img{height:52px}
     .f-bottom .f-inner{flex-direction:column}
     .seo{padding:20px 18px 6px}
@@ -518,15 +545,22 @@
 <!-- ===================== HOW IT WORKS ===================== -->
 <section class="block">
   <div class="wrap">
-    <div class="sec-head">
-      <div><h2>How does home sample collection work?</h2></div>
-    </div>
-    <div class="steps">
-      <div class="step"><img src="{{img:s1}}" alt=""><div class="txt"><span class="n">STEP 1</span><h3>Easy online booking</h3><p>Search for tests and packages, book your preferred time slot and enter your address for seamless at-home lab tests.</p></div></div>
-      <div class="step"><img src="{{img:s2}}" alt=""><div class="txt"><span class="n">STEP 2</span><h3>Live tracking of phlebotomist</h3><p>Track our trained phlebotomist's real time location for seamless sample collection.</p></div></div>
-      <div class="step"><img src="{{img:s3}}" alt=""><div class="txt"><span class="n">STEP 3</span><h3>Safe Sample Collection</h3><p>Our phlebotomists follow strict safety protocols to collect samples safely at home and on time.</p></div></div>
-      <div class="step"><img src="{{img:s4}}" alt=""><div class="txt"><span class="n">STEP 4</span><h3>Sample received at lab</h3><p>Samples are transported securely to our accredited labs with world-class machines for testing by qualified experts.</p></div></div>
-      <div class="step"><img src="{{img:s5}}" alt=""><div class="txt"><span class="n">STEP 5</span><h3>Quick, Doctor-Verified Reports</h3><p>Get doctor-approved reports via email and WhatsApp, with options for doctor follow-ups and AI insights.</p></div></div>
+    <div class="how">
+      <div class="how-head">
+        <div><h2>How does home sample collection work?</h2><p>Five simple steps from booking to your report.</p></div>
+        <div class="how-meta">
+          <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>Home collection</span>
+          <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>NABL labs</span>
+          <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>Doctor-verified reports</span>
+        </div>
+      </div>
+      <div class="steps">
+      <div class="step"><div class="mark"><b>1</b></div><div class="pic"><img src="{{img:s1}}" alt=""></div><div class="txt"><h3>Easy online booking</h3><p>Search for tests and packages, book your preferred time slot and enter your address for seamless at-home lab tests.</p></div></div>
+      <div class="step"><div class="mark"><b>2</b></div><div class="pic"><img src="{{img:s2}}" alt=""></div><div class="txt"><h3>Live tracking of phlebotomist</h3><p>Track our trained phlebotomist's real time location for seamless sample collection.</p></div></div>
+      <div class="step"><div class="mark"><b>3</b></div><div class="pic"><img src="{{img:s3}}" alt=""></div><div class="txt"><h3>Safe Sample Collection</h3><p>Our phlebotomists follow strict safety protocols to collect samples safely at home and on time.</p></div></div>
+      <div class="step"><div class="mark"><b>4</b></div><div class="pic"><img src="{{img:s4}}" alt=""></div><div class="txt"><h3>Sample received at lab</h3><p>Samples are transported securely to our accredited labs with world-class machines for testing by qualified experts.</p></div></div>
+      <div class="step"><div class="mark"><b>5</b></div><div class="pic"><img src="{{img:s5}}" alt=""></div><div class="txt"><h3>Quick, Doctor-Verified Reports</h3><p>Get doctor-approved reports via email and WhatsApp, with options for doctor follow-ups and AI insights.</p></div></div>
+      </div>
     </div>
   </div>
 </section>

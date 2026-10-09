@@ -1,6 +1,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Tata 1mg Labs Redesign</title>
+<title>Tata 1mg Medicines Redesign</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Figtree:wght@400;500;600;700&display=swap">
 <style>
@@ -387,14 +387,142 @@
   }
   @media (prefers-reduced-motion: reduce){ *{transition:none !important;animation:none !important} .banners{overflow-x:auto} }
 </style>
+<style>
+  /* ===== medicines page ===== */
+  .mhero{padding:0}
+  .mhero-panel{position:relative;overflow:hidden;margin-inline:calc(var(--gutter) * -1);padding:40px var(--gutter) 44px;background:linear-gradient(135deg,#FFF3F1 0%,#F7F8FB 45%,#E9F6F2 100%);border-bottom:1px solid var(--line)}
+  .mhero-panel::before{content:"";position:absolute;width:640px;height:640px;border-radius:50%;background:radial-gradient(circle,rgba(229,71,62,.14),transparent 65%);top:-300px;right:18%;pointer-events:none}
+  .mhero-panel>*{position:relative;z-index:1}
+  .mhero h1{font-size:clamp(28px,3.2vw,40px);font-weight:800;line-height:1.1;letter-spacing:-.03em;max-width:24ch;margin:0 0 8px}
+  .mhero h1 em{font-style:normal;color:var(--accent)}
+  .mhero .lede{font-size:15.5px;color:var(--ink-2);max-width:56ch;margin-bottom:20px}
+  .mhero .search{max-width:860px}
+  .quick{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px;max-width:860px}
+  .qk{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;background:var(--surface);border:1px solid var(--line);text-align:left;transition:border-color .2s,transform .2s,box-shadow .2s}
+  .qk:hover{border-color:var(--line-2);transform:translateY(-2px);box-shadow:var(--shadow)}
+  .qk .ic{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;flex:none;background:var(--q-bg);color:var(--q-fg)}
+  .qk b{display:block;font-size:13.5px;font-weight:700;line-height:1.2}
+  .qk span{display:block;font-size:12px;color:var(--ink-3);margin-top:2px}
+  .qk-blue{--q-bg:#EAF4FD;--q-fg:#2B7BD1}.qk-pink{--q-bg:#FBEAEE;--q-fg:#D04A74}.qk-green{--q-bg:#E7F5EE;--q-fg:#1F9A5A}.qk-amber{--q-bg:#FFF4DF;--q-fg:#B86E00}
 
-<!-- ===================== HEADER ===================== -->
+  /* banner slider */
+  .bslider{position:relative;border-radius:18px;overflow:hidden;box-shadow:var(--shadow);background:var(--surface);margin-top:26px;aspect-ratio:960/200}
+  .bslider .track{display:flex;height:100%;transition:transform .7s cubic-bezier(.22,1,.36,1)}
+  .bslider .slide{flex:0 0 100%;height:100%}
+  .bslider .slide img{width:100%;height:100%;object-fit:cover}
+  .bslider .dots{position:absolute;left:0;right:0;bottom:10px;display:flex;justify-content:center;gap:6px}
+  .bslider .dots button{width:8px;height:8px;border-radius:999px;background:rgba(20,32,44,.35);transition:width .3s,background .3s}
+  .bslider .dots button[aria-current="true"]{width:22px;background:var(--ink)}
+  .bslider .nav{position:absolute;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.95);color:var(--ink);display:grid;place-items:center;box-shadow:var(--shadow);opacity:0;transition:opacity .2s}
+  .bslider:hover .nav,.bslider:focus-within .nav{opacity:1}
+  .bslider .nav.prev{left:12px}.bslider .nav.next{right:12px}
+
+  .cdsco{max-width:720px;margin:0 auto;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--surface)}
+  .cdsco img{width:100%;height:auto;display:block}
+
+  /* generic tile grids */
+  .grid9{display:grid;grid-template-columns:repeat(9,1fr);gap:12px}
+  .ctile{display:flex;flex-direction:column;border-radius:16px;overflow:hidden;background:var(--surface);border:1px solid var(--line);text-align:center;transition:transform .2s,border-color .2s,box-shadow .2s}
+  .ctile:hover{transform:translateY(-3px);border-color:var(--line-2);box-shadow:var(--shadow)}
+  .ctile img{width:100%;aspect-ratio:1;object-fit:cover}
+  .ctile b{display:block;padding:10px 8px 12px;font-size:13px;font-weight:600;line-height:1.25}
+  .ctile.text{justify-content:center;min-height:100%;background:var(--trust-soft);border-color:transparent}
+  .ctile.text .ph{aspect-ratio:1;display:grid;place-items:center;color:var(--trust)}
+
+  .careplan{margin:0;border-radius:18px;overflow:hidden;border:1px solid var(--line)}
+  .careplan img{width:100%;height:auto;display:block}
+
+  /* package / test cards */
+  .cards{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+  .cards.c4{grid-template-columns:repeat(4,1fr)}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:8px;transition:transform .2s,box-shadow .2s,border-color .2s}
+  .card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--line-2)}
+  .card .top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+  .card .lab{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--ink-2);font-weight:600}
+  .card .lab img{height:18px;width:auto}
+  .card .safe{font-size:10.5px;font-weight:800;letter-spacing:.08em;padding:3px 7px;border-radius:6px;background:var(--trust-soft);color:var(--trust)}
+  .card h3{font-family:var(--body);font-size:14.5px;font-weight:700;line-height:1.3;min-height:38px}
+  .card .sub{font-size:12.5px;color:var(--ink-3)}
+  .card .price-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:auto;padding-top:10px;border-top:1px solid var(--line)}
+  .card .price{font-family:var(--display);font-weight:700;font-size:18px;font-variant-numeric:tabular-nums}
+  .card .price s{font-family:var(--body);font-weight:400;font-size:12px;color:var(--ink-3);margin-left:5px}
+  .card .off{font-size:12px;font-weight:700;color:var(--trust)}
+  .card .add{padding:7px 12px;font-size:13px;border-radius:8px}
+  .card .add.added{background:var(--trust-soft);color:var(--trust)}
+
+  /* brand marquee */
+  .brands{overflow:hidden;margin-inline:calc(var(--gutter) * -1);padding:6px 0}
+  .brands .track{display:flex;gap:22px;width:max-content;padding-left:20px;animation:brandScroll 36s linear infinite}
+  .brands:hover .track{animation-play-state:paused}
+  .brands .br{width:132px;height:132px;border-radius:50%;overflow:hidden;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow);flex:none;display:grid;place-items:center;transition:transform .2s}
+  .brands .br:hover{transform:translateY(-3px)}
+  .brands .br img{width:100%;height:100%;object-fit:cover}
+  @keyframes brandScroll{to{transform:translateX(-50%)}}
+
+  /* products */
+  .prods{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+  .prod{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:8px;transition:transform .2s,box-shadow .2s,border-color .2s}
+  .prod:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--line-2)}
+  .prod .img{aspect-ratio:1;border-radius:12px;background:var(--surface-2);display:grid;place-items:center;overflow:hidden;position:relative}
+  .prod .img img{max-width:72%;max-height:78%;object-fit:contain}
+  .prod .img .pct{position:absolute;left:10px;top:10px;font-size:11px;font-weight:800;padding:4px 7px;border-radius:6px;background:var(--accent);color:#fff}
+  .prod h3{font-family:var(--body);font-size:13.5px;font-weight:700;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .prod .sub{font-size:12px;color:var(--ink-3)}
+  .prod .rate{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;color:var(--ink-2)}
+  .prod .rate i{display:inline-flex;align-items:center;gap:3px;padding:2px 6px;border-radius:6px;background:var(--trust);color:#fff;font-style:normal;font-size:11.5px}
+  .prod .rate span{font-weight:500;color:var(--ink-3)}
+  .prod .del{font-size:12px;color:var(--trust);font-weight:600}
+  .prod .price-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:auto;padding-top:10px;border-top:1px solid var(--line)}
+  .prod .price{font-family:var(--display);font-weight:700;font-size:17px;font-variant-numeric:tabular-nums}
+  .prod .price s{font-family:var(--body);font-weight:400;font-size:12px;color:var(--ink-3);margin-left:5px}
+  .prod .add{padding:7px 12px;font-size:13px;border-radius:8px}
+  .prod .add.added{background:var(--trust-soft);color:var(--trust)}
+
+  /* order on call */
+  .call{background:var(--ink);color:#fff;border-radius:20px;padding:30px 32px;display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center}
+  .call h2{font-size:24px;font-weight:700;letter-spacing:-.02em;margin-bottom:6px}
+  .call p{color:rgba(255,255,255,.78);font-size:14.5px}
+  .call .tel{font-family:var(--display);font-weight:800;font-size:28px;color:#fff;display:inline-block;margin-top:10px}
+  .call form{display:flex;gap:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:8px}
+  .call .cc{display:flex;align-items:center;padding:0 12px;font-weight:700;border-right:1px solid rgba(255,255,255,.18)}
+  .call input{flex:1;min-width:0;background:transparent;border:0;color:#fff;font:inherit;font-size:15px;padding:0 6px}
+  .call input::placeholder{color:rgba(255,255,255,.55)}
+  .call input:focus{outline:none}
+  .call .btn-primary{white-space:nowrap}
+
+  .note{font-size:12.5px;color:var(--ink-3);margin-top:12px}
+
+  @media (max-width:1060px){
+    .grid9{grid-template-columns:repeat(5,1fr)}
+    .cards{grid-template-columns:repeat(3,1fr)}
+    .cards.c4{grid-template-columns:repeat(2,1fr)}
+    .prods{grid-template-columns:repeat(3,1fr)}
+    .quick{grid-template-columns:repeat(2,1fr)}
+    .call{grid-template-columns:1fr}
+  }
+  @media (max-width:640px){
+    .mhero-panel{padding:26px var(--gutter) 30px}
+    .grid9{grid-template-columns:repeat(3,1fr);gap:8px}
+    .ctile b{font-size:12px;padding:8px 6px 10px}
+    .cards,.cards.c4{grid-template-columns:1fr 1fr;gap:10px}
+    .prods{grid-template-columns:1fr 1fr;gap:10px}
+    .quick{grid-template-columns:1fr 1fr;gap:8px}
+    .qk{padding:10px}
+    .bslider{border-radius:14px;aspect-ratio:960/260}
+    .bslider .nav{opacity:1;width:30px;height:30px}
+    .brands .br{width:96px;height:96px}
+    .call{padding:22px 18px}
+    .call form{flex-wrap:wrap}
+    .call .btn-primary{width:100%}
+  }
+</style>
+
 <header class="topbar">
   <div class="wrap">
     <a class="logo" href="medicines.html" aria-label="Tata 1mg"><img src="{{img:logo}}" alt="Tata 1mg logo"></a>
     <nav class="nav" aria-label="Primary">
-      <a href="medicines.html">Medicines</a>
-      <a href="index.html" aria-current="page">Lab Tests</a>
+      <a href="medicines.html" aria-current="page">Medicines</a>
+      <a href="index.html">Lab Tests</a>
       <a href="#">Consult Doctors</a>
       <a href="#">Cancer Care</a>
       <a href="#">Ayurveda</a>
@@ -415,8 +543,8 @@
     </div>
   </div>
   <nav class="mnav" id="mnav" aria-label="Mobile">
-    <a href="medicines.html">Medicines</a>
-    <a href="index.html" aria-current="page">Lab Tests</a>
+    <a href="medicines.html" aria-current="page">Medicines</a>
+    <a href="index.html">Lab Tests</a>
     <a href="#">Consult Doctors</a>
     <a href="#">Cancer Care</a>
     <a href="#">Ayurveda</a>
@@ -429,227 +557,170 @@
 
 <main>
 <!-- ===================== HERO ===================== -->
-<section class="hero">
+<section class="mhero">
   <div class="wrap">
-   <div class="hero-panel">
-    <div class="hero-left">
-      <h1>Book lab tests online from <em>trusted and certified</em> labs</h1>
-      <p class="hero-lede">Home sample collection, doctor-verified reports and 2,000+ tests from 120+ certified labs in 55+ cities.</p>
+   <div class="mhero-panel">
+    <h1>India's leading online pharmacy, <em>delivered to your door</em></h1>
+    <p class="lede">Order medicines, book lab tests and consult doctors from one place. Genuine products, 1800+ cities, same-day delivery in metros.</p>
 
-      <form class="search" id="searchForm" role="search" autocomplete="off">
-        <div class="search-row">
-          <button type="button" class="loc" id="locBtn" aria-label="Change location">
-            <img src="{{img:loc_pin}}" alt="">
-            <span class="city" id="locName">Gurgaon</span>
-            <img class="cur" src="{{img:loc_cur}}" alt="" title="Use current location">
-          </button>
-          <div class="field">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-            <label class="visually-hidden" for="q">Search tests or full body checkups</label>
-            <input id="q" type="text" placeholder="Search tests or full body checkups" />
-          </div>
-          <button type="submit" class="go" aria-label="Search"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+    <form class="search" id="searchForm" role="search" autocomplete="off">
+      <div class="search-row">
+        <button type="button" class="loc" id="locBtn" aria-label="Change location">
+          <img src="{{img:loc_pin}}" alt="">
+          <span class="city" id="locName">Gurgaon</span>
+          <img class="cur" src="{{img:loc_cur}}" alt="" title="Use current location">
+        </button>
+        <div class="field">
+          <label class="visually-hidden" for="q">Search for Medicines and Health Products</label>
+          <input id="q" type="text" placeholder="Search for Medicines and Health Products" />
         </div>
-        <div class="suggest" id="suggest" hidden></div>
-      </form>
-      <div class="popular">
-        <span>Popular:</span>
-        <button type="button" class="chip" data-q="Full body">Full body checkup</button>
-        <button type="button" class="chip" data-q="Thyroid">Thyroid</button>
-        <button type="button" class="chip" data-q="Vitamin">Vitamin D</button>
-        <button type="button" class="chip" data-q="HbA1c">HbA1c</button>
-        <button type="button" class="chip" data-q="CBC">CBC</button>
+        <button type="submit" class="go" aria-label="Search"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
       </div>
+      <div class="suggest" id="suggest" hidden></div>
+    </form>
 
-      <div class="stats" aria-label="Tata 1mg Labs at a glance" style="margin:18px 0 0">
-        <span><b>45,00,000+</b> tests booked</span>
-        <span><b>120+</b> verified labs</span>
-        <span><b>55+</b> cities</span>
-      </div>
-
-      <div class="ways" aria-label="Other ways to book">
-        <a class="way way-blue" href="tel:18002122323"><img src="{{img:q_phone}}" alt=""><span class="lbl"><span>Book via</span><b>Phone Call</b></span></a>
-        <a class="way way-pink" href="#"><img src="{{img:q_quick}}" alt=""><span class="lbl"><span>Quick</span><b>Order</b></span></a>
-        <a class="way way-green" href="#"><img src="{{img:q_wa}}" alt=""><span class="lbl"><span>Book via</span><b>Whatsapp</b></span></a>
-      </div>
-
+    <div class="quick" aria-label="Quick actions">
+      <a class="qk qk-pink" href="#"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M12 12v6M9 15h6"/></svg></span><div><b>Upload prescription</b><span>We'll add medicines for you</span></div></a>
+      <a class="qk qk-blue" href="tel:18002122323"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.9 2z"/></svg></span><div><b>Order on call</b><span>1800-212-2323</span></div></a>
+      <a class="qk qk-green" href="index.html"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.7 3h10.6a2 2 0 0 0 1.7-3l-5-9V3"/></svg></span><div><b>Book lab tests</b><span>Home sample collection</span></div></a>
+      <a class="qk qk-amber" href="#"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg></span><div><b>Consult a doctor</b><span>Online, from home</span></div></a>
     </div>
 
-    <div class="feature" id="slider" aria-roledescription="carousel" aria-label="Why book with Tata 1mg">
-      <div class="track" id="sliderTrack">
-        <figure class="slide"><img src="{{img:hero_home_lg}}" alt="Phlebotomist collecting a sample at home"><figcaption class="cap"><b>Home sample collection</b><span>Safe pickup at your doorstep</span></figcaption></figure>
-        <figure class="slide"><img src="{{img:hero_nabl_lg}}" alt="Technician working inside a Tata 1mg lab"><figcaption class="cap"><b>Trusted NABL certified labs</b><span>Hygienic &amp; safety assured testing</span></figcaption></figure>
-        <figure class="slide"><img src="{{img:hero_cov_lg}}" alt="Tata 1mg Labs signage"><figcaption class="cap"><b>Wide coverage across india</b><span>Most trusted service in 55+ cities</span></figcaption></figure>
-        <figure class="slide"><img src="{{img:hero_rep_lg}}" alt="Lab professional holding a report"><figcaption class="cap"><b>Fast, accurate reports</b><span>Doctor-verified, delivered on time</span></figcaption></figure>
+    <div class="bslider" id="bslider" aria-roledescription="carousel" aria-label="Offers">
+      <div class="track" id="bsliderTrack">
+        <figure class="slide" style="margin:0"><img src="{{img:m_ban1}}" alt="Neat Everyday: vegan softgels, ghee capsules and cold-pressed oils"></figure>
+        <figure class="slide" style="margin:0"><img src="{{img:m_ban2}}" alt="Online sales banner"></figure>
+        <figure class="slide" style="margin:0"><img src="{{img:m_ban3}}" alt="Gut health products"></figure>
+        <figure class="slide" style="margin:0"><img src="{{img:m_ban4}}" alt="Ayurveda products"></figure>
       </div>
-      <span class="count visually-hidden" id="sliderCount" aria-live="polite">1 / 4</span>
-      <button type="button" class="nav prev" id="sliderPrev" aria-label="Previous"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
-      <button type="button" class="nav next" id="sliderNext" aria-label="Next"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
-      <div class="dots" id="sliderDots" role="tablist" aria-label="Choose slide"></div>
+      <button type="button" class="nav prev" id="bsPrev" aria-label="Previous"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+      <button type="button" class="nav next" id="bsNext" aria-label="Next"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+      <div class="dots" id="bsDots" role="tablist" aria-label="Choose banner"></div>
     </div>
    </div>
 
-      <div class="find">
-       <div class="card">
-        <div class="hd"><h2>Find tests &amp; packages for your needs</h2><a class="link" href="#">View all</a></div>
-        <div class="tiles">
-          <button class="tile t-green" data-q="Full body"><span class="ic"><img src="{{img:c_full}}" alt=""></span><span class="tx"><b>Full Body Packages</b><span class="sub">60 to 90 tests, home collection</span></span><span class="arr" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
-          <button class="tile t-blue" data-q="Scan"><span class="ic"><img src="{{img:c_rad}}" alt=""></span><span class="tx"><b>X Rays, Scans &amp; More</b><span class="sub">CT, MRI, X-ray, ultrasound</span></span><span class="arr" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
-          <button class="tile t-sky" data-q="Fever"><span class="ic"><img src="{{img:c_fever}}" alt=""></span><span class="tx"><b>Fever Tests</b><span class="sub">Dengue, malaria, typhoid</span></span><span class="arr" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
-          <button class="tile t-pink" data-q="Diabetes"><span class="ic"><img src="{{img:c_diab}}" alt=""></span><span class="tx"><b>Diabetes Tests</b><span class="sub">HbA1c, fasting sugar</span></span><span class="arr" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
-          <button class="tile t-purple" data-q="Vitamin"><span class="ic"><img src="{{img:c_vit}}" alt=""></span><span class="tx"><b>Vitamins Tests</b><span class="sub">Vitamin D, B12, iron</span></span><span class="arr" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
-        </div>
-       </div>
-      </div>
   </div>
 </section>
 
-<!-- ===================== HEALTH NEEDS ===================== -->
+<!-- ===================== HEALTH CONCERNS ===================== -->
 <section class="block">
   <div class="wrap">
-    <div class="sec-head">
-      <div><h2>Tests and packages for your health needs</h2></div>
-      <a class="link" href="#">View all <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-    </div>
-    <div class="needs">
-      <button class="need" data-q="Men"><img src="{{img:n_men}}" alt=""><b>Men</b></button>
-      <button class="need" data-q="Women"><img src="{{img:n_women}}" alt=""><b>Women</b></button>
-      <button class="need" data-q="Liver"><img src="{{img:n_liver}}" alt=""><b>Liver &amp; Kidney</b></button>
-      <button class="need" data-q="Thyroid"><img src="{{img:n_thy}}" alt=""><b>Thyroid</b></button>
-      <button class="need" data-q="Hormone"><img src="{{img:n_horm}}" alt=""><b>Hormones</b></button>
-      <button class="need" data-q="Allergy"><img src="{{img:n_all}}" alt=""><b>Allergy</b></button>
+    <div class="sec-head"><div><h2>Shop by health concerns</h2></div><a class="link" href="#">See all</a></div>
+    <div class="grid9">
+      <a class="ctile" href="#"><img src="{{img:hc_diabetes}}" alt=""><b>Diabetes</b></a>
+      <a class="ctile" href="#"><img src="{{img:hc_heart}}" alt=""><b>Heart Care</b></a>
+      <a class="ctile" href="#"><img src="{{img:hc_stomach}}" alt=""><b>Stomach Care</b></a>
+      <a class="ctile" href="#"><img src="{{img:hc_liver}}" alt=""><b>Liver Care</b></a>
+      <a class="ctile" href="#"><img src="{{img:hc_bone}}" alt=""><b>Bone, Joint &amp; Muscle Care</b></a>
+      <a class="ctile" href="#"><img src="{{img:hc_kidney}}" alt=""><b>Kidney Care</b></a>
+      <a class="ctile" href="#"><img src="{{img:hc_derma}}" alt=""><b>Derma Care</b></a>
+      <a class="ctile" href="#"><img src="{{img:hc_resp}}" alt=""><b>Respiratory Care</b></a>
+      <a class="ctile" href="#"><img src="{{img:hc_eye}}" alt=""><b>Eye Care</b></a>
     </div>
   </div>
 </section>
 
-<!-- ===================== TRUST BANNERS ===================== -->
-<section class="block" style="padding-top:6px">
+<!-- ===================== CARE PLAN ===================== -->
+<section class="block" style="padding-top:0">
+  <div class="wrap"><a class="careplan" href="#" style="display:block"><img src="{{img:m_careplan}}" alt="Join 1mg Care plan: extra 5% savings, free shipping, same-day delivery"></a></div>
+</section>
+
+<!-- ===================== FULL BODY CHECKUPS ===================== -->
+<section class="block" style="padding-top:0">
   <div class="wrap">
-    <div class="banners" aria-label="Why trust Tata 1mg Labs">
+    <div class="sec-head"><div><h2>Full body health checkups</h2></div><a class="link" href="index.html">See all</a></div>
+    <div class="cards" id="pkgCards"></div>
+  </div>
+</section>
+
+<!-- ===================== FEATURED BRANDS ===================== -->
+<section class="block" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head"><div><h2>Featured brands</h2></div><a class="link" href="#">See all</a></div>
+    <div class="brands" aria-label="Featured brands">
       <div class="track">
-      <a class="banner" href="#"><img src="{{img:b_nabl}}" alt="NABL Labs"></a>
-      <a class="banner" href="#"><img src="{{img:b_cap}}" alt="CAP Accredited"></a>
-      <a class="banner" href="#"><img src="{{img:b_bharosa}}" alt="Bharose ka Badge"></a>
-      <a class="banner" href="#"><img src="{{img:b_trust}}" alt="Trust what you see"></a>
-      <a class="banner" href="#"><img src="{{img:b_nrl}}" alt="National Reference Lab"></a>
-      <a class="banner" href="#" aria-hidden="true" tabindex="-1"><img src="{{img:b_nabl}}" alt="NABL Labs"></a>
-      <a class="banner" href="#" aria-hidden="true" tabindex="-1"><img src="{{img:b_cap}}" alt="CAP Accredited"></a>
-      <a class="banner" href="#" aria-hidden="true" tabindex="-1"><img src="{{img:b_bharosa}}" alt="Bharose ka Badge"></a>
-      <a class="banner" href="#" aria-hidden="true" tabindex="-1"><img src="{{img:b_trust}}" alt="Trust what you see"></a>
-      <a class="banner" href="#" aria-hidden="true" tabindex="-1"><img src="{{img:b_nrl}}" alt="National Reference Lab"></a>
+        <a class="br" href="#"><img src="{{img:br_muscleblaze}}" alt="MuscleBlaze"></a><a class="br" href="#"><img src="{{img:br_healthkart}}" alt="HealthKart"></a><a class="br" href="#"><img src="{{img:br_dermaco}}" alt="The Derma Co"></a><a class="br" href="#"><img src="{{img:br_moov}}" alt="Moov"></a><a class="br" href="#"><img src="{{img:br_dabur}}" alt="Dabur"></a><a class="br" href="#"><img src="{{img:br_organicindia}}" alt="Organic India"></a><a class="br" href="#"><img src="{{img:br_farmley}}" alt="Farmley"></a><a class="br" href="#"><img src="{{img:br_tejasya}}" alt="Tejasya"></a><a class="br" href="#"><img src="{{img:br_tata1mg}}" alt="Tata 1mg"></a>
+        <a class="br" href="#" aria-hidden="true" tabindex="-1"><img src="{{img:br_muscleblaze}}" alt=""></a><a class="br" href="#" aria-hidden="true" tabindex="-1"><img src="{{img:br_healthkart}}" alt=""></a><a class="br" href="#" aria-hidden="true" tabindex="-1"><img src="{{img:br_dermaco}}" alt=""></a><a class="br" href="#" aria-hidden="true" tabindex="-1"><img src="{{img:br_moov}}" alt=""></a><a class="br" href="#" aria-hidden="true" tabindex="-1"><img src="{{img:br_dabur}}" alt=""></a><a class="br" href="#" aria-hidden="true" tabindex="-1"><img src="{{img:br_organicindia}}" alt=""></a><a class="br" href="#" aria-hidden="true" tabindex="-1"><img src="{{img:br_farmley}}" alt=""></a><a class="br" href="#" aria-hidden="true" tabindex="-1"><img src="{{img:br_tejasya}}" alt=""></a><a class="br" href="#" aria-hidden="true" tabindex="-1"><img src="{{img:br_tata1mg}}" alt=""></a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===================== RADIOLOGY ===================== -->
-<section class="block">
+<!-- ===================== PERSONAL CARE ===================== -->
+<section class="block" style="padding-top:0">
   <div class="wrap">
-    <div class="sec-head">
-      <div><h2>Radiology tests, x-rays &amp; scans</h2></div>
-      <a class="link" href="#">View all <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-    </div>
-    <div class="radio">
-      <button class="rad" data-q="CT Scan"><img src="{{img:r_ct}}" alt=""><b>CT Scan</b></button>
-      <button class="rad" data-q="ECG"><img src="{{img:r_ecg}}" alt=""><b>ECG</b></button>
-      <button class="rad" data-q="X-Ray"><img src="{{img:r_xray}}" alt=""><b>X-Ray</b></button>
-      <button class="rad" data-q="Ultrasound"><img src="{{img:r_us}}" alt=""><b>Ultrasound</b></button>
-      <button class="rad" data-q="MRI"><img src="{{img:r_mri}}" alt=""><b>MRI</b></button>
-      <button class="rad" data-q="Echo"><img src="{{img:r_echo}}" alt=""><b>Echo Test</b></button>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== HOW IT WORKS ===================== -->
-<section class="block">
-  <div class="wrap">
-    <div class="how">
-      <div class="how-head">
-        <div><h2>How does home sample collection work?</h2><p>Five simple steps from booking to your report.</p></div>
-        <div class="how-meta">
-          <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>Home collection</span>
-          <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>NABL labs</span>
-          <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>Doctor-verified reports</span>
-        </div>
-      </div>
-      <div class="steps">
-      <div class="step"><div class="mark"><b>1</b></div><div class="pic"><img src="{{img:s1}}" alt=""></div><div class="txt"><h3>Easy online booking</h3><p>Search for tests and packages, book your preferred time slot and enter your address for seamless at-home lab tests.</p></div></div>
-      <div class="step"><div class="mark"><b>2</b></div><div class="pic"><img src="{{img:s2}}" alt=""></div><div class="txt"><h3>Live tracking of phlebotomist</h3><p>Track our trained phlebotomist's real time location for seamless sample collection.</p></div></div>
-      <div class="step"><div class="mark"><b>3</b></div><div class="pic"><img src="{{img:s3}}" alt=""></div><div class="txt"><h3>Safe Sample Collection</h3><p>Our phlebotomists follow strict safety protocols to collect samples safely at home and on time.</p></div></div>
-      <div class="step"><div class="mark"><b>4</b></div><div class="pic"><img src="{{img:s4}}" alt=""></div><div class="txt"><h3>Sample received at lab</h3><p>Samples are transported securely to our accredited labs with world-class machines for testing by qualified experts.</p></div></div>
-      <div class="step"><div class="mark"><b>5</b></div><div class="pic"><img src="{{img:s5}}" alt=""></div><div class="txt"><h3>Quick, Doctor-Verified Reports</h3><p>Get doctor-approved reports via email and WhatsApp, with options for doctor follow-ups and AI insights.</p></div></div>
-      </div>
+    <div class="sec-head"><div><h2>Personal care</h2></div></div>
+    <div class="grid9">
+      <a class="ctile" href="#"><img src="{{img:pc_skin}}" alt="Skin care"></a>
+      <a class="ctile" href="#"><img src="{{img:pc_hair}}" alt="Hair care"></a>
+      <a class="ctile" href="#"><img src="{{img:pc_sexual}}" alt="Sexual wellness"></a>
+      <a class="ctile" href="#"><img src="{{img:pc_oral}}" alt="Oral care"></a>
+      <a class="ctile" href="#"><img src="{{img:pc_elderly}}" alt="Elderly care"></a>
+      <a class="ctile" href="#"><img src="{{img:pc_baby}}" alt="Baby care"></a>
+      <a class="ctile" href="#"><img src="{{img:pc_women}}" alt="Women care"></a>
+      <a class="ctile" href="#"><img src="{{img:pc_men}}" alt="Men care"></a>
+      <a class="ctile" href="#"><img src="{{img:pc_pet}}" alt="Pet care"></a>
     </div>
   </div>
 </section>
 
-<!-- ===================== APP ===================== -->
-<section class="block">
+<!-- ===================== PATHOLOGY TESTS ===================== -->
+<section class="block" style="padding-top:0">
   <div class="wrap">
-    <div class="app">
-      <div class="content">
-        <h2>Download the Tata 1mg app. Trusted healthcare, at your fingertips.</h2>
-        <h3>Book tests, track reports, and get AI-powered health insights.</h3>
-        <div class="stores">
-          <a href="#"><img src="{{img:appstore}}" alt="Download on the App Store"></a>
-          <a href="#"><img src="{{img:gplay}}" alt="Get it on Google Play"></a>
-          <span class="or">or</span>
-          <span class="qr"><img src="{{img:qr}}" alt="Scan QR to download the app"></span>
-        </div>
-      </div>
+    <div class="sec-head"><div><h2>Pathology Tests | Up to 70% off</h2></div><a class="link" href="index.html">See all</a></div>
+    <div class="cards c4" id="testCards"></div>
+  </div>
+</section>
+
+<!-- ===================== SUPER SAVING DEALS ===================== -->
+<section class="block" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head"><div><h2>Super saving deals</h2></div><a class="link" href="#">See all</a></div>
+    <div class="prods" id="prodCards"></div>
+    <p class="note">Prices shown are from 1mg.com at the time of this concept and may change.</p>
+  </div>
+</section>
+
+<!-- ===================== POPULAR CATEGORIES ===================== -->
+<section class="block" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head"><div><h2>Popular categories</h2></div></div>
+    <div class="grid9">
+      <a class="ctile" href="#"><img src="{{img:cat_offers}}" alt=""><b>Best offers</b></a>
+      <a class="ctile" href="#"><img src="{{img:cat_vitamins}}" alt=""><b>Vitamins &amp; Supplements</b></a>
+      <a class="ctile" href="#"><img src="{{img:cat_drinks}}" alt=""><b>Nutritional Drinks</b></a>
+      <a class="ctile" href="#"><img src="{{img:cat_skin}}" alt=""><b>Skin Care</b></a>
+      <a class="ctile" href="#"><img src="{{img:cat_hair}}" alt=""><b>Hair Care</b></a>
+      <a class="ctile" href="#"><img src="{{img:cat_sexual}}" alt=""><b>Sexual Wellness</b></a>
+      <a class="ctile" href="#"><img src="{{img:cat_ayurveda}}" alt=""><b>Ayurveda Products</b></a>
+      <a class="ctile" href="#"><img src="{{img:cat_pain}}" alt=""><b>Pain Relief</b></a>
+      <a class="ctile text" href="#"><span class="ph"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/><path d="M9 14a3 3 0 0 0 3 3"/></svg></span><b>Homeopathy</b></a>
     </div>
   </div>
 </section>
 
-<!-- ===================== ABOUT ===================== -->
-<section class="block">
+<!-- ===================== ORDER ON CALL ===================== -->
+<section class="block" style="padding-top:0">
   <div class="wrap">
-    <details class="seo" id="aboutSection">
-      <summary class="seo-toggle">
-        <h2>Keep your health in check with Tata 1mg: Lab tests just a click away</h2>
-        <span class="seo-cta"><span class="more">Read more</span><span class="less">Read less</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
-      </summary>
-      <div class="faqs">
-      <details class="faq" open>
-        <summary><span>Tata 1mg brings care to health</span><span class="pm" aria-hidden="true"></span></summary>
-        <div class="ans">
-          <p>Tata 1mg is India's leading digital healthcare platform. From ordering medicines online to consulting doctors online, Tata 1mg is that one place that aims to fulfill all your health needs within the comfort of your home. In fact, you don't even need to visit the diagnostic labs to get tests done. Tata 1mg has got that covered too.</p>
-        </div>
-      </details>
-      <details class="faq">
-        <summary><span>Tata 1mg: Lab tests now at your doorstep</span><span class="pm" aria-hidden="true"></span></summary>
-        <div class="ans">
-          <p>Spending hours in a queue at a diagnostic lab or a hospital is now a thing of the past. With more than 45,00,000 lab tests booked, Tata 1mg labs is on a mission to give you a flawless healthcare experience by bringing 'care' to 'health'.</p>
-          <p>With Tata 1mg labs, you can choose the diagnostic lab of your preference and get the hassle-free experience of a diagnostic center at the comfort of your home.</p>
-          <p>You can choose the diagnostic lab of your choice and get your lab tests done at discounted prices with the quality of service kept intact.</p>
-          <p>Wondering how to book a lab test? It's simple. You just need to search and add your tests, select the lab of your choice and schedule your test as per your suitable time slot. Once your test gets confirmed, a phlebotomist will be assigned to collect a sample from your home.</p>
-        </div>
-      </details>
-      <details class="faq">
-        <summary><span>Need more help?</span><span class="pm" aria-hidden="true"></span></summary>
-        <div class="ans">
-          <p>Just give us a call (<a href="tel:18002122323">18002122323</a>) and we will help you complete your order.</p>
-        </div>
-      </details>
-      <details class="faq">
-        <summary><span>Certified labs: For accessible and affordable experience</span><span class="pm" aria-hidden="true"></span></summary>
-        <div class="ans">
-          <p>We partner with various recognized diagnostic labs to make sure that you have a safe and smooth experience. To ensure quality and hygiene in sample collection and high accuracy in results, we partner with labs that are certified by international bodies like ISO (International Organization for Standardization), NABL (National Accreditation Board for testing and calibration laboratories) and CAP (College of American Pathologists).</p>
-        </div>
-      </details>
-      <details class="faq">
-        <summary><span>The services we offer</span><span class="pm" aria-hidden="true"></span></summary>
-        <div class="ans">
-          <p>As India's leading digital healthcare platforms, your health is our utmost priority. Apart from facilitating pathological tests, Tata 1mg is your one-stop place for booking radiology tests such as MRIs and CT scans. Not just this, we also offer a free package of diabetes tests for members of the Diabetes Care Plan.</p>
-          <p>With a presence in cities like Delhi, Gurgaon, Noida, Mumbai, Pune, Hyderabad, Bangalore, Chennai, etc., through Tata 1mg, you can avail over 2,000 tests and get tested by 120+ top, verified labs at the best prices. You even have the option to compare tests and packages based on prices and lab ratings and choose accordingly.</p>
-          <p>Need help with lab test results? Talk to more than 20 kinds of specialists on Tata 1mg and get your results verified by them.</p>
-          <p>We have been making healthcare affordable and accessible since the day we started. We aim to bring care to health and continue doing so until everyone is well.</p>
-          <p>Customer centricity is the core of our values. Our team of highly trained and experienced doctors, phlebotomists and pharmacists look into each order to give you a fulfilling experience.</p>
-          <p>Explore our labs now and book your tests today. Stay Healthy!</p>
-        </div>
-      </details>
+    <div class="call">
+      <div>
+        <h2>Order Medicines on Call</h2>
+        <p>Call us at 1800-212-2323 or get a call back. Our pharmacists will place the order for you.</p>
+        <a class="tel" href="tel:18002122323">1800-212-2323</a>
       </div>
-    </details>
+      <form id="callForm">
+        <span class="cc">+91</span>
+        <label class="visually-hidden" for="phone">Enter Phone Number</label>
+        <input id="phone" type="tel" inputmode="numeric" placeholder="Enter Phone Number" maxlength="10">
+        <button type="submit" class="btn btn-primary">Get a Call to Order Medicines</button>
+      </form>
+    </div>
+  </div>
+</section>
+<!-- ===================== PUBLIC NOTICE ===================== -->
+<section class="block" style="padding-top:0">
+  <div class="wrap">
+    <div class="cdsco"><img src="{{img:m_cdsco}}" alt="Pharmacovigilance notice: report any adverse event after taking a medicine via the QR code or PvPI toll-free number 1800 180 3024. Issued in public interest by the National Coordination Centre, Pharmacovigilance Programme of India."></div>
   </div>
 </section>
 </main>
@@ -780,64 +851,92 @@
 
 <script>
 (function(){
-  const TESTS = [
-    {id:1,name:"Tata 1mg Full Body Checkup",tests:64,price:999},
-    {id:2,name:"Comprehensive Full Body with Vitamins",tests:86,price:1499},
-    {id:3,name:"Thyroid Profile (T3, T4, TSH)",tests:3,price:349},
-    {id:4,name:"HbA1c (Glycated Haemoglobin)",tests:1,price:299},
-    {id:5,name:"Diabetes Screening (HbA1c + Fasting Sugar)",tests:4,price:449},
-    {id:6,name:"Vitamin D (25-OH)",tests:1,price:599},
-    {id:7,name:"Vitamin B12",tests:1,price:449},
-    {id:8,name:"Complete Blood Count (CBC)",tests:1,price:199},
-    {id:9,name:"Fever Panel (Dengue, Malaria, Typhoid, CBC)",tests:5,price:899},
-    {id:10,name:"Dengue NS1 Antigen",tests:1,price:499},
-    {id:11,name:"Liver Function Test (LFT)",tests:11,price:399},
-    {id:12,name:"Kidney Function Test (KFT)",tests:10,price:449},
-    {id:13,name:"Lipid Profile",tests:8,price:399},
-    {id:14,name:"Allergy Panel, Food (Basic)",tests:20,price:2499},
-    {id:15,name:"Men's Health Package",tests:70,price:1249},
-    {id:16,name:"Women's Wellness Package",tests:72,price:1299},
-    {id:17,name:"PCOD / PCOS Hormone Profile",tests:12,price:1199},
-    {id:18,name:"Testosterone (Total)",tests:1,price:499},
-    {id:19,name:"CT Scan Brain (Plain)",tests:1,price:2200},
-    {id:20,name:"MRI Brain (Plain)",tests:1,price:4500},
-    {id:21,name:"X-Ray Chest PA View",tests:1,price:350},
-    {id:22,name:"Ultrasound Whole Abdomen",tests:1,price:1200},
-    {id:23,name:"ECG (Resting)",tests:1,price:300},
-    {id:24,name:"2D Echo Test",tests:1,price:1800},
-  ];
-  const KEYWORDS = {
-    "full body":[1,2],"thyroid":[3],"vitamin":[6,7],"hba1c":[4,5],"cbc":[8],"fever":[9,10],"diabetes":[5,4],
-    "liver":[11,12],"kidney":[12,11],"hormone":[17,18,3],"allergy":[14],"men":[15,18],"women":[16,17],
-    "scan":[19,20,21,22],"ct scan":[19],"mri":[20],"x-ray":[21],"ultrasound":[22],"ecg":[23],"echo":[24],"heart":[13,23,24]
-  };
   const rupee = n => "₹" + n.toLocaleString("en-IN");
   const cart = new Set();
   const cartCount = document.getElementById("cartCount");
-  const toast = document.getElementById("toast");
-  let toastTimer;
+  const toast = document.getElementById("toast"); let toastTimer;
   const showToast = msg => { toast.textContent = msg; toast.classList.add("show"); clearTimeout(toastTimer); toastTimer = setTimeout(()=>toast.classList.remove("show"), 2200); };
   const updateCart = () => { cartCount.textContent = cart.size; cartCount.hidden = cart.size === 0; };
 
-  const q = document.getElementById("q"), suggest = document.getElementById("suggest");
-  let activeIdx = -1;
-  function matches(term){
-    term = term.trim().toLowerCase(); if(!term) return [];
-    const ids = new Set();
-    Object.keys(KEYWORDS).forEach(k=>{ if(k.includes(term) || term.includes(k)) KEYWORDS[k].forEach(i=>ids.add(i)); });
-    TESTS.forEach(p=>{ if(p.name.toLowerCase().includes(term)) ids.add(p.id); });
-    return [...ids].map(i=>TESTS.find(p=>p.id===i)).slice(0,7);
+  // ---- data (from 1mg.com homepage) ----
+  const PACKAGES = [
+    {id:"p1",name:"Comprehensive Gold Full Body Checkup",price:2499,mrp:4998},
+    {id:"p2",name:"Good Health Silver Package",price:749,mrp:1498},
+    {id:"p3",name:"Comprehensive Silver Full Body Checkup",price:1999,mrp:3998},
+    {id:"p4",name:"Comprehensive Platinum Full Body Checkup",price:3999,mrp:7998},
+    {id:"p5",name:"Good Health Platinum Package",price:1499,mrp:2998},
+    {id:"p6",name:"Good Health Gold Package",price:999,mrp:1998},
+  ];
+  const TESTS = [
+    {id:"t1",name:"Lipid Profile",tests:8,price:439,mrp:null},
+    {id:"t2",name:"CBC (Complete Blood Count)",tests:21,price:349,mrp:389},
+    {id:"t3",name:"Thyroid Profile Total (T3, T4 & TSH)",tests:3,price:539,mrp:609},
+    {id:"t4",name:"Lipid Profile, Non Fasting",tests:8,price:399,mrp:699},
+    {id:"t5",name:"LFT (Liver Function Test)",tests:11,price:439,mrp:779},
+    {id:"t6",name:"KFT with Electrolytes",tests:8,price:439,mrp:939},
+    {id:"t7",name:"Vitamin B12 (Vit B12)",tests:1,price:749,mrp:1319},
+    {id:"t8",name:"Coronavirus Covid-19 Test, RT-PCR",tests:1,price:500,mrp:null},
+  ];
+  const PRODUCTS = [
+    {id:"d1",img:"{{img:pr_unienzyme}}",name:"Unienzyme Digestive Enzymes for Indigestion, Acidity, Gastric, Bloat Liquid Pineapple",pack:"bottle of 200 ml Liquid",rating:4.3,count:108,del:"Get by Today",price:145,mrp:159},
+    {id:"d2",img:"{{img:pr_clocip}}",name:"Clocip Anti-Fungal Dusting Powder | For Skin Infections, Itching, Rashes",pack:"bottle of 100 gm Dusting Powder",rating:null,count:0,del:"Get by 2pm, Today",price:98.1,mrp:131},
+    {id:"d3",img:"{{img:pr_cofsils}}",name:"Cofsils Gargle",pack:"bottle of 100 ml Gargle",rating:4.3,count:226,del:"Get by 2pm, Today",price:76.5,mrp:159.37},
+    {id:"d4",img:"{{img:pr_eloway}}",name:"Eloway Aloe Vera Moisturizing Gel",pack:"box of 100 gm Gel",rating:4.5,count:6,del:"Get by Tomorrow",price:101,mrp:150},
+    {id:"d5",img:"{{img:pr_easylax}}",name:"Easylax L Oral Solution Lemon Sugar Free",pack:"bottle of 200 ml Oral Solution",rating:null,count:0,del:"Get by 2pm, Today",price:244,mrp:262.5},
+  ];
+  const ALL = [...PACKAGES, ...TESTS, ...PRODUCTS];
+  const off = (p, m) => m ? Math.round((1 - p/m)*100) : 0;
+  const star = '<svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3 6.6 7 .8-5.2 4.8 1.4 7L12 17.7 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg>';
+
+  function renderPackages(){
+    document.getElementById("pkgCards").innerHTML = PACKAGES.map(p=>`<article class="card">
+      <div class="top"><span class="lab"><img src="{{img:labs_logo}}" alt="">Tata 1mg Labs</span><span class="safe">SAFE</span></div>
+      <h3>${p.name}</h3>
+      <div class="price-row"><div><span class="price">${rupee(p.price)}<s>${rupee(p.mrp)}</s></span><div class="off">${off(p.price,p.mrp)}% off</div></div>
+      <button class="btn btn-primary add ${cart.has(p.id)?"added":""}" data-add="${p.id}">${cart.has(p.id)?"Added":"Add"}</button></div>
+    </article>`).join("");
   }
+  function renderTests(){
+    document.getElementById("testCards").innerHTML = TESTS.map(p=>`<article class="card">
+      <div class="top"><span class="lab"><img src="{{img:labs_logo}}" alt="">Tata 1mg Labs</span><span class="safe">SAFE</span></div>
+      <h3>${p.name}</h3>
+      <p class="sub">Contains ${p.tests} ${p.tests===1?"test":"tests"}</p>
+      <div class="price-row"><div><span class="price">${rupee(p.price)}${p.mrp?`<s>${rupee(p.mrp)}</s>`:""}</span>${p.mrp?`<div class="off">${off(p.price,p.mrp)}% off</div>`:""}</div>
+      <button class="btn btn-primary add ${cart.has(p.id)?"added":""}" data-add="${p.id}">${cart.has(p.id)?"Added":"Add"}</button></div>
+    </article>`).join("");
+  }
+  function renderProducts(){
+    document.getElementById("prodCards").innerHTML = PRODUCTS.map(p=>`<article class="prod">
+      <div class="img"><span class="pct">${off(p.price,p.mrp)}% off</span><img src="${p.img}" alt=""></div>
+      <h3>${p.name}</h3>
+      <p class="sub">${p.pack}</p>
+      ${p.rating ? `<span class="rate"><i>${star}${p.rating}</i><span>(${p.count})</span></span>` : ``}
+      <span class="del">${p.del}</span>
+      <div class="price-row"><span class="price">${rupee(p.price)}<s>${rupee(p.mrp)}</s></span>
+      <button class="btn btn-primary add ${cart.has(p.id)?"added":""}" data-add="${p.id}">${cart.has(p.id)?"Added":"Add"}</button></div>
+    </article>`).join("");
+  }
+  const renderAll = ()=>{ renderPackages(); renderTests(); renderProducts(); };
+  document.addEventListener("click", e=>{
+    const b = e.target.closest("[data-add]"); if(!b) return;
+    const id = b.dataset.add, item = ALL.find(p=>p.id===id);
+    if(cart.has(id)){ cart.delete(id); showToast("Removed " + item.name); } else { cart.add(id); showToast("Added " + item.name + " to cart"); }
+    updateCart(); renderAll();
+  });
+  renderAll();
+
+  // ---- search suggestions ----
+  const q = document.getElementById("q"), suggest = document.getElementById("suggest"); let activeIdx = -1;
+  const matches = term => { term = term.trim().toLowerCase(); if(!term) return []; return ALL.filter(p=>p.name.toLowerCase().includes(term)).slice(0,7); };
   function renderSuggest(){
     if(!q.value.trim()){ suggest.hidden = true; return; }
     const res = matches(q.value); activeIdx = -1;
     suggest.innerHTML = res.length
-      ? `<div class="hd">Tests and packages</div>` + res.map(p=>`<button type="button" data-pick="${p.id}"><span><span class="nm">${p.name}</span><br><span class="meta">${p.tests} ${p.tests===1?"test":"tests"} included</span></span><span class="pr">${rupee(p.price)}</span></button>`).join("")
-      : `<div class="empty">No results for "${q.value}". Try a test name like CBC or a concern like fever.</div>`;
+      ? `<div class="hd">Medicines, tests and products</div>` + res.map(p=>`<button type="button" data-pick="${p.id}"><span><span class="nm">${p.name}</span><br><span class="meta">${p.pack || (p.tests ? p.tests + " tests" : "Health package")}</span></span><span class="pr">${rupee(p.price)}</span></button>`).join("")
+      : `<div class="empty">No results for "${q.value}". Try a product, brand or test name.</div>`;
     suggest.hidden = false;
   }
-  q.addEventListener("input", renderSuggest);
-  q.addEventListener("focus", renderSuggest);
+  q.addEventListener("input", renderSuggest); q.addEventListener("focus", renderSuggest);
   q.addEventListener("keydown", e=>{
     const items = [...suggest.querySelectorAll("[data-pick]")]; if(!items.length) return;
     if(e.key==="ArrowDown"){ e.preventDefault(); activeIdx = (activeIdx+1)%items.length; }
@@ -849,23 +948,20 @@
   });
   suggest.addEventListener("click", e=>{
     const b = e.target.closest("[data-pick]"); if(!b) return;
-    const id = Number(b.dataset.pick); cart.add(id); updateCart();
-    showToast("Added " + TESTS.find(p=>p.id===id).name + " to cart");
-    q.value = ""; suggest.hidden = true;
+    cart.add(b.dataset.pick); updateCart(); renderAll();
+    showToast("Added " + ALL.find(p=>p.id===b.dataset.pick).name + " to cart"); q.value = ""; suggest.hidden = true;
   });
   document.addEventListener("click", e=>{ if(!e.target.closest("#searchForm")) suggest.hidden = true; });
-  document.getElementById("searchForm").addEventListener("submit", e=>{
-    e.preventDefault();
-    if(matches(q.value).length){ renderSuggest(); q.focus(); }
-    else showToast(q.value.trim() ? "No tests found. Try another name." : "Type a test name to search");
-  });
-  document.querySelectorAll("[data-q]").forEach(el=>el.addEventListener("click", ()=>{
-    q.value = el.dataset.q; window.scrollTo({top:0, behavior:"smooth"}); q.focus(); renderSuggest();
-  }));
+  document.getElementById("searchForm").addEventListener("submit", e=>{ e.preventDefault(); if(matches(q.value).length){ renderSuggest(); q.focus(); } else showToast(q.value.trim() ? "No products found. Try another name." : "Type a product name to search"); });
 
-  // ---- hero slider (seamless loop) ----
+  const cities = ["Gurgaon","Delhi","Noida","Mumbai","Pune","Hyderabad","Bangalore","Chennai"];
+  document.getElementById("locBtn").addEventListener("click", ()=>{ const el = document.getElementById("locName"); el.textContent = cities[(cities.indexOf(el.textContent)+1)%cities.length]; showToast("Delivering to " + el.textContent); });
+  document.getElementById("cartBtn").addEventListener("click", ()=>{ showToast(cart.size ? cart.size + (cart.size===1?" item":" items") + " in your cart" : "Your cart is empty"); });
+  document.getElementById("callForm").addEventListener("submit", e=>{ e.preventDefault(); const v = document.getElementById("phone").value.replace(/\D/g,""); if(v.length !== 10){ showToast("Enter a 10-digit mobile number"); return; } showToast("We'll call you shortly on +91 " + v); document.getElementById("phone").value = ""; });
+
+  // ---- banner slider (seamless loop) ----
   (function(){
-    const track = document.getElementById("sliderTrack"), dots = document.getElementById("sliderDots"), count = document.getElementById("sliderCount"), root = document.getElementById("slider");
+    const track = document.getElementById("bsliderTrack"), dots = document.getElementById("bsDots"), root = document.getElementById("bslider");
     const real = [...track.children], n = real.length;
     const firstClone = real[0].cloneNode(true), lastClone = real[n-1].cloneNode(true);
     firstClone.setAttribute("aria-hidden","true"); lastClone.setAttribute("aria-hidden","true");
@@ -874,35 +970,25 @@
     const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
     const setX = (p, animate)=>{ track.style.transition = animate ? "" : "none"; track.style.transform = `translateX(-${p*100}%)`; if(!animate){ void track.offsetWidth; track.style.transition = ""; } };
     const idx = ()=> (pos - 1 + n) % n;
-    function paint(){ const i = idx(); [...dots.children].forEach((d, k)=>d.setAttribute("aria-current", k===i ? "true" : "false")); count.textContent = (i+1) + " / " + n; }
-    real.forEach((_, k)=>{ const b = document.createElement("button"); b.type = "button"; b.setAttribute("role","tab"); b.setAttribute("aria-label", "Slide " + (k+1)); b.addEventListener("click", ()=>{ if(animating) return; begin(); pos = k + 1; setX(pos, true); paint(); restart(); }); dots.appendChild(b); });
+    const paint = ()=>{ const i = idx(); [...dots.children].forEach((d, k)=>d.setAttribute("aria-current", k===i ? "true" : "false")); };
+    real.forEach((_, k)=>{ const b = document.createElement("button"); b.type = "button"; b.setAttribute("role","tab"); b.setAttribute("aria-label", "Banner " + (k+1)); b.addEventListener("click", ()=>{ if(animating) return; begin(); pos = k + 1; setX(pos, true); paint(); restart(); }); dots.appendChild(b); });
     function finish(){ if(!animating) return; animating = false; clearTimeout(doneTimer); if(pos === n + 1){ pos = 1; setX(pos, false); } else if(pos === 0){ pos = n; setX(pos, false); } }
     function begin(){ animating = true; clearTimeout(doneTimer); doneTimer = setTimeout(finish, 800); }
     function step(dir){ if(animating) return; begin(); pos += dir; setX(pos, true); paint(); }
     track.addEventListener("transitionend", e=>{ if(e.target === track) finish(); });
     function restart(){ clearInterval(timer); if(!reduce) timer = setInterval(()=>step(1), 4500); }
-    document.getElementById("sliderPrev").addEventListener("click", ()=>{ step(-1); restart(); });
-    document.getElementById("sliderNext").addEventListener("click", ()=>{ step(1); restart(); });
-    root.addEventListener("mouseenter", ()=>clearInterval(timer));
-    root.addEventListener("mouseleave", restart);
+    document.getElementById("bsPrev").addEventListener("click", ()=>{ step(-1); restart(); });
+    document.getElementById("bsNext").addEventListener("click", ()=>{ step(1); restart(); });
+    root.addEventListener("mouseenter", ()=>clearInterval(timer)); root.addEventListener("mouseleave", restart);
     let sx = null;
     root.addEventListener("touchstart", e=>{ sx = e.touches[0].clientX; }, {passive:true});
     root.addEventListener("touchend", e=>{ if(sx===null) return; const dx = e.changedTouches[0].clientX - sx; if(Math.abs(dx) > 40){ step(dx < 0 ? 1 : -1); restart(); } sx = null; });
     setX(pos, false); paint(); restart();
   })();
 
+  // ---- mobile menu ----
   const burger = document.getElementById("burger"), mnav = document.getElementById("mnav");
-  burger.addEventListener("click", ()=>{ const open = mnav.classList.toggle("open"); burger.setAttribute("aria-expanded", open); burger.setAttribute("aria-label", open ? "Close menu" : "Open menu"); });
+  burger.addEventListener("click", ()=>{ const open = mnav.classList.toggle("open"); burger.setAttribute("aria-expanded", open); });
   document.addEventListener("click", e=>{ if(!e.target.closest("#mnav,#burger")){ mnav.classList.remove("open"); burger.setAttribute("aria-expanded","false"); } });
-
-  const cities = ["Gurgaon","Delhi","Noida","Mumbai","Pune","Hyderabad","Bangalore","Chennai"];
-  document.getElementById("locBtn").addEventListener("click", ()=>{
-    const el = document.getElementById("locName");
-    el.textContent = cities[(cities.indexOf(el.textContent)+1)%cities.length];
-    showToast("Showing labs in " + el.textContent);
-  });
-  document.getElementById("cartBtn").addEventListener("click", ()=>{
-    showToast(cart.size ? cart.size + (cart.size===1?" item":" items") + " in your cart" : "Your cart is empty");
-  });
 })();
 </script>

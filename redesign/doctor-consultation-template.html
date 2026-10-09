@@ -619,10 +619,6 @@
       <article class="review"><span class="q">&ldquo;</span><div class="stars">★★★★★</div><p>Dr. Chakraborty is so concerned about his patient. I sincerely wish him the best. He always takes the time to understand the problem and on the basis of that he takes the decision and explains it very well. And if you miss out on anything, you can come back with more questions.</p><div class="who"><span>Y</span>Yash</div></article>
       <article class="review"><span class="q">&ldquo;</span><div class="stars">★★★★★</div><p>Amazingly easy and convenient. Great service for the same price as a clinic visit, without the hassle of having to drive to the doctor's clinic. Couldn't be any happier.</p><div class="who"><span>R</span>Rahul</div></article>
     </div>
-    <div class="hs-ctl" aria-label="Scroll">
-        <button type="button" class="hs-prev" aria-label="Previous"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg></button>
-        <button type="button" class="hs-next" aria-label="Next"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-      </div>
     </div>
     </section>
   </div>
@@ -824,6 +820,7 @@
   // ---- horizontal scrollers ----
   document.querySelectorAll(".hs").forEach(sec=>{
     const track = sec.querySelector(".hs-track"), prev = sec.querySelector(".hs-prev"), next = sec.querySelector(".hs-next");
+    if(!prev || !next) return;
     const step = ()=> (track.firstElementChild?.getBoundingClientRect().width || 300) * 2 + 28;
     const update = ()=>{ prev.disabled = track.scrollLeft <= 2; next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 2; };
     prev.addEventListener("click", ()=>track.scrollBy({left:-step(), behavior:"smooth"}));

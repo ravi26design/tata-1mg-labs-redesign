@@ -389,6 +389,9 @@
 </style>
 <style>
   /* ===== medicines page ===== */
+  .mhero .search-row{grid-template-columns:auto 1fr auto auto}
+  .upload{display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 16px;margin-right:8px;border-radius:999px;background:#FBEAEE;border:1px solid #F2CAD3;color:#C23A62;font-size:13.5px;font-weight:700;white-space:nowrap;transition:background .2s,border-color .2s,color .2s}
+  .upload:hover{background:#C23A62;border-color:#C23A62;color:#fff}
   .topbar .icon-btn .label{white-space:nowrap}
   .catnav{background:var(--surface);border-bottom:1px solid var(--line)}
   .catnav-track{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
@@ -538,6 +541,9 @@
   }
   @media (max-width:640px){
     .mhero-panel{padding:0 var(--gutter) 30px}
+    .mhero .search-row{grid-template-columns:1fr auto auto}
+    .upload{padding:0 12px;margin-right:6px}
+    .upload span{display:none}
     .hero-media{margin-bottom:24px}
     .grid9{grid-template-columns:repeat(3,1fr);gap:8px}
     .hs-track{gap:8px}
@@ -650,14 +656,12 @@
           <label class="visually-hidden" for="q">Search for Medicines and Health Products</label>
           <input id="q" type="text" placeholder="Search for Medicines and Health Products" />
         </div>
+        <a class="upload" href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M12 12v6M9 15h6"/></svg><span>Upload prescription</span></a>
         <button type="submit" class="go" aria-label="Search"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
       </div>
       <div class="suggest" id="suggest" hidden></div>
     </form>
 
-    <div class="quick quick-one">
-      <a class="qk qk-pink" href="#"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M12 12v6M9 15h6"/></svg></span><div><b>Upload prescription</b><span>We'll add medicines for you</span></div></a>
-    </div>
 
     <a class="careplan" href="#"><img src="{{img:m_careplan}}" alt="Join 1mg Care plan: extra 5% savings, free shipping, same-day delivery"></a>
 

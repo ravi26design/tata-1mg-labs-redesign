@@ -404,7 +404,7 @@
   .dhero-panel>*{position:relative;z-index:1}
   .dhero .kicker{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;background:var(--surface);border:1px solid var(--line);font-size:13px;font-weight:700;color:var(--ink-2);margin-bottom:18px}
   .dhero .kicker i{width:8px;height:8px;border-radius:50%;background:var(--trust);box-shadow:0 0 0 4px var(--trust-soft)}
-  .dhero h1{font-size:clamp(32px,3.8vw,50px);font-weight:800;line-height:1.06;letter-spacing:-.03em;max-width:16ch;margin:0 0 16px}
+  .dhero h1{font-size:clamp(30px,3.3vw,44px);font-weight:800;line-height:1.08;letter-spacing:-.03em;max-width:none;white-space:nowrap;margin:0 0 16px}
   .dhero h1 em{font-style:normal;color:var(--accent)}
   .dhero .price{display:inline-flex;align-items:center;gap:10px;padding:8px 16px 8px 10px;border-radius:999px;background:var(--accent-soft);border:1px solid #F5C9C4;font-size:14px;font-weight:600;color:var(--ink-2);margin-bottom:22px}
   .dhero .price b{font-family:var(--display);font-size:24px;font-weight:800;color:var(--accent);letter-spacing:-.02em;line-height:1}
@@ -480,7 +480,8 @@
   }
   @media (max-width:640px){
     .dhero-panel{padding:28px var(--gutter) 36px}
-    .dhero h1{max-width:none}
+    .dhero h1{white-space:normal}
+    .dhero h1 br{display:none}
     .stats{grid-template-columns:1fr}
     .stat{padding:16px 18px;border-left:0;border-top:1px solid var(--line)}
     .stat:first-child{border-top:0}
@@ -548,7 +549,7 @@
   <div class="wrap">
    <div class="dhero-panel">
     <div>
-      <h1>Online doctor consultation with <em>qualified doctors</em></h1>
+      <h1>Online doctor consultation<br>with <em>qualified doctors</em></h1>
       <div class="price"><span>Starting at</span><b>₹199</b></div>
       <ul class="benefits">
         <li class="b-blue"><span class="ic"><img src="{{img:dc_b_talk}}" alt=""></span>Talk within 30 min</li>

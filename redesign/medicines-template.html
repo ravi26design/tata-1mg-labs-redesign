@@ -398,13 +398,13 @@
   .catnav a:hover{color:var(--accent);border-color:var(--accent)}
   .catnav a.offers{color:var(--accent);font-weight:700}
   .catnav a.offers svg{color:var(--accent)}
-  .hero-media{display:grid;grid-template-columns:2fr 1fr;gap:0;margin:26px calc(var(--gutter) * -1) 0;align-items:stretch}
+  .hero-media{display:grid;grid-template-columns:2fr 1fr;gap:0;margin:0 calc(var(--gutter) * -1) 36px;align-items:stretch}
   .hero-media .bslider{margin-top:0;aspect-ratio:960/200;height:auto;min-height:0;border-radius:0;box-shadow:none}
   .hero-media .bslider .slide img{object-fit:cover;object-position:left center}
   .notice{display:block;overflow:hidden;background:var(--surface);border-left:1px solid var(--line)}
   .notice img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
   .mhero{padding:0}
-  .mhero-panel{position:relative;overflow:hidden;margin-inline:calc(var(--gutter) * -1);padding:40px var(--gutter) 0;background:linear-gradient(135deg,#FFF3F1 0%,#F7F8FB 45%,#E9F6F2 100%);border-bottom:1px solid var(--line)}
+  .mhero-panel{position:relative;overflow:hidden;margin-inline:calc(var(--gutter) * -1);padding:0 var(--gutter) 44px;background:linear-gradient(135deg,#FFF3F1 0%,#F7F8FB 45%,#E9F6F2 100%);border-bottom:1px solid var(--line)}
   .mhero-panel::before{content:"";position:absolute;width:640px;height:640px;border-radius:50%;background:radial-gradient(circle,rgba(229,71,62,.14),transparent 65%);top:-300px;right:18%;pointer-events:none}
   .mhero-panel>*{position:relative;z-index:1}
   .mhero-panel{text-align:center}
@@ -470,9 +470,9 @@
   .brands{overflow:hidden;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:22px 0}
   .brands .track{display:flex;align-items:center;gap:36px;width:max-content;padding-left:36px;animation:brandScroll 40s linear infinite}
   .brands:hover .track{animation-play-state:paused}
-  .brands .br{width:120px;height:120px;flex:none;display:grid;place-items:center;border-radius:50%;transition:transform .25s ease}
-  .brands .br:hover{transform:translateY(-4px) scale(1.04)}
-  .brands .br img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 6px 14px rgba(20,32,44,.10))}
+  .brands .br{width:112px;height:112px;flex:none;display:grid;place-items:center;border-radius:50%;overflow:hidden;background:#fff;box-shadow:0 6px 16px rgba(20,32,44,.10);transition:transform .25s ease,box-shadow .25s ease}
+  .brands .br:hover{transform:translateY(-4px) scale(1.04);box-shadow:0 12px 24px rgba(20,32,44,.14)}
+  .brands .br img{width:104%;height:104%;object-fit:cover;border-radius:50%}
   @keyframes brandScroll{to{transform:translateX(-50%)}}
 
   /* products */
@@ -521,7 +521,8 @@
     .call{grid-template-columns:1fr}
   }
   @media (max-width:640px){
-    .mhero-panel{padding:26px var(--gutter) 30px}
+    .mhero-panel{padding:0 var(--gutter) 30px}
+    .hero-media{margin-bottom:24px}
     .grid9{grid-template-columns:repeat(3,1fr);gap:8px}
     .ctile b{font-size:12px;padding:8px 6px 10px}
     .cards,.cards.c4{grid-template-columns:1fr 1fr;gap:10px}
@@ -601,6 +602,20 @@
 <section class="mhero">
   <div class="wrap">
    <div class="mhero-panel">
+    <div class="hero-media">
+    <div class="bslider" id="bslider" aria-roledescription="carousel" aria-label="Offers">
+      <div class="track" id="bsliderTrack">
+        <figure class="slide" style="margin:0"><img src="{{img:m_ban1}}" alt="Neat Everyday: vegan softgels, ghee capsules and cold-pressed oils"></figure>
+        <figure class="slide" style="margin:0"><img src="{{img:m_ban2}}" alt="Online sales banner"></figure>
+        <figure class="slide" style="margin:0"><img src="{{img:m_ban3}}" alt="Gut health products"></figure>
+        <figure class="slide" style="margin:0"><img src="{{img:m_ban4}}" alt="Ayurveda products"></figure>
+      </div>
+      <button type="button" class="nav prev" id="bsPrev" aria-label="Previous"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+      <button type="button" class="nav next" id="bsNext" aria-label="Next"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+      <div class="dots" id="bsDots" role="tablist" aria-label="Choose banner"></div>
+    </div>
+    <a class="notice" href="tel:18001803024"><img src="{{img:m_cdsco}}" alt="Pharmacovigilance notice: report any adverse event after taking a medicine via the QR code or PvPI toll-free number 1800 180 3024. Issued in public interest by the National Coordination Centre, Pharmacovigilance Programme of India."></a>
+    </div>
     <h1>Tata 1mg: India's Leading <em>Online Pharmacy</em> &amp; Healthcare Platform</h1>
     <p class="lede">Order medicines, book lab tests and consult doctors from one place. Genuine products, 1800+ cities, same-day delivery in metros.</p>
 
@@ -627,20 +642,6 @@
       <a class="qk qk-amber" href="#"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg></span><div><b>Consult a doctor</b><span>Online, from home</span></div></a>
     </div>
 
-    <div class="hero-media">
-    <div class="bslider" id="bslider" aria-roledescription="carousel" aria-label="Offers">
-      <div class="track" id="bsliderTrack">
-        <figure class="slide" style="margin:0"><img src="{{img:m_ban1}}" alt="Neat Everyday: vegan softgels, ghee capsules and cold-pressed oils"></figure>
-        <figure class="slide" style="margin:0"><img src="{{img:m_ban2}}" alt="Online sales banner"></figure>
-        <figure class="slide" style="margin:0"><img src="{{img:m_ban3}}" alt="Gut health products"></figure>
-        <figure class="slide" style="margin:0"><img src="{{img:m_ban4}}" alt="Ayurveda products"></figure>
-      </div>
-      <button type="button" class="nav prev" id="bsPrev" aria-label="Previous"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
-      <button type="button" class="nav next" id="bsNext" aria-label="Next"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
-      <div class="dots" id="bsDots" role="tablist" aria-label="Choose banner"></div>
-    </div>
-    <a class="notice" href="tel:18001803024"><img src="{{img:m_cdsco}}" alt="Pharmacovigilance notice: report any adverse event after taking a medicine via the QR code or PvPI toll-free number 1800 180 3024. Issued in public interest by the National Coordination Centre, Pharmacovigilance Programme of India."></a>
-    </div>
    </div>
 
   </div>

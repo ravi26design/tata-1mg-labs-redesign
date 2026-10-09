@@ -445,7 +445,8 @@
   .ctile.text{justify-content:center;min-height:100%;background:var(--trust-soft);border-color:transparent}
   .ctile.text .ph{aspect-ratio:1;display:grid;place-items:center;color:var(--trust)}
 
-  .careplan{margin:0;border-radius:18px;overflow:hidden;border:1px solid var(--line)}
+  .careplan{display:block;margin:22px auto 0;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);transition:transform .2s}
+  .careplan:hover{transform:translateY(-2px)}
   .careplan img{width:100%;height:auto;display:block}
 
   /* package / test cards */
@@ -642,6 +643,8 @@
       <a class="qk qk-amber" href="#"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg></span><div><b>Consult a doctor</b><span>Online, from home</span></div></a>
     </div>
 
+    <a class="careplan" href="#"><img src="{{img:m_careplan}}" alt="Join 1mg Care plan: extra 5% savings, free shipping, same-day delivery"></a>
+
    </div>
 
   </div>
@@ -663,11 +666,6 @@
       <a class="ctile" href="#"><img src="{{img:hc_eye}}" alt=""><b>Eye Care</b></a>
     </div>
   </div>
-</section>
-
-<!-- ===================== CARE PLAN ===================== -->
-<section class="block" style="padding-top:0">
-  <div class="wrap"><a class="careplan" href="#" style="display:block"><img src="{{img:m_careplan}}" alt="Join 1mg Care plan: extra 5% savings, free shipping, same-day delivery"></a></div>
 </section>
 
 <!-- ===================== FULL BODY CHECKUPS ===================== -->

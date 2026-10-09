@@ -436,7 +436,19 @@
   .cdsco{max-width:720px;margin:0 auto;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--surface)}
   .cdsco img{width:100%;height:auto;display:block}
 
-  /* generic tile grids */
+  /* horizontal tile scrollers */
+  .hs-right{display:flex;align-items:center;gap:14px}
+  .hs-ctl{display:flex;gap:8px}
+  .hs-ctl button{width:40px;height:40px;border-radius:50%;border:1px solid var(--line-2);display:grid;place-items:center;color:var(--ink);background:var(--surface);transition:background .2s,color .2s,border-color .2s,opacity .2s}
+  .hs-ctl button:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .hs-ctl button:disabled{opacity:.35;pointer-events:none}
+  .hs-track{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;margin-inline:calc(var(--gutter) * -1);padding-inline:var(--gutter);scroll-padding-inline:var(--gutter);padding-bottom:4px}
+  .hs-track::-webkit-scrollbar{display:none}
+  .hs-track .ctile{flex:0 0 196px;scroll-snap-align:start}
+  .hs-track.cards,.hs-track.prods{display:flex;grid-template-columns:none;gap:14px}
+  .hs-track.cards .card{flex:0 0 300px;scroll-snap-align:start}
+  .hs-track.cards.c4 .card{flex-basis:312px}
+  .hs-track.prods .prod{flex:0 0 272px;scroll-snap-align:start}
   .grid9{display:grid;grid-template-columns:repeat(9,1fr);gap:12px}
   .ctile{display:flex;flex-direction:column;border-radius:16px;overflow:hidden;background:var(--surface);border:1px solid var(--line);text-align:center;transition:transform .2s,border-color .2s,box-shadow .2s}
   .ctile:hover{transform:translateY(-3px);border-color:var(--line-2);box-shadow:var(--shadow)}
@@ -509,6 +521,9 @@
 
   @media (max-width:1060px){
     .grid9{grid-template-columns:repeat(5,1fr)}
+    .hs-track .ctile{flex-basis:168px}
+    .hs-track.cards .card,.hs-track.cards.c4 .card{flex-basis:280px}
+    .hs-track.prods .prod{flex-basis:250px}
     .cards{grid-template-columns:repeat(3,1fr)}
     .cards.c4{grid-template-columns:repeat(2,1fr)}
     .prods{grid-template-columns:repeat(3,1fr)}
@@ -523,6 +538,12 @@
     .mhero-panel{padding:0 var(--gutter) 30px}
     .hero-media{margin-bottom:24px}
     .grid9{grid-template-columns:repeat(3,1fr);gap:8px}
+    .hs-track{gap:8px}
+    .hs-track .ctile{flex-basis:132px}
+    .hs-track.cards .card,.hs-track.cards.c4 .card{flex-basis:240px}
+    .hs-track.prods .prod{flex-basis:210px}
+    .hs-ctl{display:none}
+    .sec-head{flex-direction:row}
     .ctile b{font-size:12px;padding:6px;min-height:48px}
     .cards,.cards.c4{grid-template-columns:1fr 1fr;gap:10px}
     .prods{grid-template-columns:1fr 1fr;gap:10px}
@@ -651,8 +672,12 @@
 <!-- ===================== HEALTH CONCERNS ===================== -->
 <section class="block">
   <div class="wrap">
-    <div class="sec-head"><div><h2>Shop by health concerns</h2></div><a class="link" href="#">See all</a></div>
-    <div class="grid9">
+    <section class="hs">
+    <div class="sec-head"><div><h2>Shop by health concerns</h2></div><div class="hs-right"><a class="link" href="#">See all</a><div class="hs-ctl" aria-label="Scroll">
+        <button type="button" class="hs-prev" aria-label="Previous"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg></button>
+        <button type="button" class="hs-next" aria-label="Next"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div></div></div>
+    <div class="hs-track">
       <a class="ctile" href="#"><img src="{{img:hc_diabetes}}" alt=""><b>Diabetes</b></a>
       <a class="ctile" href="#"><img src="{{img:hc_heart}}" alt=""><b>Heart Care</b></a>
       <a class="ctile" href="#"><img src="{{img:hc_stomach}}" alt=""><b>Stomach Care</b></a>
@@ -663,14 +688,20 @@
       <a class="ctile" href="#"><img src="{{img:hc_resp}}" alt=""><b>Respiratory Care</b></a>
       <a class="ctile" href="#"><img src="{{img:hc_eye}}" alt=""><b>Eye Care</b></a>
     </div>
+    </section>
   </div>
 </section>
 
 <!-- ===================== FULL BODY CHECKUPS ===================== -->
 <section class="block" style="padding-top:0">
   <div class="wrap">
-    <div class="sec-head"><div><h2>Full body health checkups</h2></div><a class="link" href="index.html">See all</a></div>
-    <div class="cards" id="pkgCards"></div>
+    <section class="hs">
+    <div class="sec-head"><div><h2>Full body health checkups</h2></div><div class="hs-right"><a class="link" href="index.html">See all</a><div class="hs-ctl" aria-label="Scroll">
+        <button type="button" class="hs-prev" aria-label="Previous"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg></button>
+        <button type="button" class="hs-next" aria-label="Next"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div></div></div>
+    <div class="cards hs-track" id="pkgCards"></div>
+    </section>
   </div>
 </section>
 
@@ -690,8 +721,12 @@
 <!-- ===================== PERSONAL CARE ===================== -->
 <section class="block" style="padding-top:0">
   <div class="wrap">
-    <div class="sec-head"><div><h2>Personal care</h2></div></div>
-    <div class="grid9">
+    <section class="hs">
+    <div class="sec-head"><div><h2>Personal care</h2></div><div class="hs-right"><div class="hs-ctl" aria-label="Scroll">
+        <button type="button" class="hs-prev" aria-label="Previous"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg></button>
+        <button type="button" class="hs-next" aria-label="Next"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div></div></div>
+    <div class="hs-track">
       <a class="ctile" href="#"><img src="{{img:pc_skin}}" alt="Skin care"></a>
       <a class="ctile" href="#"><img src="{{img:pc_hair}}" alt="Hair care"></a>
       <a class="ctile" href="#"><img src="{{img:pc_sexual}}" alt="Sexual wellness"></a>
@@ -702,22 +737,33 @@
       <a class="ctile" href="#"><img src="{{img:pc_men}}" alt="Men care"></a>
       <a class="ctile" href="#"><img src="{{img:pc_pet}}" alt="Pet care"></a>
     </div>
+    </section>
   </div>
 </section>
 
 <!-- ===================== PATHOLOGY TESTS ===================== -->
 <section class="block" style="padding-top:0">
   <div class="wrap">
-    <div class="sec-head"><div><h2>Pathology Tests | Up to 70% off</h2></div><a class="link" href="index.html">See all</a></div>
-    <div class="cards c4" id="testCards"></div>
+    <section class="hs">
+    <div class="sec-head"><div><h2>Pathology Tests | Up to 70% off</h2></div><div class="hs-right"><a class="link" href="index.html">See all</a><div class="hs-ctl" aria-label="Scroll">
+        <button type="button" class="hs-prev" aria-label="Previous"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg></button>
+        <button type="button" class="hs-next" aria-label="Next"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div></div></div>
+    <div class="cards c4 hs-track" id="testCards"></div>
+    </section>
   </div>
 </section>
 
 <!-- ===================== SUPER SAVING DEALS ===================== -->
 <section class="block" style="padding-top:0">
   <div class="wrap">
-    <div class="sec-head"><div><h2>Super saving deals</h2></div><a class="link" href="#">See all</a></div>
-    <div class="prods" id="prodCards"></div>
+    <section class="hs">
+    <div class="sec-head"><div><h2>Super saving deals</h2></div><div class="hs-right"><a class="link" href="#">See all</a><div class="hs-ctl" aria-label="Scroll">
+        <button type="button" class="hs-prev" aria-label="Previous"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg></button>
+        <button type="button" class="hs-next" aria-label="Next"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div></div></div>
+    <div class="prods hs-track" id="prodCards"></div>
+    </section>
     <p class="note">Prices shown are from 1mg.com at the time of this concept and may change.</p>
   </div>
 </section>
@@ -725,8 +771,12 @@
 <!-- ===================== POPULAR CATEGORIES ===================== -->
 <section class="block" style="padding-top:0">
   <div class="wrap">
-    <div class="sec-head"><div><h2>Popular categories</h2></div></div>
-    <div class="grid9">
+    <section class="hs">
+    <div class="sec-head"><div><h2>Popular categories</h2></div><div class="hs-right"><div class="hs-ctl" aria-label="Scroll">
+        <button type="button" class="hs-prev" aria-label="Previous"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg></button>
+        <button type="button" class="hs-next" aria-label="Next"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div></div></div>
+    <div class="hs-track">
       <a class="ctile" href="#"><img src="{{img:cat_offers}}" alt=""><b>Best offers</b></a>
       <a class="ctile" href="#"><img src="{{img:cat_vitamins}}" alt=""><b>Vitamins &amp; Supplements</b></a>
       <a class="ctile" href="#"><img src="{{img:cat_drinks}}" alt=""><b>Nutritional Drinks</b></a>
@@ -737,6 +787,7 @@
       <a class="ctile" href="#"><img src="{{img:cat_pain}}" alt=""><b>Pain Relief</b></a>
       <a class="ctile" href="#"><img src="{{img:cat_homeo}}" alt=""><b>Homeopathy</b></a>
     </div>
+    </section>
   </div>
 </section>
 
@@ -1020,6 +1071,17 @@
     root.addEventListener("touchend", e=>{ if(sx===null) return; const dx = e.changedTouches[0].clientX - sx; if(Math.abs(dx) > 40){ step(dx < 0 ? 1 : -1); restart(); } sx = null; });
     setX(pos, false); paint(); restart();
   })();
+
+  // ---- horizontal scrollers ----
+  document.querySelectorAll(".hs").forEach(sec=>{
+    const track = sec.querySelector(".hs-track"), prev = sec.querySelector(".hs-prev"), next = sec.querySelector(".hs-next");
+    const step = ()=> (track.firstElementChild?.getBoundingClientRect().width || 200) * 3 + 42;
+    const update = ()=>{ prev.disabled = track.scrollLeft <= 2; next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 2; };
+    prev.addEventListener("click", ()=>track.scrollBy({left:-step(), behavior:"smooth"}));
+    next.addEventListener("click", ()=>track.scrollBy({left:step(), behavior:"smooth"}));
+    track.addEventListener("scroll", update, {passive:true}); addEventListener("resize", update); update();
+    new MutationObserver(update).observe(track, {childList:true});
+  });
 
   // ---- mobile menu ----
   const burger = document.getElementById("burger"), mnav = document.getElementById("mnav");

@@ -441,7 +441,7 @@
   .specs{display:grid;grid-template-columns:repeat(8,1fr);gap:12px}
   .spec{display:flex;flex-direction:column;align-items:center;gap:10px;padding:18px 10px 14px;border-radius:16px;background:var(--surface);border:1px solid var(--line);font-size:13.5px;font-weight:600;color:var(--ink);text-align:center;transition:border-color .2s,transform .2s,box-shadow .2s}
   .spec:hover{border-color:var(--line-2);transform:translateY(-3px);box-shadow:var(--shadow)}
-  .spec i{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-family:var(--display);font-weight:800;font-size:17px;background:var(--m-bg);color:var(--m-fg)}
+  .spec i{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:var(--m-bg);color:var(--m-fg)}
   .spec:nth-child(8n+1) i{--m-bg:#FDEDEB;--m-fg:#E5473E}.spec:nth-child(8n+2) i{--m-bg:#EAF4FD;--m-fg:#2B7BD1}.spec:nth-child(8n+3) i{--m-bg:#E7F5EE;--m-fg:#1F9A5A}.spec:nth-child(8n+4) i{--m-bg:#FFF4DF;--m-fg:#B86E00}.spec:nth-child(8n+5) i{--m-bg:#F1E9FA;--m-fg:#8A4FC9}.spec:nth-child(8n+6) i{--m-bg:#FCE9EF;--m-fg:#D9487A}.spec:nth-child(8n+7) i{--m-bg:#E3F4F0;--m-fg:#0E8C78}.spec:nth-child(8n+8) i{--m-bg:#EEF1F5;--m-fg:#4C5A69}
 
   .reviews{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;margin-inline:calc(var(--gutter) * -1);padding-inline:var(--gutter);scroll-padding-inline:var(--gutter);padding-bottom:4px}
@@ -586,22 +586,22 @@
   <div class="wrap">
     <div class="sec-head"><div><h2>Consult by speciality</h2><p>Pick a speciality and a doctor will reply within 30 minutes.</p></div></div>
     <div class="specs">
-      <a class="spec" href="#"><i>G</i>General Physician</a>
-      <a class="spec" href="#"><i>D</i>Dermatology</a>
-      <a class="spec" href="#"><i>G</i>Gynaecology</a>
-      <a class="spec" href="#"><i>P</i>Paediatrics</a>
-      <a class="spec" href="#"><i>D</i>Diet &amp; Nutrition</a>
-      <a class="spec" href="#"><i>P</i>Psychiatry</a>
-      <a class="spec" href="#"><i>O</i>Orthopaedics</a>
-      <a class="spec" href="#"><i>S</i>Sexology</a>
-      <a class="spec" href="#"><i>C</i>Cardiology</a>
-      <a class="spec" href="#"><i>E</i>ENT</a>
-      <a class="spec" href="#"><i>G</i>Gastroenterology</a>
-      <a class="spec" href="#"><i>D</i>Dentistry</a>
-      <a class="spec" href="#"><i>U</i>Urology</a>
-      <a class="spec" href="#"><i>N</i>Neurology</a>
-      <a class="spec" href="#"><i>O</i>Ophthalmology</a>
-      <a class="spec" href="#"><i>E</i>Endocrinology</a>
+      <a class="spec" href="#"><i><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3v6a5 5 0 0 0 10 0V3"/><path d="M10 14v2a4 4 0 0 0 8 0v-2"/><circle cx="18" cy="11" r="2"/></svg></i>General Physician</a>
+      <a class="spec" href="#"><i><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/><path d="M9 14a3 3 0 0 0 3 3"/></svg></i>Dermatology</a>
+      <a class="spec" href="#"><i><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M12 13v8M9 18h6"/></svg></i>Gynaecology</a>
+      <a class="spec" href="#"><i><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="3.5"/><path d="M6 21v-3a6 6 0 0 1 12 0v3"/><path d="M9 4.5 7.5 3M15 4.5 16.5 3"/></svg></i>Paediatrics</a>
+      <a class="spec" href="#"><i><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7c-4 0-7 3-7 7s3 7 7 7 7-3 7-7-3-7-7-7z"/><path d="M12 7V4M12 4c2-1 3-1 4 0"/><path d="M9 14c0-2 1-3 3-3"/></svg></i>Diet &amp; Nutrition</a>
+      <a class="spec" href="#"><i><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3a5 5 0 0 0-5 5c0 2 1 3 1 5l-1 3h3l1 5h6l1-5h2l-1-3a6 6 0 0 0-7-10z"/><path d="M10 9c1-1 3-1 4 0"/></svg></i>Psychiatry</a>
+      <a class="spec" href="#"><i><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4a2 2 0 0 1 3 2l5 5a2 2 0 0 1 2-3 2 2 0 1 1 3 3 2 2 0 0 1-3 2l-5 5a2 2 0 0 1 2 3 2 2 0 1 1-3-3 2 2 0 0 1-3-2L4 11a2 2 0 0 1-2-3 2 2 0 1 1 3-3 2 2 0 0 1 2-1z"/></svg></i>Orthopaedics</a>
+      <a class="spec" href="#"><i><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a4.5 4.5 0 0 0-6.4-6.4L10 13z"/><path d="M14 11a4.5 4.5 0 0 1 6.4 6.4L14 11z"/><path d="M3.6 6.6 10 13l-1 4 4-1 6.4-6.4"/></svg></i>Sexology</a>
+      <a class="spec" href="#"><i><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z"/><path d="M7 12h3l1.5-3 2 6 1.5-3h2"/></svg></i>Cardiology</a>
+      <a class="spec" href="#"><i><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 10a6 6 0 0 1 12 0c0 3-2 4-2 6a3 3 0 0 1-6 0"/><path d="M9 10a3 3 0 0 1 6 0c0 2-2 2-2 4"/></svg></i>ENT</a>
+      <a class="spec" href="#"><i><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v4a4 4 0 0 0 4 4h1a4 4 0 0 1 4 4v1a4 4 0 0 1-4 4H9a3 3 0 0 1 0-6h1"/></svg></i>Gastroenterology</a>
+      <a class="spec" href="#"><i><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3c-3 0-4 2-4 5 0 4 2 6 2 10 0 2 1 3 2 3s1-5 4-5 3 5 4 5 2-1 2-3c0-4 2-6 2-10 0-3-1-5-4-5-2 0-3 1-4 1S10 3 8 3z"/></svg></i>Dentistry</a>
+      <a class="spec" href="#"><i><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4C6 4 4 7 4 11c0 4 2 5 4 5h1c1 0 2 1 2 2v2"/><path d="M15 4c3 0 5 3 5 7 0 4-2 5-4 5h-1c-1 0-2 1-2 2v2"/></svg></i>Urology</a>
+      <a class="spec" href="#"><i><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4a4 4 0 0 0-4 4v1a3 3 0 0 0 0 6v1a4 4 0 0 0 8 0v-1a3 3 0 0 0 0-6V8a4 4 0 0 0-4-4z"/><path d="M12 4v16M8 12h8"/></svg></i>Neurology</a>
+      <a class="spec" href="#"><i><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></i>Ophthalmology</a>
+      <a class="spec" href="#"><i><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.7 3h10.6a2 2 0 0 0 1.7-3l-5-9V3"/><path d="M8 15h8"/></svg></i>Endocrinology</a>
     </div>
   </div>
 </section>
